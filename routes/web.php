@@ -12,13 +12,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+use App\Http\Middleware\AffiliateMiddleware;
 
-Route::get('/', [App\Http\Controllers\LearningController::class, 'index']);
+Route::get('/', 'LearningController@index');
+
+Route::resource('/course', 'CourseController');
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
