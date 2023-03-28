@@ -20,7 +20,7 @@
           <h3 class="card-title">Cursuri Gratuite</h3>
           <p class="card-text">Acceseaza gratuit o selectie de cursuri online, acoperind diverse subiecte si niveluri de
             dificultate.</p>
-          <a href="#" class="btn btn-success">Inscrie-te Gratuit</a>
+          <a href="/course/free" class="btn btn-success">Inscrie-te Gratuit</a>
         </div>
       </div>
     </div>
@@ -30,7 +30,7 @@
           <h3 class="card-title">Cursuri Premium</h3>
           <p class="card-text">Ai acces la o varietate de cursuri premium, create de experti in domenii specifice si
             disponibile la preturi accesibile.</p>
-          <a href="#" class="btn btn-warning">Vezi Cursurile</a>
+          <a href="/course" class="btn btn-warning">Vezi Cursurile</a>
         </div>
       </div>
     </div>
@@ -41,7 +41,7 @@
           <p class="card-text">Fii parte dintr-o comunitate activa de invatacei si mentori, impartasind idei si sfaturi
             si
             dezvoltandu-ti reteaua de contacte.</p>
-          <a href="#" class="btn btn-info">Afla Mai Multe</a>
+          <a href="/about_us" class="btn btn-info">Afla Mai Multe</a>
         </div>
       </div>
     </div>
