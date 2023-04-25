@@ -1,3 +1,12 @@
+<!-- resources/js/App.vue -->
 <template>
-    How To Install Vue 3 in Laravel 9 with Vite - TechvBlogs
+    <div>
+      <h1>Hello, Vue 3!</h1>
+    </div>
 </template>
+  
+<script>
+  export default {
+    name: 'App',
+  };
+</script>

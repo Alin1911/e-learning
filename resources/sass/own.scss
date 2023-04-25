@@ -21,16 +21,20 @@ footer-info a:hover {
 }
 
 .footer-bg{
-  background-color: #99c2a2;
+  background: linear-gradient(to right, #00498E9C, #AC3076AB) !important;
   padding: 20px 0;
 }
 .navbar {
-  background: linear-gradient(to right, #4E78A0, #6096BA);
+  background: linear-gradient(to right, #00498E, #AC3076) !important;
   font-family: 'Montserrat', sans-serif;
 }
 
-.navbar-brand img {
-  max-height: 40px;
+.navbar-brand {
+  color: #fff !important;
+  font-size: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+  border-bottom: 3px solid transparent;
 }
 
 .nav-link {
@@ -52,7 +56,14 @@ footer-info a:hover {
   line-height: 2rem;
   color: #555;
 }
-
+.rounded-left-1{
+  border-top-left-radius: 20px !important;
+  border-bottom-left-radius: 20px !important;
+}
+.rounded-right-1{
+  border-top-right-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+}
 .card {
   height: 100%;
   margin-bottom: 2rem;

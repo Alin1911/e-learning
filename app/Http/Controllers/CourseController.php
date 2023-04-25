@@ -7,9 +7,16 @@ use App\Models\Course;
 
 class CourseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
         $courses = Course::all();
+        if ($request->has('search')) {
+            $courses = Course::where('title', 'like', '%' . $search . '%')
+                ->orWhere('description', 'like', '%' . $search . '%')
+                ->get();
+        }
+
         return view('course.index')->with('courses', $courses);
     }
 
@@ -31,7 +38,7 @@ class CourseController extends Controller
     public function show($id)
     {
         $course = Course::find($id);
-        return view('course.show', compact('course'));
+        return view('course.show')->with('course', $course);
     }
 
     public function edit($id)
@@ -42,7 +49,22 @@ class CourseController extends Controller
 
     public function update(Request $request)
     {
+        $course = Course::find($request->id);
+        if ($request->has('title'))
+            $course->title = $request->title;
+        if ($request->has('description'))
+            $course->description = $request->description;
+        $course->save();
 
+        return redirect()->route('course.index');
+
+    }
+
+    public function destroy($id)
+    {
+        $course = Course::find($id);
+        $course->delete();
+        return redirect()->route('course.index');
     }
 
 }

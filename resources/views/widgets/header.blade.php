@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-md px-3 shadow-sm" style="background-color: #dbfeb8 !important; ">
-    <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}" style="color: #000;">
+<nav class="navbar navbar-expand-md px-3 shadow-sm">
+    <div class="container p-3">
+        <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -8,9 +8,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto">
+            <ul class="navbar-nav me-auto d-flex align-items-center">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color: #000;">Cursuri</a>
+                    <a class="nav-link" href="/course" style="color: #000;">Cursuri</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="color: #000;">Exerciții</a>
@@ -19,6 +19,14 @@
                     <a class="nav-link" href="#" style="color: #000;">Discuții</a>
                 </li>
             </ul>
+            <form class="rounded-pill" action="{{ route('course.index') }}" method="GET">
+                <div class="input-group">
+                    <div class="form-outline">
+                        <input id="form1" type="search" class="form-control border-white rounded-left-1" placeholder="Caută cursuri" name="search">
+                    </div>
+                    <button class="btn  btn-primar bg-white rounded-right-1" type="submit"><i class="fas fa-search"></i></button>
+                  </div>
+                </form>
             <ul class="navbar-nav ms-auto">
                 @guest
                 @if (Route::has('login'))

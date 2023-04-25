@@ -4,7 +4,7 @@
 <div class="container my-5 py-5">
     <form method="POST" action="{{ route('register') }}">
         @csrf
-        <div class="px-3 py-4 row justify-content-center my-5 py-5 shadow">
+        <div class="px-3 py-4 row justify-content-center my-5 py-5 shadow bg-white">
             <div class="border-bottom col-12 col-md-8 h2 py-2">
                 <strong>{{ __('Register') }}</strong>
             </div>
@@ -62,16 +62,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-8 form-group">
-                <select id="profesie" class="my-input form-select form-select-lg mb-3"
-                    aria-label=".form-select-lg example">
-                    <option selected>Profesie</option>
-                    <option value="1">Profesor</option>
-                    <option value="2">Student</option>
-                    <option value="3">Altceva</option>
-                </select>
-            </div>
-            <div class="col-12 col-md-8 form-group">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary col-12 rounded-pill">
                     {{ __('Register') }}
                 </button>
             </div>

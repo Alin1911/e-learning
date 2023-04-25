@@ -109,6 +109,8 @@
               </label>
             </div>
           </div>
+          <div id="rezultat--final" class="d-none">
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Închide</button>
@@ -116,7 +118,9 @@
         </div>
       </div>
     </div>
+  </div>
 </footer>
+@section('scripts')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
   $(document).ready(function () {
@@ -143,14 +147,16 @@
         } else if (raspunsuriCorecte == 3) {
           curs = 'Curs de nivel avansat';
         }
-        $('#intrebare-1').addClass('d-none');
-        $('#intrebare-2').removeClass('d-none');
         $('#verifica-raspuns').text('Vezi rezultatul');
         $('#verifica-raspuns').attr('data-bs-dismiss', 'modal');
-        $('#intrebare-2').append('<p>Ai răspuns corect la ' + raspunsuriCorecte + ' din 2 întrebări. Cel mai bun curs pentru tine este: ' + curs + '</p>');
+        $('#intrebare-' + (intrebareCurenta - 1)).addClass('d-none');
+        $('#rezultat--final').append('<p>Ai răspuns corect la ' + raspunsuriCorecte + ' din 2 întrebări. Cel mai bun curs pentru tine este: ' + curs + '</p>');
+        $('#rezultat--final').removeClass('d-none');
       } else {
         $('#intrebare-' + intrebareCurenta).removeClass('d-none');
+        $('#intrebare-' + (intrebareCurenta - 1)).addClass('d-none');
       }
     });
   });
 </script>
+@endsection

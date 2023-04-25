@@ -4,7 +4,7 @@
 <div class="container my-5 py-5">
     <form method="POST" action="{{ route('login') }}">
         @csrf
-        <div class="px-3 py-4 row justify-content-center my-5 py-5 shadow">
+        <div class="px-3 py-4 row justify-content-center my-5 py-5 shadow bg-white">
             <div class="border-bottom col-12 col-md-8 h2 py-2">
                 <strong>{{ __('Login') }}</strong>
             </div>
@@ -40,25 +40,25 @@
             </div>
             <div class="col-12 col-md-8">
                 <div class="row">
-                    <div class="form-check col-12 col-md-6">
-                        <div class="row">
-                            <input class="ml-1 form-check-input" type="checkbox" name="remember" id="remember" {{
+                    <div class="col-12 col-md-6">
+                        <div>
+                            <input type="checkbox" name="remember" id="remember" {{
                                 old('remember') ? 'checked' : '' }}>
-                            <label class="ml-3 form-check-label" for="remember">
+                            <label class="form-check-label ml-1" for="remember">
                                 {{ __('Remember Me') }}
                             </label>
                         </div>
 
                         @if (Route::has('password.request'))
-                        <div class="row mt-2">
-                            <a href="{{ route('password.request') }}">
+                        <div>
+                            <a class="p-0" href="{{ route('password.request') }}">
                                 {{ __('Forgot Your Password?') }}
                             </a>
                         </div>
                         @endif
                     </div>
-                    <div class="col-12 col-md-6">
-                        <button type="submit" class="btn btn-outline-danger col-8 rounded-pill">
+                    <div class="col-12 col-md-6 mt-2 mt-md-0">
+                        <button type="submit" class="btn btn-primary col-12 rounded-pill">
                             {{ __('Login') }}
                         </button>
                     </div>

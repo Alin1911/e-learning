@@ -4,7 +4,7 @@
 
 @section('content')
 @include('widgets.slider')
-<div class="container">
+<div class="container bg-white py-5 mt-4 shadow">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center">
       <h1 class="mb-4">Bine ai venit la Platforma de eLearning</h1>
