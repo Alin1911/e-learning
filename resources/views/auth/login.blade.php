@@ -4,11 +4,11 @@
 <div class="container my-5 py-5">
     <form method="POST" action="{{ route('login') }}">
         @csrf
-        <div class="px-3 py-4 row justify-content-center my-5 py-5 shadow bg-white">
+        <div class="px-3 py-4 row justify-content-center my-5 py-5 shadow bg-light">
             <div class="border-bottom col-12 col-md-8 h2 py-2">
                 <strong>{{ __('Login') }}</strong>
             </div>
-            <div class="mt-4 col-12 col-md-8  form-group">
+            <div class="mt-4 col-12 col-md-8  form-group my-1">
                 <div class="form-group row">
                     <label for="email" class="col-sm-2 col-form-label">{{ __('Email Address') }}</label>
                     <div class="col-sm-10">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-8  form-group">
+            <div class="col-12 col-md-8  form-group my-1">
                 <div class="form-group row">
                     <label for="password" class="col-sm-2 col-form-label">{{ __('Password') }}</label>
                     <div class="col-sm-10">
@@ -38,13 +38,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-8 mt-2">
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <div>
-                            <input type="checkbox" name="remember" id="remember" {{
+                            <input class="mr-2" type="checkbox" name="remember" id="remember" {{
                                 old('remember') ? 'checked' : '' }}>
-                            <label class="form-check-label ml-1" for="remember">
+                            <label class="form-check-label ml-2" for="remember">
                                 {{ __('Remember Me') }}
                             </label>
                         </div>

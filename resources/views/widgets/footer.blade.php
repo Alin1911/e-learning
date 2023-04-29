@@ -1,6 +1,6 @@
 <footer class="footer-bg pt-4">
   <div class="container">
-    <div class="row">
+    <div class="row text-dark" style="font-size: 20px;">
       <div class="col-md-4">
         <h4>Cursuri populare</h4>
         <ul>

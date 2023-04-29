@@ -32,7 +32,7 @@ class CourseController extends Controller
         $course->description = $request->description;
         $course->save();
 
-        return redirect()->route('course.index');
+        return json_encode($course);
     }
 
     public function show($id)

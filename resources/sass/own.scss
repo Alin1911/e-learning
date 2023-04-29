@@ -57,12 +57,15 @@ footer-info a:hover {
   color: #555;
 }
 .rounded-left-1{
-  border-top-left-radius: 20px !important;
   border-bottom-left-radius: 20px !important;
+  border-bottom-right-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
 }
 .rounded-right-1{
   border-top-right-radius: 20px !important;
   border-bottom-right-radius: 20px !important;
+  border-bottom-right-radius: 0px !important;
 }
 .card {
   height: 100%;
@@ -95,7 +98,6 @@ footer-info a:hover {
 .carousel-control-next {
   width: 5%;
 }
-
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   background-image: none;

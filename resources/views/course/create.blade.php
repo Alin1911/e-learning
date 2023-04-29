@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container bg-white p-5 mt-4 shadow">
-    <course :course="{{ json_encode($course) }}"></course>
+    <course-add></course-add>
 </div>
 @endsection
 

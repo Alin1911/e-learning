@@ -4,8 +4,8 @@
 
 @section('content')
 @include('widgets.slider')
-<div class="container bg-white py-5 mt-4 shadow">
-  <div class="row justify-content-center">
+<div class="container bg-white p-5 mt-4 shadow">
+  <div class="row justify-content-center py-5">
     <div class="col-md-8 text-center">
       <h1 class="mb-4">Bine ai venit la Platforma de eLearning</h1>
       <p class="lead">Aici vei gasi o varietate de cursuri si resurse online pentru a-ti dezvolta abilitatile si a-ti
@@ -16,7 +16,7 @@
   <div class="row mt-5">
     <div class="col-md-4">
       <div class="card">
-        <div class="card-body">
+        <div class="card-body" style="min-height: 260px;">
           <h3 class="card-title">Cursuri Gratuite</h3>
           <p class="card-text">Acceseaza gratuit o selectie de cursuri online, acoperind diverse subiecte si niveluri de
             dificultate.</p>
@@ -26,7 +26,7 @@
     </div>
     <div class="col-md-4">
       <div class="card">
-        <div class="card-body">
+        <div class="card-body" style="min-height: 260px;">
           <h3 class="card-title">Cursuri Premium</h3>
           <p class="card-text">Ai acces la o varietate de cursuri premium, create de experti in domenii specifice si
             disponibile la preturi accesibile.</p>
@@ -36,7 +36,7 @@
     </div>
     <div class="col-md-4">
       <div class="card">
-        <div class="card-body">
+        <div class="card-body" style="min-height: 260px;">
           <h3 class="card-title">Comunitate</h3>
           <p class="card-text">Fii parte dintr-o comunitate activa de invatacei si mentori, impartasind idei si sfaturi
             si
