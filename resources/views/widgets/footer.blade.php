@@ -1,18 +1,16 @@
 <footer class="footer-bg pt-4">
   <div class="container">
     <div class="row text-dark" style="font-size: 20px;">
-      <div class="col-md-4">
-        <h4>Cursuri populare</h4>
-        <ul>
-          <li><a href="#">Curs de Python</a></li>
-          <li><a href="#">Curs de JavaScript</a></li>
-          <li><a href="#">Curs de HTML și CSS</a></li>
-        </ul>
+      <div class="col-md-3 col-12">
+        <h2 class="text-white mb-4">Cursuri populare</h2>
+          <div ><a href="#">Curs de Python</a></div>
+          <div ><a href="#">Curs de JavaScript</a></div>
+          <div ><a href="#">Curs de HTML și CSS</a></div>
       </div>
-      <div class="col-md-4">
-        <h4>Filtrare cursuri</h4>
+      <div class="col-md-3 col-12">
+        <h2 class="text-white mb-4">Filtrare cursuri</h2>
         <form>
-          <div class="mb-3">
+          <div class="mb-3 text-white">
             <label for="nivel-dificultate" class="form-label">Nivel dificultate</label>
             <select class="form-select" id="nivel-dificultate">
               <option selected>Alege nivelul de dificultate</option>
@@ -21,7 +19,7 @@
               <option value="avansat">Avansat</option>
             </select>
           </div>
-          <div class="mb-3">
+          <div class="mb-3 text-white">
             <label for="limbaj-programare" class="form-label">Limbaj programare</label>
             <select class="form-select" id="limbaj-programare">
               <option selected>Alege limbajul de programare</option>
@@ -30,27 +28,25 @@
               <option value="html-css">HTML și CSS</option>
             </select>
           </div>
-          <button type="submit" class="btn btn-primary">Filtrează</button>
+          <button type="submit" class="btn btn-danger w-100">Filtrează</button>
         </form>
       </div>
-      <div class="col-md-2">
-        <h4>Joc de programare</h4>
+      <div class="col-md-3 col-12 text-white">
+        <h2 class="text-white mb-4">Joc de programare</h2>
         <p>Încearcă jocul nostru de programare pentru a-ți testa abilitățile.</p>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#jocModal">
+        <button type="button" class="btn btn-danger w-100" data-toggle="modal" data-target="#jocModal">
           Joacă acum
         </button>
       </div>
-      <div class="col-md-2">
-        <h4>Despre noi</h4>
-        <ul>
-          <li><a href="#">Echipa noastră</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Termeni și condiții</a></li>
-        </ul>
+      <div class="col-md-3 col-12 text-white">
+        <h2 class="text-white mb-4">Despre noi</h2>
+          <div><a href="#">Echipa noastră</a></div>
+          <div><a href="#">Contact</a></div>
+          <lidiv><a href="#">Termeni și condiții</a></div>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12 d-flex justify-content-center py-4">
+      <div class="col-md-12 d-flex justify-content-center py-4 text-white">
         <div class="copy-text">
           <p>&copy; 2023 E-Learning Platform. Toate drepturile rezervate.</p>
         </div>

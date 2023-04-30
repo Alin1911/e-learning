@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container bg-white p-5 mt-4 shadow">
-    <course-add></course-add>
+<div>
+   @include('widgets.slider_course_add')
+<div class="main-content container">
+    <course-add :categories={{$categories}}></course-add>
+</div>
 </div>
 @endsection
 

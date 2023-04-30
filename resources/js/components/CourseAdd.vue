@@ -53,11 +53,10 @@
           </select>
         </div>
   
-        <!-- ID-ul categoriei -->
         <div class="form-group">
       <label for="category">Categorie</label>
       <select class="form-control" id="category" v-model="course.category_id">
-        <option v-for="category in categories" :key="category.id" :value="category.id">
+        <option v-for="category in categories"  :value="category.id">
           {{ category.name }}
         </option>
       </select>
@@ -101,6 +100,14 @@
         type: Object,
         default: null,
       },
+      instructors: {
+          type: Array,
+          default: () => [],
+        },
+        categories: {
+          type: Array,
+          default: () => [],
+        },
     },
     data() {
       return {
@@ -117,6 +124,9 @@
           language: '',
           ...this.initialCourse,
         },
+        languages: ['Română', 'Engleză', 'Franceză', 'Spaniolă', 'Germană', 'Italiană'],
+        levels: ['Începător', 'Intermediar', 'Avansat'],
+        durations: ['2 weeks', '1 month', '2 months', '3 months', '6 months', '1 year']
     };
   },
   computed: {
@@ -125,20 +135,21 @@
     },
   },
   methods: {
-    async submitCourse() {
-      try {
-        let response;
-        if (this.isUpdate) {
-          response = await axios.put(`/course/${this.course.id}`, this.course);
-          console.log('Curs actualizat:', response.data);
-        } else {
-          response = await axios.post('/course', this.course);
-          console.log('Curs creat:', response.data);
-        }
-      } catch (error) {
-        console.error('Eroare la trimiterea cursului:', error);
+  async submitCourse() {
+    try {
+      let response;
+      if (this.isUpdate) {
+        response = await axios.put(`/course/${this.course.id}`, this.course);
+        console.log('Curs actualizat:', response.data);
+      } else {
+        response = await axios.post('/course', this.course);
+        console.log('Curs creat:', response.data);
       }
-    },
+      window.location.replace(`/course/${response.data}`);
+    } catch (error) {
+      console.error('Eroare la trimiterea cursului:', error);
+    }
   },
+},
 };
 </script>

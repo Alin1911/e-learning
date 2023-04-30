@@ -22,7 +22,7 @@
 <body>
     <div id="app" style="background: linear-gradient(to bottom, #B9DBFB9C, #CEEFFFAB) !important;">
         @include('widgets.header')
-        <div class="pb-5" style="min-height: 600px; padding-top:90px;">
+        <div class="pb-5" style="min-height: 600px;">
             @yield('content')
         </div>
         @include('widgets.footer')
