@@ -13,10 +13,10 @@
                     <a class="nav-link" href="/course" style="color: #000;">Cursuri</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color: #000;">Exerciții</a>
+                    <a class="nav-link" href="/exercise" style="color: #000;">Exerciții</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color: #000;">Discuții</a>
+                    <a class="nav-link" href="/forum" style="color: #000;">Discuții</a>
                 </li>
             </ul>
             <div class="row d-none d-md-block">
@@ -49,6 +49,9 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/home" style="color: #000;">
+                            Dashboard
+                        </a>
                         <a class="dropdown-item" href="/course/create" style="color: #000;">
                             Adauga curs
                         </a>

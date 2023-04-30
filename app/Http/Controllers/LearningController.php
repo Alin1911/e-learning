@@ -10,4 +10,19 @@ class LearningController extends Controller
     {
         return view('index');
     }
+
+    public function team()
+    {
+        return view('general.team');
+    }
+
+    public function contact()
+    {
+        return view('general.contact');
+    }
+
+    public function term()
+    {
+        return view('general.term');
+    }
 }

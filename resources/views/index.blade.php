@@ -41,7 +41,7 @@
           <p class="card-text">Fii parte dintr-o comunitate activa de invatacei si mentori, impartasind idei si sfaturi
             si
             dezvoltandu-ti reteaua de contacte.</p>
-          <a href="/about_us" class="btn btn-info">Afla Mai Multe</a>
+          <a href="/team" class="btn btn-info">Afla Mai Multe</a>
         </div>
       </div>
     </div>

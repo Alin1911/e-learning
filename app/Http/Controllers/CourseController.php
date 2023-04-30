@@ -14,8 +14,10 @@ class CourseController extends Controller
         $courses = Course::all();
         if ($request->has('search')) {
             $courses = Course::where('title', 'like', '%' . $search . '%')
-                ->orWhere('description', 'like', '%' . $search . '%')
-                ->get();
+                ->orWhere('description', 'like', '%' . $search . '%')->get();
+        }
+        if ($request->has('nivel')) {
+            $courses = $courses->where('level', $request->nivel);
         }
 
         return view('course.index')->with('courses', $courses);

@@ -3,17 +3,17 @@
     <div class="row text-dark" style="font-size: 20px;">
       <div class="col-md-3 col-12">
         <h2 class="text-white mb-4">Cursuri populare</h2>
-          <div ><a href="#">Curs de Python</a></div>
-          <div ><a href="#">Curs de JavaScript</a></div>
-          <div ><a href="#">Curs de HTML și CSS</a></div>
+          <div ><a href="/course/1">Curs de Python</a></div>
+          <div ><a href="/course/2">Curs de JavaScript</a></div>
+          <div ><a href="/course/3">Curs de HTML și CSS</a></div>
       </div>
       <div class="col-md-3 col-12">
         <h2 class="text-white mb-4">Filtrare cursuri</h2>
-        <form>
+        <form action="/course" method="get">
           <div class="mb-3 text-white">
             <label for="nivel-dificultate" class="form-label">Nivel dificultate</label>
-            <select class="form-select" id="nivel-dificultate">
-              <option selected>Alege nivelul de dificultate</option>
+            <select class="form-select" id="nivel-dificultate" name="nivel" required>
+              <option selected value="">Alege nivelul de dificultate</option>
               <option value="incepator">Începător</option>
               <option value="intermediar">Intermediar</option>
               <option value="avansat">Avansat</option>
@@ -21,8 +21,8 @@
           </div>
           <div class="mb-3 text-white">
             <label for="limbaj-programare" class="form-label">Limbaj programare</label>
-            <select class="form-select" id="limbaj-programare">
-              <option selected>Alege limbajul de programare</option>
+            <select class="form-select" id="limbaj-programare" name="search" required>
+              <option selected value="">Alege limbajul de programare</option>
               <option value="python">Python</option>
               <option value="javascript">JavaScript</option>
               <option value="html-css">HTML și CSS</option>
@@ -40,9 +40,9 @@
       </div>
       <div class="col-md-3 col-12 text-white">
         <h2 class="text-white mb-4">Despre noi</h2>
-          <div><a href="#">Echipa noastră</a></div>
-          <div><a href="#">Contact</a></div>
-          <lidiv><a href="#">Termeni și condiții</a></div>
+          <div><a href="/team">Echipa noastră</a></div>
+          <div><a href="/contact">Contact</a></div>
+          <lidiv><a href="/term">Termeni și condiții</a></div>
       </div>
     </div>
     <div class="row">
