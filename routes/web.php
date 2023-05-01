@@ -17,6 +17,7 @@ Route::post('course/{id}/join', [CourseController::class, 'join'])->name('course
 Route::post('course/{id}/leave', [CourseController::class, 'leave'])->name('course.leave');
 Auth::routes();
 
+Route::get('/learn/course/{id}', 'CourseController@learnCourse');
 Route::resource('/answer', 'CourseAnswerController');
 Route::resource('/exercise', 'ExerciseController');
 Route::resource('/test', 'TestController');

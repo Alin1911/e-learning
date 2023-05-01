@@ -109,4 +109,15 @@ class CourseController extends Controller
         return $course->id;
     }
 
+    public function learnCourse($id, Request $request)
+    {
+        $course = Course::find($id);
+        $course->load('lessons');
+        $course->load('exercises');
+        $course->load('tests');
+        $course->load('questions');
+        $course->load('category');
+        $course->load('instructor');
+        return view('course.learn')->with('course', $course);
+    }
 }
