@@ -7,7 +7,7 @@ Route::get('/', 'LearningController@index');
 Route::get('/team', 'LearningController@team');
 Route::get('/contact', 'LearningController@contact');
 Route::get('/term', 'LearningController@term');
-
+Route::post('/course/{id}/enroll', 'CourseController@enroll');
 
 Route::resource('course', CourseController::class);
 

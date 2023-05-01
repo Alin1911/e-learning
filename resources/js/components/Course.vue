@@ -5,19 +5,19 @@
         <div v-if="course.image" class="col-md-4">
           <img :src="course.image" class="img-fluid rounded-start" alt="Course image">
         </div>
-        <div class="col-md-8">
+        <div class="col-12">
           <div class="card-body">
             <h5 class="card-title mb-5">{{ course.title || 'Title not available' }}</h5>
             <p v-if="course.description" class="card-text">{{ course.description }}</p>
             <p v-else class="card-text text-muted">Description not available</p>
             <p class="card-text">
               <small v-if="course.level || course.language || course.duration" class="text-muted">
-                <span v-if="course.level" class="course-level me-2">{{ course.level }}</span>
-                <span v-if="course.language" class="course-language me-2">{{ course.language }}</span>
-                <span v-if="course.duration" class="course-duration">{{ course.duration }}</span>
+                <span v-if="course.level" class="course-level me-2">Nivel: {{ course.level }}</span>
+                <span v-if="course.language" class="course-language me-2">Limba: {{ course.language }}</span>
+                <span v-if="course.duration" class="course-duration">Durata: {{ course.duration }}</span>
               </small>
             </p>
-            <p v-if="course.category_id" class="card-text">Category: {{ course.category_id }}</p>
+            <p v-if="course.category_id" class="card-text">Category: {{ course.category.name }}</p>
             <p v-if="course.instructor_id" class="card-text">Instructor: {{ course.instructor_id }}</p>
             <p v-if="course.additional_info" class="card-text">{{ course.additional_info }}</p>
             <div class="course-price mt-3">
@@ -41,27 +41,30 @@ export default {
     course: Object,
   },
   methods: {
-    async enroll(courseId) {
-  try {
-    const response = await fetch(`/course/${courseId}/enroll`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+  async enroll(courseId) {
+    try {
+      const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-      window.location.href = `/learn/course/${courseId}`;
-    } else {
-      const errorData = await response.json();
-      console.error(errorData);
+      const response = await fetch(`/course/${this.course.id}/enroll`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': csrfToken,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        window.location.href = `/learn/course/${this.course.id}`;
+      } else {
+        const errorData = await response.json();
+        console.error(errorData);
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
-  } catch (error) {
-    console.error('Error:', error);
-  }
-},
+  },
   },
 };
 </script>

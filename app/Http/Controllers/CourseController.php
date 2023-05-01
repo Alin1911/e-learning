@@ -51,6 +51,7 @@ class CourseController extends Controller
     public function show($id)
     {
         $course = Course::find($id);
+        $course->load('category');
         return view('course.show')->with('course', $course);
     }
 
@@ -95,6 +96,17 @@ class CourseController extends Controller
         $course = Course::find($id);
         $course->delete();
         return redirect()->route('course.index');
+    }
+
+    public function enroll($id)
+    {
+        if (! auth()->check()) {
+            abort(401, 'Unauthorized action.');
+        }
+        $course = Course::find($id);
+        $user = auth()->user();
+        $user->courses()->attach($course, ['enrollment_date' => now()]);
+        return $course->id;
     }
 
 }
