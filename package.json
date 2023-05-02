@@ -40,6 +40,7 @@
         "postcss-preset-env": "^8.3.2",
         "vite-plugin-fonts": "^0.7.0",
         "vite-plugin-pwa": "^0.14.7",
-        "vite-plugin-windicss": "^1.8.10"
+        "vite-plugin-windicss": "^1.8.10",
+        "vuex": "^4.0.2"
     }
 }

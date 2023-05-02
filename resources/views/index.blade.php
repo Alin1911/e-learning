@@ -7,7 +7,7 @@
 <div class="container bg-white p-5 mt-4 shadow">
   <div class="row justify-content-center py-5">
     <div class="col-md-8 text-center">
-      <h1 class="mb-4">Bine ai venit la Platforma de eLearning</h1>
+      <h1 class="mb-4">Bine ai venit la Platforma de Mini-E-Learning</h1>
       <p class="lead">Aici vei gasi o varietate de cursuri si resurse online pentru a-ti dezvolta abilitatile si a-ti
         imbunatati cunostintele in diverse domenii.</p>
       <a href="#" class="btn btn-primary btn-lg my-4">Exploreaza Cursurile</a>

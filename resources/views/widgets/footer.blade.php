@@ -42,7 +42,7 @@
         <h2 class="text-white mb-4">Despre noi</h2>
           <div><a href="/team">Echipa noastră</a></div>
           <div><a href="/contact">Contact</a></div>
-          <lidiv><a href="/term">Termeni și condiții</a></div>
+          <div><a href="/term">Termeni și condiții</a></div>
       </div>
     </div>
     <div class="row">

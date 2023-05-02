@@ -43,6 +43,9 @@ class CourseController extends Controller
         $course->additional_info = $request->get('additional_info', '');
         $course->instructor_id = $request->get('instructor_id', '1');
         $course->language = $request->get('language', 'english');
+        if ($request->has('image')) {
+            $course->image = $request->file('image')->store('courses');
+        }
         $course->save();
 
         return $course->id;
@@ -105,6 +108,9 @@ class CourseController extends Controller
         }
         $course = Course::find($id);
         $user = auth()->user();
+        if ($user->courses->contains($course->id)) {
+            return $course->id;
+        }
         $user->courses()->attach($course, ['enrollment_date' => now()]);
         return $course->id;
     }
@@ -119,5 +125,12 @@ class CourseController extends Controller
         $course->load('category');
         $course->load('instructor');
         return view('course.learn')->with('course', $course);
+    }
+
+    public function courses()
+    {
+        $user = auth()->user();
+        $courses = $user->courses;
+        return json_encode($courses);
     }
 }

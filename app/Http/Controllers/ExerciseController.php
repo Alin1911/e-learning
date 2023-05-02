@@ -9,7 +9,7 @@ class ExerciseController extends Controller
 {
     public function index()
     {
-        $exercises = Exercise::all();
+        $exercises = Exercise::where('public', 1)->get();
         return view('exercise.index')->with('exercises', $exercises);
     }
 

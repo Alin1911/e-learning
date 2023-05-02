@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class CourseAnswer extends Model
 {
     use HasFactory;
+
+    protected $table = 'course_answers';
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function questuion()
+    {
+        return $this->belongsTo(CourseQuestion::class);
+    }
 }

@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class LearningController extends Controller
 {
     public function index(Request $request)
     {
-        return view('index');
+        $courses = Course::all()->take(10);
+        return view('index')->with('courses', $courses);
     }
 
     public function team()
