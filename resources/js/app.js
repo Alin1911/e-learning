@@ -7,7 +7,9 @@ import CourseAdd from '@/components/CourseAdd.vue';
 import Instructors from '@/components/Instructors.vue';
 import Categories from '@/components/Categories.vue';
 import CourseManager from './components/CourseManager.vue';
-import store from './store.js';
+import createNewStore from './store.js';
+
+const store = createNewStore();
 
 const app = createApp({
     components: {
@@ -19,6 +21,6 @@ const app = createApp({
     },
 });
 
-app.config.globalProperties.$store = store;
+app.use(store);
 
 app.mount('#app');

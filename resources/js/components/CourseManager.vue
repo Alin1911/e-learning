@@ -1,39 +1,28 @@
 <template>
-    <div>
-        {{ user }}
+  <div>
+    <h2>Selected Course: {{ selectedCourseTitle }}</h2>
+    <h3>Lessons:</h3>
+    <ul>
+      <li v-for="(lesson, index) in getLessons()" :key="index">
+        {{ lesson.title }}
+      </li>
+    </ul>
+  </div>
+</template>
 
-      <h2>{{ course.name }}</h2>
-      <div >
-        <ul>
-          <li v-for="(lesson, index) in course.lessons" :key="lesson.id">
-            <a @click="selectLesson(lesson, index)">{{ lesson.title }}</a>
-          </li>
-        </ul>
-      </div>
-      <div v-if="selectedLesson">
-        <h3>{{ selectedLesson.title }}</h3>
-        <p>{{ selectedLesson.description }}</p>
-      </div>
-    </div>
-  </template>
-  
-  <script>
+<script>
 export default {
-  props: ['course', 'selectedLesson'],
+  props: ['course_id',],
   computed: {
     user() {
-      console.log('store:', this.$store);
       return this.$store.getters.getUser;
     },
-    courses() {
-      return this.$store.getters.getCourses;
+    selectedCourse() {
+      return this.$store.getters.getSelectedCourse;
     },
-  },
-  data() {
-    return {
-      course_id: null,
-      selectedLesson: null,
-    };
+    selectedCourseTitle() {
+      return this.$store.getters.getSelectedCourseTitle;
+    },
   },
   methods: {
     async fetchUser() {
@@ -42,13 +31,19 @@ export default {
     async fetchCourses() {
       await this.$store.dispatch('fetchCourses');
     },
-    selectLesson(lesson, index) {
-      this.selectedLesson = lesson;
+    getLessons() {
+      return this.selectedCourse ? this.selectedCourse.lessons : [];
+    },
+  },
+  watch: {
+    course_id(newValue) {
+      this.$store.commit('setSelectedCourseId', newValue);
     },
   },
   mounted() {
     this.fetchUser();
     this.fetchCourses();
+    this.$store.commit('setSelectedCourseId', this.course_id);
   },
 };
-  </script>
+</script>

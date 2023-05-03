@@ -27,6 +27,8 @@
         "webpack-cli": "^5.0.2"
     },
     "dependencies": {
+        "@babel/core": "^7.21.8",
+        "@babel/preset-env": "^7.21.5",
         "@fortawesome/fontawesome-svg-core": "^6.3.0",
         "@fortawesome/free-brands-svg-icons": "^6.3.0",
         "@fortawesome/free-regular-svg-icons": "^6.3.0",

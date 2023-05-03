@@ -45,6 +45,8 @@ class CourseController extends Controller
         $course->language = $request->get('language', 'english');
         if ($request->has('image')) {
             $course->image = $request->file('image')->store('courses');
+        } else {
+            $course->image = 'storage/images/2.png';
         }
         $course->save();
 
@@ -130,6 +132,7 @@ class CourseController extends Controller
     public function courses()
     {
         $user = auth()->user();
+        $user->load('courses', 'courses.lessons', 'courses.exercises', 'courses.tests', 'courses.questions');
         $courses = $user->courses;
         return json_encode($courses);
     }

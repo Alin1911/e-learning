@@ -9,8 +9,8 @@
       <div class="carousel-item @if($course->id == 1)active @endif">
         <img class="d-block w-100" src="{{ asset($course->image) }}" alt="{{$course->name}}">
         <div class="carousel-caption d-none d-md-block">
-          <h5>{{$course->name}}</h5>
-          <p>{{ substr($course->description, 0, 50); }}</p>
+          <h5>{{$course->title}}</h5>
+          <p>{{$course->level}}</p>
         </div>
       </div>
       @endforeach
