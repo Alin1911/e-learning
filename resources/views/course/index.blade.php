@@ -34,7 +34,7 @@
                 <div class="course-price mt-3">
                   @if($course->discount)
                     <span class="text-danger me-1">
-                      <s>{{ $course->price }} USD</s>
+                      <s>{{ $course->price }} RON</s>
                     </span>
                   @endif
                   @if($course->price)
