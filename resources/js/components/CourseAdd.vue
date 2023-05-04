@@ -25,6 +25,12 @@
           <label for="discount">Discount</label>
           <input type="number" step="0.01" class="form-control" id="discount" v-model="course.discount">
         </div>
+        <!-- Image-->
+        <div class="form-group">
+  <label for="image">Image</label>
+  <input type="file" class="form-control" id="image" @change="onFileChange">
+</div>
+
   
         <!-- Nivel -->
         <div class="form-group">
@@ -126,7 +132,8 @@
         },
         languages: ['Română', 'Engleză', 'Franceză', 'Spaniolă', 'Germană', 'Italiană'],
         levels: ['Începător', 'Intermediar', 'Avansat'],
-        durations: ['2 weeks', '1 month', '2 months', '3 months', '6 months', '1 year']
+        durations: ['2 weeks', '1 month', '2 months', '3 months', '6 months', '1 year'],
+        selectedFile: null
     };
   },
   computed: {
@@ -135,21 +142,51 @@
     },
   },
   methods: {
-  async submitCourse() {
-    try {
-      let response;
-      if (this.isUpdate) {
-        response = await axios.put(`/course/${this.course.id}`, this.course);
-        console.log('Curs actualizat:', response.data);
-      } else {
-        response = await axios.post('/course', this.course);
-        console.log('Curs creat:', response.data);
-      }
-      window.location.replace(`/course/${response.data}`);
-    } catch (error) {
-      console.error('Eroare la trimiterea cursului:', error);
-    }
+  async onFileChange(e) {
+    this.selectedFile = e.target.files[0];
   },
+  async submitCourse() {
+  try {
+    let response;
+
+    // Crearea obiectului FormData
+    const formData = new FormData();
+    formData.append("title", this.course.title);
+    formData.append("description", this.course.description);
+    formData.append("price", this.course.price);
+    formData.append("discount", this.course.discount);
+    formData.append("level", this.course.level);
+    formData.append("additional_info", this.course.additional_info);
+    formData.append("duration", this.course.duration);
+    formData.append("category_id", this.course.category_id);
+    formData.append("instructor_id", this.course.instructor_id);
+    formData.append("language", this.course.language);
+
+    // Adăugarea imaginii la FormData, dacă există
+    if (this.selectedFile) {
+      formData.append("image", this.selectedFile);
+    }
+
+    if (this.isUpdate) {
+      response = await axios.put(`/course/${this.course.id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log("Curs actualizat:", response.data);
+    } else {
+      response = await axios.post("/course", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log("Curs creat:", response.data);
+    }
+    window.location.replace(`/course/${response.data}`);
+  } catch (error) {
+    console.error("Eroare la trimiterea cursului:", error);
+  }
+},
 },
 };
 </script>
