@@ -38,18 +38,18 @@
                     </span>
                   @endif
                   @if($course->price)
-                    <span>{{ $course->discount ? ($course->price - $course->discount) : $course->price }} USD</span>
+                    <span>{{ $course->discount ? ($course->price - $course->discount) : $course->price }} RON</span>
                   @endif
                 </div>
               </li>
               @else 
               <li class="list-group-item">
-                Free to enroll
+                Inscrie-te gratuit!
               </li>
               @endif
             </ul>
             <div class="card-body">
-                <a href="{{ route('course.show', $course->id) }}" class="btn btn-primary">Inscriete</a>
+                <a href="{{ route('course.show', $course->id) }}" class="btn btn-primary">Inscrie-te</a>
             </div>
           </div>
         @endforeach

@@ -1,9 +1,9 @@
 <template>
   <div class="">
     <div class="container mb-3">
-      <div class="row g-0">
-        <div v-if="course.image" class="col-md-4">
-          <img :src="course.image" class="img-fluid rounded-start" alt="Course image">
+      <div class="row g-0 d-flex justify-content-center">
+        <div v-if="course.image" class="col-md-8 mb-5">
+          <img src="http://localhost/storage/images/2.png" class="img-fluid rounded-start" alt="Course image">
         </div>
         <div class="col-12">
           <div class="card-body">
@@ -17,18 +17,18 @@
                 <span v-if="course.duration" class="course-duration">Durata: {{ course.duration }}</span>
               </small>
             </p>
-            <p v-if="course.category_id" class="card-text">Category: {{ course.category.name }}</p>
+            <p v-if="course.category_id" class="card-text">Categorie: {{ course.category.name }}</p>
             <p v-if="course.instructor_id" class="card-text">Instructor: {{ course.instructor_id }}</p>
             <p v-if="course.additional_info" class="card-text">{{ course.additional_info }}</p>
             <div class="course-price mt-3">
               <span v-if="course.discount" class="text-danger me-1">
-                <s v-if="course.price">{{ course.price }} USD</s>
+                <s v-if="course.price">{{ course.price }} RON</s>
               </span>
-              <span  v-if="course.price" >{{ course.discount ? (course.price - course.discount) : course.price }} USD</span>
+              <span  v-if="course.price" >{{ course.discount ? (course.price - course.discount) : course.price }} RON</span>
             </div>
           </div>
         </div>
-        <button class="enroll-btn btn btn-primary mt-3" @click="enroll">Enroll</button>
+        <button class="enroll-btn btn btn-primary mt-3" @click="enroll">Inscrie-te</button>
       </div>
     </div>
   </div>
