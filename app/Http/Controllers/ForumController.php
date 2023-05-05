@@ -15,4 +15,70 @@ class ForumController extends Controller
             $forum = Forum::find(1);
         return view('forum.index')->with('forum', $forum);
     }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('forum.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $forum = new Forum();
+        if ($request->has('title')) {
+            $forum->title = $request->input('title');
+        }
+        if ($request->has('description')) {
+            $forum->description = $request->input('description');
+        }
+        $forum->save();
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $forum = Forum::find($id);
+        return view('forum.show')->with('forum', $forum);
+
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $forum = Forum::find($id);
+        return view('forum.edit')->with('forum', $forum);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $forum = Forum::find($id);
+        if ($request->has('title')) {
+            $forum->title = $request->input('title');
+        }
+        if ($request->has('description')) {
+            $forum->description = $request->input('description');
+        }
+        $forum->save();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        $forum = Forum::find($id);
+        $forum->delete();
+    }
 }
