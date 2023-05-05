@@ -6,9 +6,9 @@
             class="list-group-item list-group-item-action py-3 px-5 ripple active"
             aria-current="true"
           >
-            <i class="fas fa-solid fa-book fa-fw me-3"></i><span>Creare curs</span>
+            <i class="fas fa-solid fa-book fa-fw me-3"></i><span>Adaugare curs</span>
           </a>
-          <a href="/course/lesson/" class="list-group-item list-group-item-action px-5 py-3 ripple">
+          <a href="/course/lesson/create" class="list-group-item list-group-item-action px-5 py-3 ripple">
             <i class="fas fa-solid fa-person-chalkboard fa-fw me-3 "></i><span>Adauga lectie</span>
           </a>
           <a href="#" class="list-group-item list-group-item-action py-3 px-5 ripple"

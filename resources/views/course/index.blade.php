@@ -8,7 +8,7 @@
             <img class="card-img-top" src="..." alt="">
             <div class="card-body">
               <h6 class="card-title">{{ $course->title}}</h6>
-              <p class="card-text">{{ substr($course->description, 0, 50); }}</p>
+              <p class="card-text">{{ substr($course->description, 0, 50)}}</p>
             </div>
             <ul class="list-group list-group-flush">
               @if($course->levle)
