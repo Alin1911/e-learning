@@ -45,4 +45,10 @@ class ExerciseController extends Controller
 
         return redirect()->route('exercise.index');
     }
+
+    public function destroy($id)
+    {
+        $exercise = Exercise::find($id);
+        $exercise->delete();
+    }
 }

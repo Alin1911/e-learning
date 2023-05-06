@@ -18,6 +18,19 @@
           <a href="/forum/create" class="list-group-item list-group-item-action px-5 py-3 ripple @if($active == 4) active @endif"
             ><i class="fas fa-users fa-fw me-3"></i><span>Creaza o discoutie</span></a
           >
+          @if(!@empty($courses))
+              
+          <div class="btn-group">
+  <button type="button" class="btn btn-warning rounded-0 border dropdown-toggle py-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <h5>Cursurile tale</h5>
+  </button>
+  <div class="dropdown-menu p-0" style="width: 240px;">
+    @foreach ($courses as $course)
+    <a class="dropdown-item border-bottom py-2" href="/course/{{$course->id}}/edit">{{$course->title}}</a>
+    @endforeach
+  </div>
+</div>
+@endif
         </div>
     </div>
 </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Course;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -25,9 +26,11 @@ class CourseController extends Controller
 
     public function create()
     {
+        $user = Auth::user();
+        $courses = $user->courses;
         $categories = Category::all();
 
-        return view('course.create')->with('categories', $categories);
+        return view('course.create')->with('categories', $categories)->with('courses', $courses);
     }
 
     public function store(Request $request)
@@ -41,7 +44,7 @@ class CourseController extends Controller
         $course->duration = $request->get('duration', 'anytime');
         $course->discount = $request->get('discount', '0');
         $course->additional_info = $request->get('additional_info', '');
-        $course->instructor_id = $request->get('instructor_id', '1');
+        $course->instructor_id = 1;
         $course->language = $request->get('language', 'english');
         if ($request->has('image')) {
             $course->image = $request->file('image')->store('courses');
