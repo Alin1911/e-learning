@@ -13,7 +13,7 @@ class Course extends Model
     {
         return $this->hasOne(Category::class, 'id', 'category_id');
     }
-    public function users()
+    public function learningUsers()
     {
         return $this->belongsToMany(User::class, 'course_user', 'course_id', 'user_id');
     }

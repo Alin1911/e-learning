@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   props: {
     courses: {
@@ -52,18 +53,35 @@ export default {
     };
   },
   methods: {
-    addLesson() {
-      if (!this.newLesson.title || !this.newLesson.description) {
+async addLesson() {
+    if (!this.newLesson.title || !this.newLesson.description) {
         alert('Te rog să completezi toate câmpurile!');
         return;
-      }
-      // Aici poți adăuga logica pentru a trimite lecția nouă la server
-      console.log('Lecție nouă:', this.newLesson);
-
-      // Reset form
-      this.newLesson.title = '';
-      this.newLesson.description = '';
     }
+    // Aici poți adăuga logica pentru a trimite lecția nouă la server
+    try {
+        const response = await axios.post('/lesson', {
+            title: this.newLesson.title,
+            description: this.newLesson.description,
+            course_id: this.selectedCourse.id
+        });
+
+        if (response.status === 200) {
+            alert('Lecția a fost adăugată cu succes!');
+            // Actualizează lista de lecții a cursului selectat cu datele primite de la server
+            this.selectedCourse.lessons = response.data;
+        } else {
+            alert('A apărut o eroare la adăugarea lecției!');
+        }
+    } catch (error) {
+        console.error(error);
+        alert('A apărut o eroare la adăugarea lecției!');
+    }
+
+    // Reset form
+    this.newLesson.title = '';
+    this.newLesson.description = '';
+}
   }
 };
 </script>

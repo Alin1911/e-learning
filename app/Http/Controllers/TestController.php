@@ -28,21 +28,30 @@ class TestController extends Controller
         }
         return view('test.index')->with(['tests' => $tests, 'user' => $user]);
     }
-
-    public function create(Request $request)
+    public function store(Request $request)
     {
-        $course = null;
-        $lesson = null;
-        $user = Auth::user();
+        $test = new Test();
         if ($request->has('course_id')) {
-            $course_id = $request->input('course_id');
-            $course = Course::find($course_id);
+            $test->course_id = $request->input('course_id');
         }
         if ($request->has('lesson_id')) {
-            $lesson_id = $request->input('lesson_id');
-            $lesson = Lesson::find($lesson_id);
+            $test->lesson_id = $request->input('lesson_id');
         }
-        return view('test.create')->with(['course' => $course, 'lesson' => $lesson, 'user' => $user]);
+        if ($request->has('title')) {
+            $test->title = $request->input('title');
+        }
+        if ($request->has('description')) {
+            $test->description = $request->input('description');
+        }
+        $test->save();
+        return response()->json($test, 200);
+    }
+    public function create(Request $request)
+    {
+        $user = Auth::user();
+        $course = $user->courses;
+        $course->load('lessons', 'tests', 'lessons.tests');
+        return view('test.create')->with(['courses' => $course]);
     }
 
     public function edit($id)

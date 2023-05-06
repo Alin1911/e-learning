@@ -40,7 +40,6 @@ class LessonController extends Controller
             'course_id' => 'required',
             'title' => 'required',
             'description' => 'required',
-            'video_url' => 'required',
         ]);
         $lesson = new Lesson();
         if ($request->has('course_id')) {
@@ -55,7 +54,10 @@ class LessonController extends Controller
         if ($request->has('video_url')) {
             $lesson->video_url = $request->input('video_url');
         }
+        $lesson->order = Lesson::where('course_id', $lesson->course_id)->count() + 1;
         $lesson->save();
+        $lessons = Lesson::where('course_id', $lesson->course_id)->get();
+        return response()->json($lessons, 200);
     }
 
     /**

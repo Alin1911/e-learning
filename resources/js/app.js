@@ -6,11 +6,9 @@ import Course from '@/components/Course.vue';
 import CourseAdd from '@/components/CourseAdd.vue';
 import Instructors from '@/components/Instructors.vue';
 import Categories from '@/components/Categories.vue';
-import CourseManager from './components/CourseManager.vue';
-import LessonCreate from './components/LessonCreate.vue';
-import TestCreate from './components/TestCreate.vue';
-
-Vue.component('test-create', TestCreate);
+import CourseManager from '@/components/CourseManager.vue';
+import LessonCreate from '@/components/LessonCreate.vue';
+import TestCreate from '@/components/TestCreate.vue';
 
 import createNewStore from './store.js';
 
