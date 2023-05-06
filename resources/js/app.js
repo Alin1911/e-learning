@@ -7,6 +7,11 @@ import CourseAdd from '@/components/CourseAdd.vue';
 import Instructors from '@/components/Instructors.vue';
 import Categories from '@/components/Categories.vue';
 import CourseManager from './components/CourseManager.vue';
+import LessonCreate from './components/LessonCreate.vue';
+import TestCreate from './components/TestCreate.vue';
+
+Vue.component('test-create', TestCreate);
+
 import createNewStore from './store.js';
 
 const store = createNewStore();
@@ -17,7 +22,9 @@ const app = createApp({
         'course-add': CourseAdd,
         'instructors': Instructors,
         'categories': Categories,
-        'course-manager': CourseManager
+        'course-manager': CourseManager,
+        'lesson-create': LessonCreate,
+        'test-create': TestCreate,
     },
 });
 

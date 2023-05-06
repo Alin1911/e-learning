@@ -24,6 +24,6 @@ Route::resource('/answer', 'CourseAnswerController');
 Route::resource('/exercise', 'ExerciseController');
 Route::resource('/test', 'TestController');
 Route::resource('/forum', 'ForumController');
-Route::resource('/course/lesson', 'LessonController');
+Route::resource('/lesson', 'LessonController');
 Route::resource('/question', 'CourseQuestionController');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -27,6 +27,7 @@ class LessonController extends Controller
     {
         $user = Auth::user();
         $courses = $user->courses;
+        $courses->load('lessons');
         return view('lesson.create', compact('courses'));
     }
 

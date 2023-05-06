@@ -36,6 +36,8 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $course = new Course();
+        $user = Auth::user();
+        $course->user_id = $user->id;
         $course->title = $request->get('title', '');
         $course->description = $request->get('description', '');
         $course->category_id = $request->get('category_id', '');
@@ -66,7 +68,10 @@ class CourseController extends Controller
     public function edit($id)
     {
         $course = Course::find($id);
-        return view('course.edit', compact('course'));
+        $categories = Category::all();
+        $user = Auth::user();
+        $courses = $user->courses;
+        return view('course.edit', compact('course', 'categories', 'courses'));
     }
 
     public function update(Request $request)
