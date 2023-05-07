@@ -24,7 +24,6 @@
         <ul class="list-group mb-3">
           <li v-for="test in selectedLesson.tests" :key="test.id"  class="list-group-item d-flex bd-highlight mb-3">
             <b class="p-2 bd-highlight">{{ test.title }}</b>
-            <a :href="'/test/' + test.id + '/exercices'" class="ms-auto btn btn-outline-danger col-2 rounded-pill"><i class="fa-solid fa-list-check"></i>Audauga exercitii</a>
             <div  class="ms-auto p-2 bd-highlight">
               <a class="m-1" :href="'/test/' + test.id"><i class="fa-solid fa-eye"></i></a>
               <a class="m-1" :href="'/test/' + test.id + '/edit'"><i class="fas fa-edit"></i></a>
@@ -39,7 +38,6 @@
           <div v-for="test in selectedCourse.tests">
             <li v-if="!test.lesson_id" :key="test.id" class="list-group-item d-flex bd-highlight mb-3">
               <b class="p-2 bd-highlight">{{ test.title }}</b>
-              <a :href="'/test/' + test.id + '/exercices'" class="ms-auto btn btn-outline-danger col-2 rounded-pill"><i class="fa-solid fa-list-check"></i>Audauga exercitii</a>
               <div  class="ms-auto p-2 bd-highlight">
                 <a class="m-1" :href="'/test/' + test.id"><i class="fa-solid fa-eye"></i></a>
                 <a class="m-1" :href="'/test/' + test.id + '/edit'"><i class="fas fa-edit"></i></a>
