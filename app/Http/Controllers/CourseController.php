@@ -110,26 +110,28 @@ class CourseController extends Controller
         $course->delete();
         return redirect()->route('course.index');
     }
-
     public function enroll($id)
     {
         if (! auth()->check()) {
             abort(401, 'Unauthorized action.');
         }
+
         $course = Course::find($id);
         $user = auth()->user();
-        if ($user->courses->contains($course->id)) {
-            return $course->id;
+
+        // Verificați dacă utilizatorul este deja înscris la curs
+        if ($user->learningCourses->contains($course->id)) {
+            // Returnați un mesaj de eroare sau redirecționați către o pagină de eroare
+            return response()->json(['message' => 'User is already enrolled in this course'], 400);
         }
-        $user->courses()->attach($course, ['enrollment_date' => now()]);
+
+        $user->learningCourses()->attach($course, ['enrollment_date' => now()]);
         return $course->id;
     }
-
     public function learnCourse($id, Request $request)
     {
         $course = Course::find($id);
         $course->load('lessons');
-        $course->load('exercises');
         $course->load('tests');
         $course->load('questions');
         $course->load('category');

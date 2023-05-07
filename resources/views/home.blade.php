@@ -14,17 +14,19 @@
 
             <h4>{{ __('Cursurile la care ești înscris:') }}</h4>
             <div class="row">
+                @foreach($learningCourses as $learningCourse)
                 <!-- Înlocuiți cu un ciclu foreach care parcurge cursurile utilizatorului și afișează informațiile relevante despre fiecare curs -->
                 <div class="col-md-4">
                     <div class="card mb-4 p-3">
                         <img src="URL imagine curs" class="card-img-top" alt="Imagine curs">
                         <div class="card-body">
-                            <h5 class="card-title">Nume curs</h5>
+                            <h5 class="card-title">{{$learningCourse->title}}</h5>
                             <p class="card-text">Descriere scurtă a cursului</p>
                             <a href="URL curs" class="btn btn-primary">Accesează cursul</a>
                         </div>
                     </div>
                 </div>
+                @endforeach
                 <!-- Sfârșitul exemplului de card curs -->
             </div>
             <hr>

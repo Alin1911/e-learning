@@ -54,41 +54,22 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
+  props: {
       test: {
         title: '',
         description: '',
         exercises: []
       },
+  },
+  data() {
+    return {
       answers: []
     };
-  },
-  async mounted() {
-    // Încărcați testul și exercițiile asociate de la server
-    const response = await fetch('/api/test/' + this.$route.params.id);
-    this.test = await response.json();
-
-    // Inițializați structura răspunsurilor în funcție de tipurile de exerciții
-    this.answers = this.test.exercises.map((exercise) => {
-      switch (exercise.exercise_type) {
-        case 'multiple_choice_multiple_answers':
-          return exercise.options.map(() => false);
-        case 'multiple_choice_single_answer':
-          return null;
-        case 'numeric':
-          return '';
-        case 'ordering':
-          return exercise.ordering_items.map(() => '');
-        case 'fill_in_the_blank':
-          return exercise.fill_in_the_blank_items.map(() => '');
-      }
-    });
   },
   methods: {
     async submitTest() {
       // Trimite răspunsurile utilizatorului la server
-      const response = await fetch('/api/test/' + this.$route.params.id, {
+      const response = await fetch('/test/' + this.testId, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

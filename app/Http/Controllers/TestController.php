@@ -59,4 +59,13 @@ class TestController extends Controller
         $test = Test::find($id);
         return view('test.edit')->with(['test' => $test]);
     }
+
+    public function show(Request $request, $id)
+    {
+        $test = Test::find($id);
+        if ($request->wantsJson()) {
+            return response()->json($test, 200);
+        }
+        return view('test.show')->with(['test' => $test]);
+    }
 }
