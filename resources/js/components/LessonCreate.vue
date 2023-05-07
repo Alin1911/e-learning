@@ -12,9 +12,14 @@
     <div v-if="selectedCourse">
     <div v-if="selectedCourse.lessons">
       <h3>Lecții existente</h3>
-      <ul class="list-group mb-3">
-        <li v-for="lesson in selectedCourse.lessons" :key="lesson.id" class="list-group-item">
-          {{ lesson.title }}
+      <ul class="list-group mb-1">
+        <li v-for="lesson in selectedCourse.lessons" :key="lesson.id" class="list-group-item d-flex bd-highlight mb-3">
+          <b class="p-2 bd-highlight">{{ lesson.title }}</b>
+          <div  class="ms-auto p-2 bd-highlight">
+          <a class="m-1" :href="'/lesson/' + lesson.id"><i class="fa-solid fa-eye"></i></a>
+          <a class="m-1" :href="'/lesson/' + lesson.id + '/edit'"><i class="fas fa-edit"></i></a>
+          <a class="m-1" :href="'/lesson/' + lesson.id + '/delete'"><i class="fa-solid fa-trash"></i></a>
+          </div>
         </li>
       </ul>
     </div>
@@ -36,7 +41,7 @@
 
 <script>
 import axios from 'axios';
-export default {
+export default  {
   props: {
     courses: {
       type: Array,
