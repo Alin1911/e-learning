@@ -22,7 +22,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{$learningCourse->title}}</h5>
                             <p class="card-text">Descriere scurtă a cursului</p>
-                            <a href="URL curs" class="btn btn-primary">Accesează cursul</a>
+                            <a href="/learn/course/{{$learningCourse->id}}" class="btn btn-primary">Accesează cursul</a>
                         </div>
                     </div>
                 </div>
