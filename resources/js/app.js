@@ -10,6 +10,7 @@ import CourseManager from '@/components/CourseManager.vue';
 import LessonCreate from '@/components/LessonCreate.vue';
 import TestCreate from '@/components/TestCreate.vue';
 import TestComponent from '@/components/TestComponent.vue';
+import ExerciseCreate from '@/components/Exercise.vue';
 
 import createNewStore from './store.js';
 
@@ -25,6 +26,7 @@ const app = createApp({
         'lesson-create': LessonCreate,
         'test-create': TestCreate,
         'test-component': TestComponent,
+        'exercise-create': ExerciseCreate,
     },
 });
 

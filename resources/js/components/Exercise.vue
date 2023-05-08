@@ -29,11 +29,11 @@
 </template>
 
 <script>
-import MultipleChoiceMultipleAnswers from '@/components/MultipleChoiceMultipleAnswers.vue';
-import MultipleChoiceSingleAnswer from '@/components/MultipleChoiceSingleAnswer.vue';
-import Numeric from '@/components/Numeric.vue';
-import Ordering from '@/components/Ordering.vue';
-import FillInTheBlank from '@/components/FillInTheBlank.vue';
+import MultipleChoiceMultipleAnswers from './MultipleChoiceMultipleAnswers.vue';
+import MultipleChoiceSingleAnswer from './MultipleChoiceSingleAnswer.vue';
+import Numeric from './Numeric.vue';
+import Ordering from './Ordering.vue';
+import FillInTheBlank from './FillInTheBlank.vue';
 
 export default {
   components: {

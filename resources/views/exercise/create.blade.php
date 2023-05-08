@@ -2,9 +2,10 @@
 
 @section('content')
 <div>
-   @include('widgets.slider_course_add')
+   @include('widgets.slider_course_add',['active'=>2])
 <div class="main-content container">
 </div>
+<exercise-create></exercise-create>
 </div>
 @endsection
 
