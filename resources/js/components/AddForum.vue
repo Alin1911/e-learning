@@ -42,7 +42,7 @@ export default {
   methods: {
     async addForum() {
   try {
-    const response = await fetch('/forums', {
+    const response = await fetch('/forum', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
