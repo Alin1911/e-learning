@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="(item, index) in items" :key="index" class="form-group">
+    <div v-for="(item, index) in items" :key="index" class="form-group py-2">
       <label :for="`item-${index}`">Cuvântul {{ index + 1 }}:</label>
       <input type="text" class="form-control" :id="`item-${index}`" v-model="item.word" placeholder="Cuvânt" />
       <input type="number" class="form-control mt-1" v-model="item.position" placeholder="Poziția" />
