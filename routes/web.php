@@ -21,7 +21,7 @@ Route::get('/user', 'UserController@currentUser');
 Route::get('/courses', 'CourseController@courses');
 Route::get('/learn/course/{id}', 'CourseController@learnCourse');
 Route::resource('/answer', 'CourseAnswerController');
-Route::resource('/exercise', 'ExerciseController');
+Route::resource('/test/{test_id}/exercise', 'ExerciseController');
 Route::resource('/test', 'TestController');
 Route::resource('/forum', 'ForumController');
 Route::resource('/lesson', 'LessonController');
