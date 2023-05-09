@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
+use App\Models\CourseMetaTag;
 
 class CourseController extends Controller
 {
@@ -54,6 +55,18 @@ class CourseController extends Controller
             $course->image = 'storage/images/2.png';
         }
         $course->save();
+        $metaTag = new CourseMetaTag();
+        $metaTag->course_id = $course->id;
+        $metaTag->title = $course->title;
+        $metaTag->description = $course->description;
+        $metaTag->keywords = implode(', ', array_slice(explode(' ', $course->description), 0, 10)); // primele 10 cuvinte din descriere
+        $metaTag->language = $course->language;
+        $metaTag->author = $user->name;
+        $metaTag->publish_date = date('Y-m-d');
+        $metaTag->duration = $course->duration;
+        $metaTag->level = $course->level;
+
+        $metaTag->save();
 
         return $course->id;
     }
