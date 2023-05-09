@@ -12,6 +12,13 @@
 
 <script>
 export default {
+  props: {
+    modelValue: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  emits: ['update:modelValue'],
   data() {
     return {
       options: [{ answer: '', correct: false }],
@@ -25,7 +32,7 @@ export default {
   watch: {
     options: {
       handler(value) {
-        this.$emit('input', { options: value });
+        this.$emit('update:modelValue', { options: value });
       },
       deep: true,
     },

@@ -11,6 +11,13 @@
 
 <script>
 export default {
+  props: {
+    modelValue: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  emits: ['update:modelValue'],
   data() {
     return {
       items: [{ word: '', position: 1 }],
@@ -24,7 +31,7 @@ export default {
   watch: {
     items: {
       handler(value) {
-        this.$emit('input', { fillInTheBlankItems: value });
+        this.$emit('update:modelValue', { fillInTheBlankItems: value });
       },
       deep: true,
     },

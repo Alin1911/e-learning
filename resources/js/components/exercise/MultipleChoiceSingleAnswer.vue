@@ -12,6 +12,13 @@
 
 <script>
 export default {
+  props: {
+    modelValue: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  emits: ['input'],
   data() {
     return {
       options: [{ answer: '' }],

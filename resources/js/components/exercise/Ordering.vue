@@ -11,6 +11,13 @@
 
 <script>
 export default {
+  props: {
+    modelValue: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  emits: ['update:modelValue'],
   data() {
     return {
       items: [{ content: '', correctOrder: 1 }],
@@ -24,7 +31,7 @@ export default {
   watch: {
     items: {
       handler(value) {
-        this.$emit('input', { orderingItems: value });
+        this.$emit('update:modelValue', { orderingItems: value });
       },
       deep: true,
     },

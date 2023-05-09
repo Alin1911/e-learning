@@ -7,6 +7,13 @@
 
 <script>
 export default {
+  props: {
+    modelValue: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  emits: ['input'],
   data() {
     return {
       correctAnswer: 0,
@@ -15,6 +22,15 @@ export default {
   watch: {
     correctAnswer(value) {
       this.$emit('input', { correctAnswer: value });
+    },
+    modelValue: {
+      deep: true,
+      immediate: true,
+      handler(value) {
+        if (value && value.correctAnswer !== undefined) {
+          this.correctAnswer = value.correctAnswer;
+        }
+      },
     },
   },
 };

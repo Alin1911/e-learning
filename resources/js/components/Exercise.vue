@@ -18,27 +18,31 @@
         <input type="text" class="form-control" id="question" v-model="question" />
       </div>
 
-      <component
-        :is="exerciseComponent"
-        v-model="exerciseData"
-      ></component>
+<component
+  :is="exerciseComponent"
+  v-model="exerciseData"
+  @input="exerciseData = $event"
+></component>
+
+
       <div class="row d-flex justify-content-end">
         <div class="col-2 d-flex justify-content-end">
           <button @click="addExercise" class="btn btn-primary">Adaugă exercițiul</button>
         </div>
-      </div>  
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import MultipleChoiceMultipleAnswers from './MultipleChoiceMultipleAnswers.vue';
-import MultipleChoiceSingleAnswer from './MultipleChoiceSingleAnswer.vue';
-import Numeric from './Numeric.vue';
-import Ordering from './Ordering.vue';
-import FillInTheBlank from './FillInTheBlank.vue';
+import MultipleChoiceMultipleAnswers from './exercise/MultipleChoiceMultipleAnswers.vue';
+import MultipleChoiceSingleAnswer from './exercise/MultipleChoiceSingleAnswer.vue';
+import Numeric from './exercise/Numeric.vue';
+import Ordering from './exercise/Ordering.vue';
+import FillInTheBlank from './exercise/FillInTheBlank.vue';
 
 export default {
+  props: ['test_id'],
   components: {
     MultipleChoiceMultipleAnswers,
     MultipleChoiceSingleAnswer,
@@ -71,20 +75,32 @@ export default {
   },
   methods: {
     async addExercise() {
-      const exercise = {
-        test_id: this.$route.params.test_id, // Așigurați-vă că aveți test_id în parametrii rutei
-        question: this.question,
-        exercise_type: this.selectedExerciseType,
-        ...this.exerciseData,
-      };
+  const exercise = {
+    test_id: this.test_id, // Așigurați-vă că aveți test_id în parametrii rutei
+    question: this.question,
+    exercise_type: this.selectedExerciseType,
+    ...this.exerciseData,
+  };
+   console.log('Exercise data:', exercise); 
+  // Adăugați codul pentru a trimite exercițiul la server (de exemplu, prin POST la un API endpoint)
+  const response = await fetch(`/test/${this.test_id}/exercise/create`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(exercise),
+  });
 
-      // Adăugați codul pentru a trimite exercițiul la server (de exemplu, prin POST la un API endpoint)
-      // ...
-
-      // Resetați formularul
-      this.selectedExerciseType = '';
-      this.question = '';
-      this.exerciseData = null;
+  if (response.ok) {
+    // Exercițiul a fost creat cu succes
+    // Resetați formularul
+    this.selectedExerciseType = '';
+    this.question = '';
+    this.exerciseData = null;
+  } else {
+    // Tratați eroarea (de exemplu, afișați un mesaj de eroare)
+    console.error(`Error ${response.status}: ${response.statusText}`);
+  }
     },
   },
 };
