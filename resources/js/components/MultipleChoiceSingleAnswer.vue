@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-for="(option, index) in options" :key="index" class="form-check">
-      <input type="radio" class="form-check-input" name="single-answer" :id="`option-${index}`" v-model="correctIndex" :value="index" />
+    <div v-for="(option, index) in options" :key="index" class="form-check px-4 py-2">
+      <input type="radio" class="mt-2 form-check-input" name="single-answer" :id="`option-${index}`" v-model="correctIndex" :value="index" />
       <label class="form-check-label" :for="`option-${index}`">
         <input type="text" class="form-control" v-model="option.answer" placeholder="Răspuns" />
       </label>
