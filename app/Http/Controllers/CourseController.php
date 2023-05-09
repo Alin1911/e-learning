@@ -58,6 +58,7 @@ class CourseController extends Controller
         $metaTag->course_id = $course->id;
         $metaTag->title = $course->title;
         $metaTag->description = $course->description;
+        $metaTag->price = $course->price;
         $metaTag->keywords = implode(', ', array_slice(explode(' ', $course->description), 0, 10)); // primele 10 cuvinte din descriere
         $metaTag->language = $course->language;
         $metaTag->author = $user->name;

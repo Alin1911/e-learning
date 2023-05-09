@@ -21,6 +21,7 @@ class CourseMetaTag extends Model
         'publish_date',
         'duration',
         'level',
+        'price',
     ];
 
     public function course()

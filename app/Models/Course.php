@@ -48,7 +48,15 @@ class Course extends Model
             $query->where('title', 'LIKE', '%' . $searchTerm . '%')
                 ->orWhere('description', 'LIKE', '%' . $searchTerm . '%')
                 ->orWhereHas('metaTag', function (Builder $query) use ($searchTerm) {
-                    $query->where('keywords', 'LIKE', '%' . $searchTerm . '%');
+                    $query->where('keywords', 'LIKE', '%' . $searchTerm . '%')
+                        ->orWhere('description', 'LIKE', '%' . $searchTerm . '%')
+                        ->orWhere('title', 'LIKE', '%' . $searchTerm . '%')
+                        ->orWhere('author', 'LIKE', '%' . $searchTerm . '%')
+                        ->orWhere('language', 'LIKE', '%' . $searchTerm . '%')
+                        ->orWhere('level', 'LIKE', '%' . $searchTerm . '%')
+                        ->orWhere('duration', 'LIKE', '%' . $searchTerm . '%')
+                        ->orWhere('publish_date', 'LIKE', '%' . $searchTerm . '%')
+                        ->orWhere('price', 'LIKE', '%' . $searchTerm . '%');
                 });
         });
     }
@@ -56,5 +64,4 @@ class Course extends Model
     {
         return $this->hasOne(CourseMetaTag::class);
     }
-
 }
