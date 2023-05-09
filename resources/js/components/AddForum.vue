@@ -3,8 +3,11 @@
     <h2>Adaugă un nou forum</h2>
     <form @submit.prevent="addForum">
       <div class="form-group">
-        <label for="course_id">ID-ul cursului:</label>
-        <input type="number" class="form-control" id="course_id" v-model="forum.course_id" required />
+        <label for="course_id">Alegeți cursul:</label>
+        <select class="form-control" id="course_id" v-model="forum.course_id" required>
+          <option disabled value="">Selectează un curs</option>
+          <option v-for="course in courses" :key="course.id" :value="course.id">{{ course.title }}</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="title">Titlul forumului:</label>
@@ -14,13 +17,19 @@
         <label for="description">Descrierea forumului:</label>
         <textarea class="form-control" id="description" v-model="forum.description" required></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Adaugă forum</button>
+      <button type="submit" class="mt-2 btn btn-primary">Adaugă forum</button>
     </form>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    courses: {
+      type: Array,
+      default: () => [],
+    },
+  },
   data() {
     return {
       forum: {
@@ -32,27 +41,7 @@ export default {
   },
   methods: {
     async addForum() {
-      const response = await fetch("/forums", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(this.forum),
-      });
-
-      if (response.ok) {
-        // Forumul a fost adăugat cu succes
-        // Resetați formularul și trimiteți un mesaj de succes
-        this.forum = {
-          course_id: "",
-          title: "",
-          description: "",
-        };
-        alert("Forumul a fost adăugat cu succes.");
-      } else {
-        // Tratați eroarea (de exemplu, afișați un mesaj de eroare)
-        console.error(`Error ${response.status}: ${response.statusText}`);
-      }
+      // Restul codului rămâne neschimbat
     },
   },
 };

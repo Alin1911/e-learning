@@ -3,10 +3,9 @@
 @section('content')
 <div>
    @include('widgets.slider_course_add', ['active' => 4])
-<div class="main-content container">
-</div>
-<add-forum></add-forum>
-
+   <div class="main-content container">
+      <add-forum :courses='@json($courses)'></add-forum>
+   </div>
 </div>
 @endsection
 
