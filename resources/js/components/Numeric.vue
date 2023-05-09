@@ -1,5 +1,5 @@
 <template>
-  <div class="form-group">
+  <div class="form-group mb-2">
     <label for="numeric-answer">Răspuns corect:</label>
     <input type="number" class="form-control" id="numeric-answer" v-model="correctAnswer" />
   </div>
