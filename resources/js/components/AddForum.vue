@@ -41,8 +41,34 @@ export default {
   },
   methods: {
     async addForum() {
-      // Restul codului rămâne neschimbat
-    },
+  try {
+    const response = await fetch('/forums', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(this.forum),
+    });
+
+    if (response.ok) {
+      // Forumul a fost creat cu succes
+      // Resetați formularul
+      this.forum.course_id = '';
+      this.forum.title = '';
+      this.forum.description = '';
+      
+      // Opțional: afișați un mesaj de succes sau redirecționați utilizatorul
+      alert('Forumul a fost creat cu succes.');
+    } else {
+      // Tratați eroarea (de exemplu, afișați un mesaj de eroare)
+      console.error(`Error ${response.status}: ${response.statusText}`);
+    }
+  } catch (error) {
+    // Tratați eroarea de rețea
+    console.error('A apărut o eroare de rețea:', error);
+  }
+}
+
   },
 };
 </script>
