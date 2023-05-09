@@ -53,7 +53,7 @@
                             Dashboard
                         </a>
                         <a class="dropdown-item" href="/course/create" style="color: #000;">
-                            Adauga curs
+                            Adaugă curs
                         </a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();" style="color: #000;">
