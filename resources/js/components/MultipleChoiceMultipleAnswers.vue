@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-for="(option, index) in options" :key="index" class="form-check">
-      <input type="checkbox" class="form-check-input" :id="`option-${index}`" v-model="option.correct" />
+    <div v-for="(option, index) in options" :key="index" class="form-check mt-2">
+      <input type="checkbox" class="mt-2 form-check-input" :id="`option-${index}`" v-model="option.correct" />
       <label class="form-check-label" :for="`option-${index}`">
         <input type="text" class="form-control" v-model="option.answer" placeholder="Răspuns" />
       </label>

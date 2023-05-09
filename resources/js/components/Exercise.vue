@@ -12,7 +12,7 @@
       </select>
     </div>
 
-    <div v-if="selectedExerciseType">
+    <div v-if="selectedExerciseType" class="bg-white py-3 px-2 mt-3 rounded shadow">
       <div class="form-group">
         <label for="question">Întrebarea:</label>
         <input type="text" class="form-control" id="question" v-model="question" />
@@ -22,8 +22,11 @@
         :is="exerciseComponent"
         v-model="exerciseData"
       ></component>
-
-      <button @click="addExercise" class="btn btn-primary">Adaugă exercițiul</button>
+      <div class="row d-flex justify-content-end">
+        <div class="col-2 d-flex justify-content-end">
+          <button @click="addExercise" class="btn btn-primary">Adaugă exercițiul</button>
+        </div>
+      </div>  
     </div>
   </div>
 </template>
