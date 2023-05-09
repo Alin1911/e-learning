@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Course extends Model
 {
@@ -41,4 +42,19 @@ class Course extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function scopeSearch(Builder $query, string $searchTerm)
+    {
+        return $query->where(function (Builder $query) use ($searchTerm) {
+            $query->where('title', 'LIKE', '%' . $searchTerm . '%')
+                ->orWhere('description', 'LIKE', '%' . $searchTerm . '%')
+                ->orWhereHas('metaTag', function (Builder $query) use ($searchTerm) {
+                    $query->where('keywords', 'LIKE', '%' . $searchTerm . '%');
+                });
+        });
+    }
+    public function metaTag()
+    {
+        return $this->hasOne(CourseMetaTag::class);
+    }
+
 }
