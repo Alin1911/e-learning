@@ -11,6 +11,7 @@ import LessonCreate from '@/components/LessonCreate.vue';
 import TestCreate from '@/components/TestCreate.vue';
 import TestComponent from '@/components/TestComponent.vue';
 import ExerciseCreate from '@/components/Exercise.vue';
+import AddForum from '@/components/AddForum.vue';
 
 import createNewStore from './store.js';
 
@@ -27,6 +28,7 @@ const app = createApp({
         'test-create': TestCreate,
         'test-component': TestComponent,
         'exercise-create': ExerciseCreate,
+        'add-forum': AddForum,
     },
 });
 
