@@ -6,6 +6,7 @@ export default function createNewStore() {
       user: null,
       courses: [],
       selectedCourseId: null,
+      openedLesson: null,
     },
     getters: {
       getUser: state => state.user,
@@ -17,9 +18,17 @@ export default function createNewStore() {
       },
       getSelectedCourseTitle: state => {
         if (state.courses) {
-        const selectedCourse = state.courses.find(course => course.id === state.selectedCourseId);
-        return selectedCourse ? selectedCourse.title : '';
+          const selectedCourse = state.courses.find(course => course.id === state.selectedCourseId);
+          return selectedCourse ? selectedCourse.title : '';
         }
+      },
+      getLessonsByCourseId: (state) => (courseId) => {
+        const course = state.courses.find((course) => course.id === courseId);
+        return course ? course.lessons : [];
+      },
+      getCompletedLessonsByCourseId: (state) => (courseId) => {
+        const course = state.courses.find((course) => course.id === courseId);
+        return course ? course.completedLessons : [];
       },
     },
     mutations: {
@@ -32,19 +41,39 @@ export default function createNewStore() {
       setSelectedCourseId(state, courseId) {
         state.selectedCourseId = courseId;
       },
+      setOpenedLesson(state, lesson) {
+        state.openedLesson = lesson;
+      },
     },
     actions: {
       async fetchUser({ commit }) {
         const response = await fetch('/user');
         const data = await response.json();
-        console.log(data);
         commit('setUser', data);
       },
       async fetchCourses({ commit }) {
         const response = await fetch('/courses');
         const data = await response.json();
-        console.log(data);
         commit('setCourses', data);
+      },
+      async fetchCourseData({ commit }, courseId) {
+        const response = await fetch(`/course/${courseId}`);
+        const data = await response.json();
+        commit('setCourses', data);
+      },
+      async toggleLessonCompletion({ state, commit }, { courseId, lessonId }) {
+        const course = state.courses.find((course) => course.id === courseId);
+        if (course) {
+          const completedLessons = course.completedLessons;
+          const index = completedLessons.indexOf(lessonId);
+          if (index > -1) {
+            completedLessons.splice(index, 1);
+          } else {
+            completedLessons.push(lessonId);
+          }
+          commit('setCourses', state.courses);
+          // Aici puteți adăuga logica de actualizare a API-ului
+        }
       },
     },
   });

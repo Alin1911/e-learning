@@ -6,12 +6,13 @@ import Course from '@/components/Course.vue';
 import CourseAdd from '@/components/CourseAdd.vue';
 import Instructors from '@/components/Instructors.vue';
 import Categories from '@/components/Categories.vue';
-import CourseManager from '@/components/CourseManager.vue';
+import CourseManager from '@/components/learn/CourseManager.vue';
 import LessonCreate from '@/components/LessonCreate.vue';
 import TestCreate from '@/components/TestCreate.vue';
 import TestComponent from '@/components/TestComponent.vue';
 import ExerciseCreate from '@/components/Exercise.vue';
 import AddForum from '@/components/AddForum.vue';
+import Lesson from '@/components/learn/Lesson.vue';
 
 import createNewStore from './store.js';
 
@@ -29,6 +30,7 @@ const app = createApp({
         'test-component': TestComponent,
         'exercise-create': ExerciseCreate,
         'add-forum': AddForum,
+        'lesson': Lesson,
     },
 });
 

@@ -71,10 +71,13 @@ class CourseController extends Controller
         return $course->id;
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $course = Course::find($id);
-        $course->load('category');
+        $course->load('category', 'lessons', 'tests', 'questions', 'instructor', 'metaTag', 'exercises');
+        if ($request->wantsJson()) {
+            return json_encode($course);
+        }
         return view('course.show')->with('course', $course);
     }
 
