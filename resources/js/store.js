@@ -7,6 +7,7 @@ export default function createNewStore() {
       courses: [],
       selectedCourseId: null,
       openedLesson: null,
+      currentCourse: null,
     },
     getters: {
       getUser: state => state.user,
@@ -23,12 +24,12 @@ export default function createNewStore() {
         }
       },
       getLessonsByCourseId: (state) => (courseId) => {
-        const course = state.courses.find((course) => course.id === courseId);
-        return course ? course.lessons : [];
+        const course = state.currentCourse;
+        return course && course.id === courseId ? course.lessons : [];
       },
       getCompletedLessonsByCourseId: (state) => (courseId) => {
-        const course = state.courses.find((course) => course.id === courseId);
-        return course ? course.completedLessons : [];
+        const course = state.currentCourse;
+        return course && course.id === courseId ? course.completedLessons : [];
       },
     },
     mutations: {
@@ -44,6 +45,9 @@ export default function createNewStore() {
       setOpenedLesson(state, lesson) {
         state.openedLesson = lesson;
       },
+      setCurrentCourse(state, course) {
+        state.currentCourse = course;
+      },
     },
     actions: {
       async fetchUser({ commit }) {
@@ -57,10 +61,16 @@ export default function createNewStore() {
         commit('setCourses', data);
       },
       async fetchCourseData({ commit }, courseId) {
-        const response = await fetch(`/course/${courseId}`);
+        const requestOptions = {
+          headers: {
+            'Accept': 'application/json'
+          }
+        };
+      
+        const response = await fetch(`/course/${courseId}`, requestOptions);
         const data = await response.json();
-        commit('setCourses', data);
-      },
+        commit('setCurrentCourse', data);
+      },      
       async toggleLessonCompletion({ state, commit }, { courseId, lessonId }) {
         const course = state.courses.find((course) => course.id === courseId);
         if (course) {
