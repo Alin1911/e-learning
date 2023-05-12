@@ -29,7 +29,8 @@ export default function createNewStore() {
       },
       getCompletedLessonsByCourseId: (state) => (courseId) => {
         const course = state.currentCourse;
-        return course && course.id === courseId ? course.completedLessons : [];
+
+        return course && course.id === courseId ? course.lessons.completedLessons : [];
       },
     },
     mutations: {

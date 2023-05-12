@@ -77,7 +77,7 @@ class CourseController extends Controller
         if (empty($course)) {
             return redirect()->route('course.index');
         }
-        $course->load('category', 'lessons', 'tests', 'questions', 'instructor', 'metaTag', 'exercises');
+        $course->load('category', 'lessons', 'lessons.userLessons', 'tests', 'questions', 'instructor', 'metaTag', 'exercises');
         if ($request->wantsJson()) {
             return json_encode($course);
         }
