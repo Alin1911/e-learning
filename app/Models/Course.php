@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Course extends Model
 {
@@ -59,6 +60,15 @@ class Course extends Model
                         ->orWhere('price', 'LIKE', '%' . $searchTerm . '%');
                 });
         });
+    }
+    public function completedLessonsForUser(int $userId) : Builder
+    {
+        return Lesson::query()
+            ->join('user_lessons', 'lessons.id', '=', 'user_lessons.lesson_id')
+            ->where('lessons.course_id', $this->id)
+            ->where('user_lessons.user_id', $userId)
+            ->whereNotNull('user_lessons.completed_at')
+            ->select('lessons.*');
     }
     public function metaTag()
     {

@@ -8,6 +8,7 @@ export default function createNewStore() {
       selectedCourseId: null,
       openedLesson: null,
       currentCourse: null,
+      completedLessons: [],
     },
     getters: {
       getUser: state => state.user,
@@ -23,15 +24,10 @@ export default function createNewStore() {
           return selectedCourse ? selectedCourse.title : '';
         }
       },
-      getLessonsByCourseId: (state) => (courseId) => {
-        const course = state.currentCourse;
-        return course && course.id === courseId ? course.lessons : [];
-      },
-      getCompletedLessonsByCourseId: (state) => (courseId) => {
-        const course = state.currentCourse;
-
-        return course && course.id === courseId ? course.lessons.completedLessons : [];
-      },
+      getLessons: state => state.currentCourse ? state.currentCourse.lessons : [],
+      getOpenedLesson: state => state.openedLesson,
+      getCompletedLessons: state => state.completedLessons,
+      getCurrentCourse: state => state.currentCourse ? state.currentCourse : null,
     },
     mutations: {
       setUser(state, user) {
@@ -49,6 +45,9 @@ export default function createNewStore() {
       setCurrentCourse(state, course) {
         state.currentCourse = course;
       },
+      setCompletedLessons(state, completedLessons) {
+        state.completedLessons = completedLessons;
+      }
     },
     actions: {
       async fetchUser({ commit }) {
@@ -67,10 +66,11 @@ export default function createNewStore() {
             'Accept': 'application/json'
           }
         };
-      
         const response = await fetch(`/course/${courseId}`, requestOptions);
         const data = await response.json();
-        commit('setCurrentCourse', data);
+        console.log(data);
+        commit('setCurrentCourse', data.course);
+        commit('setCompletedLessons', data.completedLessons);
       },      
       async toggleLessonCompletion({ state, commit }, { courseId, lessonId }) {
         const course = state.courses.find((course) => course.id === courseId);

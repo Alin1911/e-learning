@@ -1,13 +1,13 @@
 <template>
   <div>
     <h2>Manager de curs</h2>
-    {{ this.course_id }}
+    {{ course.title }}
     <ul class="list-group">
       <li
         v-for="(lesson, index) in lessons"
         :key="lesson.id"
         class="list-group-item"
-        :class="{ 'bg-success': completedLessons.includes(lesson.id) }"
+
       >
         <div class="d-flex justify-content-between">
           <div>
@@ -48,11 +48,20 @@ export default {
     },
   },
   computed: {
+    course() {
+      if (this.$store.getters.getCurrentCourse) {
+        return this.$store.getters.getCurrentCourse;
+      }
+      return {
+        title: 'Loading...',
+        lessons: [],
+      };
+    },
     lessons() {
-      return this.$store.getters.getLessonsByCourseId(this.course_id);
+      return this.$store.getters.getLessons;
     },
     completedLessons() {
-      return this.$store.getters.getCompletedLessonsByCourseId(this.course_id);
+      return this.$store.getters.getCompletedLessons;
     },
     openedLesson: {
       get() {
@@ -74,10 +83,10 @@ export default {
       });
     },
   },
-  async created() {
+  mounted() {
     console.log('CourseManager created');
     console.log('this.course_id', this.course_id)
-    await this.$store.dispatch('fetchCourseData', this.course_id);
+    this.$store.dispatch('fetchCourseData', this.course_id);
   },
 };
 </script>

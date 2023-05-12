@@ -74,14 +74,16 @@ class CourseController extends Controller
     public function show(Request $request, $id)
     {
         $course = Course::find($id);
+        $userId = Auth::user()->id;
+        $completedLessons = $course->completedLessonsForUser($userId)->get();
         if (empty($course)) {
             return redirect()->route('course.index');
         }
         $course->load('category', 'lessons', 'lessons.userLessons', 'tests', 'questions', 'instructor', 'metaTag', 'exercises');
         if ($request->wantsJson()) {
-            return json_encode($course);
+            return json_encode(['course' => $course, 'completedLessons' => $completedLessons]);
         }
-        return view('course.show')->with('course', $course);
+        return view('course.show')->with(['course' => $course, 'completedLessons' => $completedLessons]);
     }
 
     public function edit($id)
