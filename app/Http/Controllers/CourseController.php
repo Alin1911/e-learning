@@ -74,6 +74,9 @@ class CourseController extends Controller
     public function show(Request $request, $id)
     {
         $course = Course::find($id);
+        if (empty($course)) {
+            return redirect()->route('course.index');
+        }
         $course->load('category', 'lessons', 'tests', 'questions', 'instructor', 'metaTag', 'exercises');
         if ($request->wantsJson()) {
             return json_encode($course);
@@ -84,6 +87,8 @@ class CourseController extends Controller
     public function edit($id)
     {
         $course = Course::find($id);
+        if (empty($course))
+            return redirect()->route('course.index');
         $categories = Category::all();
         $user = Auth::user();
         $courses = $user->courses;
