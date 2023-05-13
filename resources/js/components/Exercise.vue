@@ -83,10 +83,12 @@ export default {
   };
    console.log('Exercise data:', exercise); 
   // Adăugați codul pentru a trimite exercițiul la server (de exemplu, prin POST la un API endpoint)
-  const response = await fetch(`/test/${this.test_id}/exercise/create`, {
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  const response = await fetch(`/test/${this.test_id}/exercise`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': csrfToken,
     },
     body: JSON.stringify(exercise),
   });

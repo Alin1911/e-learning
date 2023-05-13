@@ -28,7 +28,7 @@
       },
       selectedAnswers: {
         type: Object,
-        required: true,
+        default: () => [],
       },
     },
     created() {

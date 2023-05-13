@@ -3,25 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Exercise;
+use App\Models\Forum;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CourseMetaTag;
+use Psy\Command\WhereamiCommand;
 
 class CourseController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->input('search');
-        $courses = Course::all();
-        if ($request->has('search')) {
-            $courses = Course::search($search)->get();
+        if (! empty($request->input('search', ''))) {
+            $search = $request->input('search');
+        } else {
+            $courses = Course::all();
+            return view('course.index')->with('courses', $courses);
         }
+        $courses = Course::search($search)->paginate(10);
+
         if ($request->has('nivel')) {
             $courses = $courses->where('level', $request->nivel);
         }
 
-        return view('course.index')->with('courses', $courses);
+        $exercise = Exercise::where('question', 'like', '%' . $search . '%')
+            ->orWhere('exercise_type', 'like', '%' . $search . '%')
+            ->where('public', 1)
+            ->paginate(10);
+
+        $forums = Forum::where('title', 'like', '%' . $search . '%')
+            ->orWhere('description', 'like', '%' . $search . '%')
+            ->paginate(10);
+
+        return view('course.index')->with(['courses' => $courses, 'exercises' => $exercise, 'forums' => $forums]);
     }
 
     public function create()

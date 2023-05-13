@@ -38,15 +38,21 @@ class ExerciseController extends Controller
         if ($request->has('points')) {
             $exercise->points = $request->points;
         }
+        if ($request->has('public')) {
+            $exercise->public = $request->public;
+        }
+        if ($request->has('test_id')) {
+            $exercise->test_id = $request->test_id;
+        }
+        $exercise->points = $request->get('points', 1);
         $exercise->save();
-
         if ($request->has('options')) {
-            $options = json_decode($request->options, true);
+            $options = $request->options;
             foreach ($options as $option) {
                 $exerciseOption = new ExerciseOption();
                 $exerciseOption->exercise_id = $exercise->id;
-                $exerciseOption->answer = $option['answer'];
-                $exerciseOption->correct = $option['correct'];
+                $exerciseOption->option_text = $option['answer'];
+                $exerciseOption->is_correct = $option['correct'];
                 $exerciseOption->save();
             }
         }
@@ -73,7 +79,7 @@ class ExerciseController extends Controller
             }
         }
 
-        return redirect()->route('exercise.index');
+        return response()->json(['exercise_id' => $exercise->id]);
     }
 
     public function edit($id)

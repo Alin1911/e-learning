@@ -9,11 +9,9 @@ class ForumController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->has('id'))
-            $forum = Forum::find($request->id);
-        else
-            $forum = Forum::find(1);
-        return view('forum.index')->with('forum', $forum);
+
+        $forums = Forum::whereNull('course_id')->get();
+        return view('forum.index')->with('forums', $forums);
     }
 
     /**
@@ -47,6 +45,7 @@ class ForumController extends Controller
     public function show(string $id)
     {
         $forum = Forum::find($id);
+        $forum->load('courses', 'forum_posts', 'forum_posts.user');
         return view('forum.show')->with('forum', $forum);
 
     }

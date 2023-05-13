@@ -4,11 +4,11 @@
     <p>Timer: {{ minutes }}:{{ seconds }}</p>
     <form @submit.prevent="submitTest">
       <div v-for="(exercise, index) in test.exercises" :key="exercise.id" class="mb-4">
-        <p>{{ index + 1 }}. {{ exercise.text }}</p>
+        <h4 class="mb-3">{{ index + 1 }}. {{ exercise.question }}</h4>
         <component
-          :is="exerciseComponentName(exercise.type)"
-          :exercise="exercise"
-          :selected-answers.sync="selectedAnswers"
+        :is="exerciseComponentName(exercise.exercise_type)"
+        :exercise="exercise"
+        :selected-answers.sync="selectedAnswers[exercise.id]"
         />
       </div>
       <button type="submit" class="btn btn-primary">Trimite testul</button>
@@ -37,17 +37,13 @@ export default {
       type: [String, Number],
       required: true,
     },
-    test: {
-      type: Object,
-      default: () => ({
-        title: "",
-        exercises: [],
-      }),
-    },
   },
   data() {
     return {
-      test: {},
+      test: {
+        title: "",
+        exercises: [],
+      },
       selectedAnswers: {},
       timer: null,
       minutes: 30,
@@ -56,30 +52,28 @@ export default {
   },
   methods: {
     async fetchTest() {
-  try {
-    const response = await axios.get(`/learn/test/${this.test_id}`, {
-      headers: {
-        Accept: 'application/json',
-      },
-    });
-    this.test = response.data.test;
+      try {
+        const response = await axios.get(`/learn/test/${this.test_id}`, {
+          headers: {
+            Accept: 'application/json',
+          },
+        });
+        this.test = response.data.test;
 
-    // Inițializează selectedAnswers după ce testul a fost setat
-    this.test.exercises.forEach((exercise) => {
-      this.$set(this.selectedAnswers, exercise.id, []);
-    });
+        this.test.exercises.forEach((exercise) => {
+          this.selectedAnswers = { ...this.selectedAnswers, [exercise.id]: [] };
+        });
 
-    // Start the timer
-    this.startTimer();
-  } catch (error) {
-    console.error('Error fetching test:', error);
-  }
-},
+        this.startTimer();
+      } catch (error) {
+        console.error('Error fetching test:', error);
+      }
+    },
     exerciseComponentName(type) {
       switch (type) {
         case "single-answer":
           return "SingleAnswer";
-        case "multiple-answer":
+        case "multiple_choice_multiple_answers":
           return "MultipleAnswer";
         case "ordering-exercise":
           return "OrderingExercise";
@@ -90,22 +84,24 @@ export default {
       }
     },
     async submitTest() {
-      clearInterval(this.timer);
-      // Aici înlocuiți cu un apel API real
-      const response = await fetch(`/test/${this.test.id}/check`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(this.selectedAnswers),
-      });
+  clearInterval(this.timer);
+  try {
+    const response = await axios.post(`/test/${this.test.id}/check`, this.selectedAnswers, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-      if (response.ok) {
-        // Handle success response
-      } else {
-        // Handle error response
-      }
-    },
+    if (response.status === 200) {
+      // Handle success response
+    } else {
+      // Handle error response
+    }
+  } catch (error) {
+    // Handle error
+  }
+},
+
     startTimer() {
       this.timer = setInterval(() => {
         this.seconds -= 1;

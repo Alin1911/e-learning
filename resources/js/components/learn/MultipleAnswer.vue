@@ -1,5 +1,6 @@
 <template>
-  <div v-if="exercise.type === 'multiple-answer'">
+  <div v-if="exercise.exercise_type === 'multiple_choice_multiple_answers'">
+    <div class="ml-5" style="padding-left: 20px;">
     <div class="form-check" v-for="(option, optionIndex) in exercise.options" :key="option.id">
       <input
         class="form-check-input"
@@ -7,11 +8,12 @@
         :name="`exercise-${exercise.id}`"
         :id="`option-${exercise.id}-${optionIndex}`"
         :value="option.id"
-        v-model="selectedAnswers[exercise.id]"
+        v-model="internalSelectedAnswers"
       />
       <label class="form-check-label" :for="`option-${exercise.id}-${optionIndex}`">
-        {{ option.text }}
+        {{ option.option_text }}
       </label>
+    </div>
     </div>
   </div>
 </template>
@@ -24,12 +26,22 @@ export default {
       required: true,
     },
     selectedAnswers: {
-      type: Object,
-      required: true,
+    type: Array,
+    required: true,
+  },
+  },
+  data() {
+  return {
+    internalSelectedAnswers: this.selectedAnswers,
+  };
+},
+watch: {
+  internalSelectedAnswers: {
+    deep: true,
+    handler(newValue) {
+      this.$emit('update:selectedAnswers', newValue);
     },
   },
-  created() {
-    this.$set(this.selectedAnswers, this.exercise.id, []);
-  },
+},
 };
 </script>
