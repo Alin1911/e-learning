@@ -35,6 +35,7 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         $course = new Course();
         $user = Auth::user();
         $course->user_id = $user->id;

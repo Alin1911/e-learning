@@ -19,7 +19,7 @@ class Test extends Model
         return $this->belongsTo(Lesson::class);
     }
 
-    public function exercise()
+    public function exercises()
     {
         return $this->hasMany(Exercise::class);
     }

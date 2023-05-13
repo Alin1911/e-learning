@@ -2,6 +2,6 @@
 
 @section('content')
 <div class="container bg-white p-5 mt-4 shadow">
-    <test :test=@json($test)></test>
+    <test :test_id="{{$test->id}}"></test>
 </div>
 @endsection

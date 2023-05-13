@@ -5,23 +5,11 @@
     <form @submit.prevent="submitTest">
       <div v-for="(exercise, index) in test.exercises" :key="exercise.id" class="mb-4">
         <p>{{ index + 1 }}. {{ exercise.text }}</p>
-        <div v-if="exercise.type === 'single-answer'">
-          <!-- Single-answer exercise -->
-          <div class="form-check" v-for="(option, optionIndex) in exercise.options" :key="option.id">
-            <input
-              class="form-check-input"
-              type="radio"
-              :name="`exercise-${index}`"
-              :id="`option-${index}-${optionIndex}`"
-              :value="option.id"
-              v-model="selectedAnswers[exercise.id]"
-            />
-            <label class="form-check-label" :for="`option-${index}-${optionIndex}`">
-              {{ option.text }}
-            </label>
-          </div>
-        </div>
-        <!-- Add other exercise types here -->
+        <component
+          :is="exerciseComponentName(exercise.type)"
+          :exercise="exercise"
+          :selected-answers.sync="selectedAnswers"
+        />
       </div>
       <button type="submit" class="btn btn-primary">Trimite testul</button>
     </form>
@@ -29,18 +17,37 @@
 </template>
 
 <script>
+import SingleAnswer from "./SingleAnswer.vue";
+import MultipleAnswer from "./MultipleAnswer.vue";
+import OrderingExercise from "./OrderingExercise.vue";
+import FillInTheBlanks from "./FillInTheBlanks.vue";
+import MatchingExercise from "./MatchingExercise.vue";
+import axios from 'axios';
+
 export default {
+  components: {
+    SingleAnswer,
+    MultipleAnswer,
+    OrderingExercise,
+    FillInTheBlanks,
+    MatchingExercise,
+  },
   props: {
+    test_id: {
+      type: [String, Number],
+      required: true,
+    },
     test: {
       type: Object,
       default: () => ({
-        title: '',
+        title: "",
         exercises: [],
       }),
     },
   },
   data() {
     return {
+      test: {},
       selectedAnswers: {},
       timer: null,
       minutes: 30,
@@ -48,41 +55,74 @@ export default {
     };
   },
   methods: {
-    async submitTest() {
-      // Stop the timer
-      clearInterval(this.timer);
+    async fetchTest() {
+  try {
+    const response = await axios.get(`/learn/test/${this.test_id}`, {
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+    this.test = response.data.test;
 
-      // Logica de trimitere a răspunsurilor la API pentru evaluare
-      // Exemplu: await axios.post('/submit-test', { answers: this.selectedAnswers });
-      console.log("Răspunsuri trimise:", this.selectedAnswers);
+    // Inițializează selectedAnswers după ce testul a fost setat
+    this.test.exercises.forEach((exercise) => {
+      this.$set(this.selectedAnswers, exercise.id, []);
+    });
+
+    // Start the timer
+    this.startTimer();
+  } catch (error) {
+    console.error('Error fetching test:', error);
+  }
+},
+    exerciseComponentName(type) {
+      switch (type) {
+        case "single-answer":
+          return "SingleAnswer";
+        case "multiple-answer":
+          return "MultipleAnswer";
+        case "ordering-exercise":
+          return "OrderingExercise";
+        case "fill-in-the-blanks":
+          return "FillInTheBlanks";
+        case "matching-exercise":
+          return "MatchingExercise";
+      }
+    },
+    async submitTest() {
+      clearInterval(this.timer);
+      // Aici înlocuiți cu un apel API real
+      const response = await fetch(`/test/${this.test.id}/check`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(this.selectedAnswers),
+      });
+
+      if (response.ok) {
+        // Handle success response
+      } else {
+        // Handle error response
+      }
     },
     startTimer() {
       this.timer = setInterval(() => {
-        if (this.seconds === 0) {
-          this.minutes--;
+        this.seconds -= 1;
+        if (this.seconds < 0) {
+          this.minutes -= 1;
           this.seconds = 59;
-        } else {
-          this.seconds--;
         }
 
-        if (this.minutes === 0 && this.seconds === 0) {
+        if (this.minutes < 0) {
           clearInterval(this.timer);
           this.submitTest();
         }
       }, 1000);
     },
   },
-  created() {
-    // Inițializarea structurii selectedAnswers în funcție de tipurile de exerciții
-    this.test.exercises.forEach((exercise) => {
-      if (exercise.type === 'single-answer') {
-        this.$set(this.selectedAnswers, exercise.id, null);
-      }
-      // Add initialization for other exercise types here
-    });
-
-    // Start the timer
-    this.startTimer();
+  mounted() {
+    this.fetchTest();
   },
 };
 </script>
