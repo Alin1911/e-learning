@@ -30,14 +30,22 @@ class ForumPostController extends Controller
     }
     public function store(Request $request)
     {
-        $forum_post = new ForumPost();
-        $forum_post->title = $request->title;
-        $forum_post->description = $request->description;
-        $forum_post->save();
+        $validatedData = $request->validate([
+            'user_id' => 'required',
+            'topic_id' => 'required',
+            'content' => 'required',
+            'likes' => 'integer'
+        ]);
 
-        return redirect()->route('forum_post.index');
+        $post = new ForumPost();
+        $post->user_id = $request->user_id;
+        $post->topic_id = $request->topic_id;
+        $post->content = $request->content;
+        $post->likes = $request->likes ?? 0;
+        $post->save();
+
+        return response()->json(['message' => 'Postarea a fost adaugată cu succes', 'post' => $post]);
     }
-
     public function edit($id)
     {
         $forum_post = ForumPost::find($id);
