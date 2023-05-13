@@ -1,5 +1,5 @@
 <button id="menuToggle" class="btn btn-white bg-white pr-3 py-5 rounded-pill" style="z-index: 10; position: absolute; top: 35%;border-top-left-radius: 0 !important;border-bottom-left-radius: 0 !important;">
-  <i class="fas fa-solid fa-arrow-right"></i>
+  <i class="fas fa-bars"></i>
 </button>
 
 <div id="sidebar" class="sidebar">
