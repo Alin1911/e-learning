@@ -4,7 +4,7 @@
 <div class="container mt-5 mb-5">
     <div class="row">
         @foreach($forums as $forum)
-        <div class="col-12">
+        <div class="col-12 my-2">
             <div class="row d-flex align-items-center p-4 shadow bg-white">
                 <div class="col-12 d-flex justify-content-between">
                     <div>
