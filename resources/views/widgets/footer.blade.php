@@ -53,8 +53,8 @@
       </div>
     </div>
   </div>
-
-  <div class="modal fade" id="jocModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+</footer>
+<div class="modal fade" id="jocModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
@@ -115,7 +115,6 @@
       </div>
     </div>
   </div>
-</footer>
 @section('scripts')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
