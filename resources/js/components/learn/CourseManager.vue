@@ -1,41 +1,65 @@
 <template>
-  <div>
-    <h2>Manager de curs</h2>
-    {{ course.title }}
-    <ul class="list-group">
-      <li
-        v-for="(lesson, index) in lessons"
-        :key="lesson.id"
-        class="list-group-item"
-
-      >
-        <div class="d-flex justify-content-between">
-          <div>
-            {{ index + 1 }}. {{ lesson.title }}
+  <div class="card">
+    <div class="card-header">
+      <h2 class="mb-0">{{ course.title }}</h2>
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        <li
+          v-for="(lesson, index) in lessons"
+          :key="lesson.id"
+          class="list-group-item"
+          :class="{ 'bg-success': completedLessons.includes(lesson.id), 'bg-white': !completedLessons.includes(lesson.id) }"
+        >
+          <div class="d-flex justify-content-between align-items-center">
+            <div @click="openLesson(lesson)" class="w-100">
+              Lecția - {{ index + 1 }}. {{ lesson.title }}
+            </div>
             <button
-              v-if="!completedLessons.includes(lesson.id)"
-              class="btn btn-sm btn-primary ml-2"
-              @click="openLesson(lesson)"
+              class="btn btn-sm"
+              :class="{ 'btn-success': completedLessons.includes(lesson.id), 'btn-secondary': !completedLessons.includes(lesson.id) }"
+              @click="toggleLessonCompletion(lesson)"
             >
-              Deschide
+              {{ completedLessons.includes(lesson.id) ? 'Parcursă' : 'Parcurge' }}
             </button>
           </div>
-          <button
-            class="btn btn-sm"
-            :class="{ 'btn-success': completedLessons.includes(lesson.id), 'btn-secondary': !completedLessons.includes(lesson.id) }"
-            @click="toggleLessonCompletion(lesson)"
-          >
-            {{ completedLessons.includes(lesson.id) ? 'Parcursă' : 'Parcurge' }}
-          </button>
-        </div>
-        <div v-if="openedLesson === lesson">
-          <h5 class="mt-3">Teste</h5>
-          <ul>
-            <li v-for="test in lesson.tests" :key="test.id">{{ test.title }}</li>
-          </ul>
-        </div>
-      </li>
-    </ul>
+          <div v-if="openedLesson === lesson">
+            <ul class="list-group mt-2">
+              <li class="list-group-item" v-for="test in lesson.tests" :key="test.id">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    Test - {{ test.title }}
+                  </div>
+                  <a 
+                    :href="'/learn/test/' +  test.id "
+                    class="btn btn-sm btn-primary"
+                  >
+                    Verifica-ti cunostintele
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li v-if="hasTests"
+          v-for="(test, index) in course.tests"
+          :key="test.id"
+          class="list-group-item"
+        >
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              Test de curs - {{ test.title }}
+            </div>
+            <a 
+              :href="'/learn/test/' +  test.id "
+              class="btn btn-sm btn-primary"
+            >
+              Verifica-ti cunostintele
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -49,13 +73,7 @@ export default {
   },
   computed: {
     course() {
-      if (this.$store.getters.getCurrentCourse) {
         return this.$store.getters.getCurrentCourse;
-      }
-      return {
-        title: 'Loading...',
-        lessons: [],
-      };
     },
     lessons() {
       return this.$store.getters.getLessons;
@@ -71,15 +89,18 @@ export default {
         this.$store.commit('setOpenedLesson', lesson);
       },
     },
+    hasTests() {
+      return this.course.tests.length > 0;
+    },
   },
   methods: {
-    openLesson(lesson) {
+    openLesson(lesson){
       this.openedLesson = this.openedLesson === lesson ? null : lesson;
     },
     toggleLessonCompletion(lesson) {
       this.$store.dispatch('toggleLessonCompletion', {
-        course_id: this.course_id,
-        lessonId: lesson.id,
+      course_id: this.course_id,
+      lessonId: lesson.id,
       });
     },
   },
@@ -89,4 +110,4 @@ export default {
     this.$store.dispatch('fetchCourseData', this.course_id);
   },
 };
-</script>
+</script>     

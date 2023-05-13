@@ -7,7 +7,12 @@ export default function createNewStore() {
       courses: [],
       selectedCourseId: null,
       openedLesson: null,
-      currentCourse: null,
+      currentCourse: {
+        id: null,
+        title: '',
+        tests : [],
+        lessons: [],
+      },
       completedLessons: [],
     },
     getters: {
@@ -27,7 +32,7 @@ export default function createNewStore() {
       getLessons: state => state.currentCourse ? state.currentCourse.lessons : [],
       getOpenedLesson: state => state.openedLesson,
       getCompletedLessons: state => state.completedLessons,
-      getCurrentCourse: state => state.currentCourse ? state.currentCourse : null,
+      getCurrentCourse: state => state.currentCourse ,
     },
     mutations: {
       setUser(state, user) {
