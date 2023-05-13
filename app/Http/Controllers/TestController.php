@@ -57,6 +57,7 @@ class TestController extends Controller
     public function edit($id)
     {
         $test = Test::find($id);
+        $test->load('course', 'lesson', 'exercise');
         return view('test.edit')->with(['test' => $test]);
     }
 
@@ -67,5 +68,12 @@ class TestController extends Controller
             return response()->json($test, 200);
         }
         return view('test.show')->with(['test' => $test]);
+    }
+
+    public function verify($id, Request $request)
+    {
+        $test = Test::find($id);
+        $test->load('course', 'lesson', 'exercise', 'questions');
+        return view('test.learn')->with(['test' => $test]);
     }
 }
