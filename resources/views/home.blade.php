@@ -19,7 +19,7 @@
                 <div class="col-md-4">
                     <div class="card mb-4 p-3 border-0 shadow">
                         @if(isset($learningCourse->image))
-                            <img src="{{ asset($learningCourse->image) }}" class="card-img-top" alt="Imagine curs">
+                            <img src="{{ asset($learningCourse->image) }}" class="card-img-top" alt="Imagine curs" height="215">
                         @endif
                         <div class="card-body">
                             <h5 class="card-title">{{$learningCourse->title}}</h5>
@@ -35,7 +35,6 @@
                 <!-- Sfârșitul exemplului de card curs -->
             </div>
             <hr class="text-danger bg-danger">
-            <h4 class="mt-4">{{ __('Citate inspiraționale') }}</h4>
             <blockquote class="blockquote">
                 <p>"Educația este cea mai puternică armă pe care o poți folosi pentru a schimba lumea."</p>
                 <footer class="blockquote-footer">Nelson Mandela</footer>
