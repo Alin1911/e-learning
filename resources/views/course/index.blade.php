@@ -4,11 +4,10 @@
 <div class="container mt-5 mb-5">
     <div class="row d-flex align-items-center justify-content-center">
         @foreach($courses as $course)
-        <div class="card m-2 shadow" style="width: 18rem; height: 370px;">
-            <img class="card-img-top" src="..." alt="">
-            <div class="card-body">
-              <h6 class="card-title">{{ $course->title}}</h6>
-              <p class="card-text">{{ substr($course->description, 0, 50)}}</p>
+        <div class="card m-2 shadow p-0" style="width: 18rem; height: 370px;">
+            <div class="p-0 card-body background-index" style="background-image: -webkit-image-set( url('{{ asset($course->image) }}') );">
+              <h6 class="pt-3 px-3 text-white  card-title over">{{ $course->title}}</h6>
+              <p class="px-3 card-text text-white over">{{ substr($course->description, 0, 50)}}</p>
             </div>
             <ul class="list-group list-group-flush">
               @if($course->levle)

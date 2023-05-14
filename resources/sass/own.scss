@@ -9,6 +9,18 @@
   height: 100%;
   display: none !important;
 }
+.background-index::before {
+  background: linear-gradient(180deg,transparent,rgba(0,0,0,.4) 49.73%,transparent 100%,rgba(0,0,0,.4) 0);
+  content: "";
+  height: 50%;
+  width: 100%;
+  position: absolute;
+  z-index: 0;
+}
+.over{
+  z-index: 0;
+  position: relative;
+}
 .active1 {
   display: none !important;
 }

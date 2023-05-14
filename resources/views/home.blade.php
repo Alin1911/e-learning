@@ -1,10 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5 p-3 shadow bg-light">
+<div class="container mt-5 p-4 shadow bg-light">
     <div class="row ">
         <div class="col-md-12">
-            <h2 class="mb-4">{{ __('Dashboard') }}</h2>
 
             @if (session('status'))
                 <div class="alert alert-success" role="alert">
@@ -12,24 +11,30 @@
                 </div>
             @endif
 
-            <h4>{{ __('Cursurile la care ești înscris:') }}</h4>
+            <h3>{{ __('Cursurile tale:') }}</h3>
+            <hr class="text-danger bg-danger">
             <div class="row">
                 @foreach($learningCourses as $learningCourse)
                 <!-- Înlocuiți cu un ciclu foreach care parcurge cursurile utilizatorului și afișează informațiile relevante despre fiecare curs -->
                 <div class="col-md-4">
-                    <div class="card mb-4 p-3">
-                        <img src="URL imagine curs" class="card-img-top" alt="Imagine curs">
+                    <div class="card mb-4 p-3 border-0 shadow">
+                        @if(isset($learningCourse->image))
+                            <img src="{{ asset($learningCourse->image) }}" class="card-img-top" alt="Imagine curs">
+                        @endif
                         <div class="card-body">
                             <h5 class="card-title">{{$learningCourse->title}}</h5>
-                            <p class="card-text">Descriere scurtă a cursului</p>
+                            <p class="card-text">{{$learningCourse->level}} - {{$learningCourse->duration}}</p>
+                            <div class="d-flex justify-content-between">
                             <a href="/learn/course/{{$learningCourse->id}}" class="btn btn-primary">Accesează cursul</a>
+                            <a href="/learn/course/leave/{{$learningCourse->id}}" class="btn btn-danger">Parăsește cursul</a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 @endforeach
                 <!-- Sfârșitul exemplului de card curs -->
             </div>
-            <hr>
+            <hr class="text-danger bg-danger">
             <h4 class="mt-4">{{ __('Citate inspiraționale') }}</h4>
             <blockquote class="blockquote">
                 <p>"Educația este cea mai puternică armă pe care o poți folosi pentru a schimba lumea."</p>
