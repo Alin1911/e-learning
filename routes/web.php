@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/user', 'UserController@currentUser');
 Route::get('/courses', 'CourseController@courses');
 Route::get('/learn/course/{id}', 'CourseController@learnCourse');
+Route::get('/learn/lesson/{id}', 'LessonController@learnLesson');
 Route::get('/learn/test/{id}', 'TestController@verify');
 Route::get('/exercise', 'ExerciseController@index');
 Route::resource('/answer', 'CourseAnswerController');

@@ -118,4 +118,11 @@ class LessonController extends Controller
         $lesson = Lesson::findOrFail($id);
         $lesson->delete();
     }
+
+    public function learnLesson(Request $request, $id)
+    {
+        $lesson = Lesson::findOrFail($id);
+        $lesson->load('course', 'course.user', 'tests');
+        return view('lesson.learn')->with(['lesson' => $lesson]);
+    }
 }
