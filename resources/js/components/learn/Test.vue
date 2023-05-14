@@ -1,14 +1,18 @@
 <template>
   <div>
-    <h2>{{ test.title }}</h2>
-    <p>Timer: {{ minutes }}:{{ seconds }}</p>
+    <div class="d-flex justify-content-between border-bottom border-danger mb-4 pb-2">
+    <h2>Test: {{ test.title }}</h2>
+    <h3>Timp rămas: <span class="text-danger">{{ minutes }}:{{ seconds }}</span></h3>
+    </div>
     <form @submit.prevent="submitTest">
-      <div v-for="(exercise, index) in test.exercises" :key="exercise.id" class="mb-4">
-        <h4 class="mb-3">{{ index + 1 }}. {{ exercise.question }}</h4>
+      <div v-for="(exercise, index) in test.exercises" :key="exercise.id" class="mb-4 border-bottom py-3">
+        <h4 class="mb-3">Exercitiul {{ index + 1 }}.</h4>
+        <h5 class="mb-3">{{ exercise.question }}</h5>
         <component
-        :is="exerciseComponentName(exercise.exercise_type)"
-        :exercise="exercise"
-        :selected-answers.sync="selectedAnswers[exercise.id]"
+          :is="exerciseComponentName(exercise.exercise_type)"
+          :exercise="exercise"
+          :selected-answers.sync="selectedAnswers[exercise.id]"
+          @update-answers="updateSelectedAnswers"
         />
       </div>
       <button type="submit" class="btn btn-primary">Trimite testul</button>
@@ -51,6 +55,11 @@ export default {
     };
   },
   methods: {
+    updateSelectedAnswers({ exerciseId, selectedAnswers }) {
+  this.selectedAnswers[exerciseId] = selectedAnswers;
+  this.$forceUpdate();
+},
+
     async fetchTest() {
       try {
         const response = await axios.get(`/learn/test/${this.test_id}`, {
@@ -71,13 +80,13 @@ export default {
     },
     exerciseComponentName(type) {
       switch (type) {
-        case "single-answer":
+        case "multiple_choice_single_answer":
           return "SingleAnswer";
         case "multiple_choice_multiple_answers":
           return "MultipleAnswer";
-        case "ordering-exercise":
+        case "ordering_items":
           return "OrderingExercise";
-        case "fill-in-the-blanks":
+        case "fill_in_the_blank_items":
           return "FillInTheBlanks";
         case "matching-exercise":
           return "MatchingExercise";
@@ -86,7 +95,12 @@ export default {
     async submitTest() {
   clearInterval(this.timer);
   try {
-    const response = await axios.post(`/test/${this.test.id}/check`, this.selectedAnswers, {
+    const answersArray = Object.keys(this.selectedAnswers).map((key) => ({
+      exercise_id: key,
+      selected_answers: this.selectedAnswers[key],
+    }));
+
+    const response = await axios.post(`/test/${this.test.id}/check`, answersArray, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -101,6 +115,7 @@ export default {
     // Handle error
   }
 },
+
 
     startTimer() {
       this.timer = setInterval(() => {

@@ -48,11 +48,20 @@ class ExerciseController extends Controller
         $exercise->save();
         if ($request->has('options')) {
             $options = $request->options;
-            foreach ($options as $option) {
+            foreach ($options as $key => $option) {
                 $exerciseOption = new ExerciseOption();
                 $exerciseOption->exercise_id = $exercise->id;
                 $exerciseOption->option_text = $option['answer'];
-                $exerciseOption->is_correct = $option['correct'];
+                if (isset($option['correct'])) {
+                    $exerciseOption->is_correct = $option['correct'];
+                } else {
+                    $corect = $request->correctIndex;
+                    if ($key == $corect) {
+                        $exerciseOption->is_correct = 1;
+                    } else {
+                        $exerciseOption->is_correct = 0;
+                    }
+                }
                 $exerciseOption->save();
             }
         }

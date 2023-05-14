@@ -39,9 +39,14 @@ watch: {
   internalSelectedAnswers: {
     deep: true,
     handler(newValue) {
-      this.$emit('update:selectedAnswers', newValue);
+      this.$emit('update-answers', {
+        exerciseId: this.exercise.id,
+        selectedAnswers: newValue,
+      });
+      console.log(newValue);
     },
   },
 },
+
 };
 </script>
