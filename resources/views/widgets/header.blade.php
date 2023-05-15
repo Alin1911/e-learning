@@ -52,9 +52,11 @@
                         <a class="dropdown-item" href="/home" style="color: #000;">
                             Dashboard
                         </a>
+                        @if(Auth::user()->isAdmin())
                         <a class="dropdown-item" href="/course/create" style="color: #000;">
                             Adaugă curs
                         </a>
+                        @endif
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();" style="color: #000;">
                             {{ __('Logout') }}
