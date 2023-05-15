@@ -7,6 +7,18 @@ use Illuminate\Http\Request;
 
 class ProblemController extends Controller
 {
+    public function index()
+    {
+        $problems = Problem::all();
+        return view('problems.index', compact('problems'));
+    }
+
+    public function show($id)
+    {
+        $problem = Problem::find($id);
+        return view('problems.show', compact('problem'));
+    }
+
 
     public function create()
     {
@@ -30,13 +42,15 @@ class ProblemController extends Controller
         return redirect()->route('problems.index')->with('success', 'Problem created successfully');
     }
 
-    public function edit(Problem $problem)
+    public function edit($id)
     {
+        $problem = Problem::find($id);
         return view('problems.edit', compact('problem'));
     }
 
-    public function update(Request $request, Problem $problem)
+    public function update(Request $request, $id)
     {
+        $problem = Problem::findOrFail($id);
         // Validarea datelor din formular
         $request->validate([
             'title' => 'required',
@@ -49,5 +63,12 @@ class ProblemController extends Controller
 
         // Redirecționarea către pagina de probleme cu mesaj de succes
         return redirect()->route('problems.index')->with('success', 'Problem updated successfully');
+    }
+
+    public function destroy($id)
+    {
+        $problem = Problem::find($id);
+        $problem->delete();
+        return redirect()->route('problems.index')->with('success', 'Problem deleted successfully');
     }
 }
