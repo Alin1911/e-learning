@@ -49,12 +49,18 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/account/{{ Auth::user()->id }}" style="color: #000;">
+                            Contul meu
+                        </a>
                         <a class="dropdown-item" href="/home" style="color: #000;">
                             Dashboard
                         </a>
                         @if(Auth::user()->isAdmin())
                         <a class="dropdown-item" href="/course/create" style="color: #000;">
                             Adaugă curs
+                        </a>
+                        <a class="dropdown-item" href="/problem/create" style="color: #000;">
+                            Adaugă exercițiu
                         </a>
                         @endif
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

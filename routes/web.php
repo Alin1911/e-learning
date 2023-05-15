@@ -10,6 +10,7 @@ Route::get('/term', 'LearningController@term');
 Route::post('/course/{id}/enroll', 'CourseController@enroll');
 
 Route::resource('course', CourseController::class);
+Route::resource('/problem', ProblemController::class);
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
