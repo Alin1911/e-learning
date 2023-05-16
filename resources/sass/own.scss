@@ -1,163 +1,169 @@
 .sidebar {
-  position: absolute;
-  left: 0;
-  top: 90px;
-  bottom: 0;
-  z-index: 0;
-  background-color: white;
-  min-height: 100%;
-  height: 100%;
-  display: none !important;
+    position: absolute;
+    left: 0;
+    top: 90px;
+    bottom: 0;
+    z-index: 0;
+    background-color: white;
+    min-height: 100%;
+    height: 100%;
+    display: none !important;
 }
 .background-index::before {
-  background: linear-gradient(180deg,transparent,rgba(0,0,0,.4) 49.73%,transparent 100%,rgba(0,0,0,.4) 0);
-  content: "";
-  height: 50%;
-  width: 100%;
-  position: absolute;
-  z-index: 0;
+    background: linear-gradient(
+        180deg,
+        transparent,
+        rgba(0, 0, 0, 0.4) 49.73%,
+        transparent 100%,
+        rgba(0, 0, 0, 0.4) 0
+    );
+    content: "";
+    height: 50%;
+    width: 100%;
+    position: absolute;
+    z-index: 0;
 }
-.over{
-  z-index: 0;
-  position: relative;
+.over {
+    z-index: 0;
+    position: relative;
 }
 .active1 {
-  display: none !important;
+    display: none !important;
 }
 .sidebar.active {
-  display: block !important;
+    display: block !important;
 }
 .main-content {
-  margin-left: 200px; /* aceasta ar trebui să fie aceeași valoare ca și lățimea meniului */
-  padding: 1rem;
+    margin-left: 200px; /* aceasta ar trebui să fie aceeași valoare ca și lățimea meniului */
+    padding: 1rem;
 }
 footer a {
-  color: #fff;
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
-  transition: all 0.3s ease;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
 }
 footer a:hover {
-  color: yellow;
-  border-bottom-color: yellow
+    color: yellow;
+    border-bottom-color: yellow;
 }
 footer-info a {
-  font-size: 18px;
-  color: #fff !important;
-  transition: all 0.2s ease-in-out;
+    font-size: 18px;
+    color: #fff !important;
+    transition: all 0.2s ease-in-out;
 }
 
 footer-info a:hover {
-  color: yellow;
-  font-size: 20px;
-  text-decoration: none;
+    color: yellow;
+    font-size: 20px;
+    text-decoration: none;
 }
- footer{
-  z-index: 1;
-position: relative;
-bottom: 0;
- }
-.footer-bg{
-  background: linear-gradient(to bottom, #00498E, #AC3076) !important;
-  padding: 20px 0;
+footer {
+    z-index: 1;
+    position: relative;
+    bottom: 0;
+}
+.footer-bg {
+    background: linear-gradient(to bottom, #00498e, #ac3076) !important;
+    padding: 20px 0;
 }
 .navbar {
-  z-index: 1 !important;
-  position: fixed !important;
-width: 100%;
-top: 0 !important;
-  background: linear-gradient(to right, #00498E, #AC3076) !important;
-  font-family: 'Montserrat', sans-serif;
+    z-index: 1 !important;
+    position: fixed !important;
+    width: 100%;
+    top: 0 !important;
+    background: linear-gradient(to right, #00498e, #ac3076) !important;
+    font-family: "Montserrat", sans-serif;
 }
 
 .navbar-brand {
-  color: #fff !important;
-  font-size: 25px;
-  font-weight: 600;
-  transition: all 0.3s ease-in-out;
-  border-bottom: 3px solid transparent;
+    color: #fff !important;
+    font-size: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+    border-bottom: 3px solid transparent;
 }
 
 .nav-link {
-  color: #fff !important;
-  font-size: 18px;
-  font-weight: 600;
-  text-transform: uppercase;
-  transition: all 0.3s ease-in-out;
-  border-bottom: 3px solid transparent;
+    color: #fff !important;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    border-bottom: 3px solid transparent;
 }
 
 .nav-link:hover {
-  color: #fff !important;
-  border-bottom: 3px solid #fff;
-  transform: scale(1.1);
+    color: #fff !important;
+    border-bottom: 3px solid #fff;
+    transform: scale(1.1);
 }
 .lead {
-  font-size: 1.5rem;
-  line-height: 2rem;
-  color: #555;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    color: #555;
 }
-.rounded-left-1{
-  border-bottom-left-radius: 20px !important;
-  border-bottom-right-radius: 0px !important;
-  border-top-left-radius: 0px !important;
-  border-top-right-radius: 0px !important;
+.rounded-left-1 {
+    border-bottom-left-radius: 20px !important;
+    border-bottom-right-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
 }
-.rounded-right-1{
-  border-top-right-radius: 20px !important;
-  border-bottom-right-radius: 20px !important;
-  border-bottom-right-radius: 0px !important;
+.rounded-right-1 {
+    border-top-right-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
+    border-bottom-right-radius: 0px !important;
 }
 .card {
-  height: 100%;
-  margin-bottom: 2rem;
-  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
-  height: 415px;
+    height: 100%;
+    margin-bottom: 2rem;
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
+    height: 415px;
 }
 
 .card-title {
-  font-size: 1.5rem;
-  color: #333;
+    font-size: 1.5rem;
+    color: #333;
 }
 
 .card-text {
-  font-size: 1.125rem;
-  color: #666;
-  margin-bottom: 2rem;
+    font-size: 1.125rem;
+    color: #666;
+    margin-bottom: 2rem;
 }
 
 .banner {
-  position: relative;
-  margin-top: 20px;
+    position: relative;
+    margin-top: 20px;
 }
 
 .carousel-item img {
-  height: 400px;
-  object-fit: cover;
+    height: 400px;
+    object-fit: cover;
 }
 
 .carousel-control-prev,
 .carousel-control-next {
-  width: 5%;
+    width: 5%;
 }
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  background-image: none;
-  font-size: 1.5rem;
-  color: #fff;
+    background-image: none;
+    font-size: 1.5rem;
+    color: #fff;
 }
 
 .carousel-control-prev-icon:before {
-  content: '<';
+    content: "<";
 }
 
 .carousel-control-next-icon:before {
-  content: '>';
+    content: ">";
 }
 
-.my-input{
-  border-left: none !important;
-  border-top: none !important;
-  border-right: none !important;
-  border-radius: 0% !important;
+.my-input {
+    border-left: none !important;
+    border-top: none !important;
+    border-right: none !important;
+    border-radius: 0% !important;
 }
