@@ -3,14 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\Forum;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ForumController extends Controller
 {
+
+    public function topics(Request $request, $id)
+    {
+        $forum = Forum::with(['topics', 'topics.posts'])->findOrFail($id);
+    
+        if ($request->wantsJson()) {
+            return json_encode($forum);
+        }
+    
+        return $forum;
+    }
+
     public function index(Request $request)
     {
 
         $forums = Forum::whereNull('course_id')->get();
+        $forums->load('topics', 'topics.posts');
+        if($request->wantsJson()){
+            return json_encode($forums);
+        }
         return view('forum.index')->with('forums', $forums);
     }
 
@@ -45,8 +62,8 @@ class ForumController extends Controller
     public function show(string $id)
     {
         $forum = Forum::find($id);
-        $forum->load('courses', 'forum_posts', 'forum_posts.user');
-        return view('forum.show')->with('forum', $forum);
+        $forum->load('topics');
+        return view('topic.index')->with('forum', $forum);
 
     }
 

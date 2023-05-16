@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ForumPost extends Model
 {
     use HasFactory;
+    protected $fillable = ['content', 'likes'];
 
-    public function forum()
+    public function topic()
     {
-        return $this->belongsTo(Forum::class);
+        return $this->belongsTo(ForumTopic::class);
     }
 
     public function user()

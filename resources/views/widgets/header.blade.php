@@ -16,7 +16,7 @@
                     <a class="nav-link" href="/exercise" style="color: #000;">Exerciții</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/forum" style="color: #000;">Discuții</a>
+                    <a class="nav-link" href="/forums" style="color: #000;">Discuții</a>
                 </li>
             </ul>
             <div class="row d-none d-md-block">

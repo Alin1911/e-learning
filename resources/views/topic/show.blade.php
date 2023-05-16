@@ -2,6 +2,6 @@
 
 @section("content")
     <div class="container p-5 mt-4">
-        <forum-list></forum-list>
+        <topic-view topic_id="{{ $topic->id }}"></topic-view>
     </div>
 @endsection

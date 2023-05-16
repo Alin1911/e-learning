@@ -14,6 +14,9 @@ import ExerciseCreate from "@/components/Exercise.vue";
 import AddForum from "@/components/AddForum.vue";
 import Lesson from "@/components/learn/Lesson.vue";
 import Test from "@/components/learn/Test.vue";
+import ForumList from "@/components/forum/ForumList.vue";
+import TopicList from "@/components/forum/ForumView.vue";
+import TopicView from "@/components/forum/TopicView.vue";
 
 import createNewStore from "./store.js";
 
@@ -22,7 +25,8 @@ const store = createNewStore();
 const app = createApp({
     components: {
         course: Course,
-        "course-add": CourseAdd,
+        lesson: Lesson,
+        test: Test,
         instructors: Instructors,
         categories: Categories,
         "course-manager": CourseManager,
@@ -31,8 +35,10 @@ const app = createApp({
         "test-component": TestComponent,
         "exercise-create": ExerciseCreate,
         "add-forum": AddForum,
-        lesson: Lesson,
-        test: Test,
+        "course-add": CourseAdd,
+        "forum-list": ForumList,
+        "topic-list": TopicList,
+        "topic-view": TopicView,
     },
 });
 

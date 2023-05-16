@@ -27,8 +27,18 @@ Route::get('/exercise', 'ExerciseController@index');
 Route::resource('/answer', 'CourseAnswerController');
 Route::resource('/test/{test_id}/exercise', 'ExerciseController');
 Route::resource('/test', 'TestController');
-Route::resource('/forum', 'ForumController');
 Route::resource('/lesson', 'LessonController');
 Route::resource('/question', 'CourseQuestionController');
-Route::resource('/forum/{forum_id}/post', 'ForumPostController');
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/forums', 'ForumController@index');
+Route::get('/forums/{id}', 'ForumController@show');
+Route::get('/forums/{id}/topics', 'ForumController@topics');
+
+Route::get('/topics/{id}', 'ForumTopicController@show');
+Route::post('/forums/{id}/topics', 'ForumTopicController@store');
+Route::get('/topics/{id}/posts', 'ForumTopicController@posts');
+
+Route::post('/topics/{id}/posts', 'ForumPostController@store');
