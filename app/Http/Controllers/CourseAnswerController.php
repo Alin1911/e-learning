@@ -13,7 +13,7 @@ class CourseAnswerController extends Controller
         $answers = CourseAnswer::all();
         if ($request->has('question_id')) {
             $answers = CourseAnswer::where('question_id', $request->question_id)->get();
-        } else if ($request->has('user_id')) {
+        } elseif ($request->has('user_id')) {
             $answers = CourseAnswer::where('user_id', $request->user_id)->get();
         }
         return view('courseanswer.index')->with(['answers' => $answers]);
@@ -49,12 +49,15 @@ class CourseAnswerController extends Controller
     public function update(Request $request)
     {
         $answer = CourseAnswer::find($request->id);
-        if ($request->has('question_id'))
+        if ($request->has('question_id')) {
             $answer->question_id = $request->question_id;
-        if ($request->has('user_id'))
+        }
+        if ($request->has('user_id')) {
             $answer->user_id = $request->user_id;
-        if ($request->has('answer'))
+        }
+        if ($request->has('answer')) {
             $answer->answer = $request->answer;
+        }
         $answer->save();
         return redirect()->route('courseanswer.index');
     }

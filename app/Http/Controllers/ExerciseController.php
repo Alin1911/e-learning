@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ExerciseOption;
-use App\Models\ExerciseOrderingItem;
-use App\Models\ExerciseFillInTheBlankItem;
-
-
 use App\Models\Exercise;
+use App\Models\ExerciseFillInTheBlankItem;
+use App\Models\ExerciseOption;
+
+
+use App\Models\ExerciseOrderingItem;
 use Illuminate\Http\Request;
 
 class ExerciseController extends Controller
@@ -100,10 +100,12 @@ class ExerciseController extends Controller
     public function update(Request $request)
     {
         $exercise = Exercise::find($request->id);
-        if ($request->has('title'))
+        if ($request->has('title')) {
             $exercise->title = $request->title;
-        if ($request->has('description'))
+        }
+        if ($request->has('description')) {
             $exercise->description = $request->description;
+        }
         $exercise->save();
 
         return redirect()->route('exercise.index');

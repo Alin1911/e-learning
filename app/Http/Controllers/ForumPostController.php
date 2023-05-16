@@ -20,10 +20,12 @@ class ForumPostController extends Controller
     public function update(Request $request)
     {
         $forum_post = ForumPost::find($request->id);
-        if ($request->has('title'))
+        if ($request->has('title')) {
             $forum_post->title = $request->title;
-        if ($request->has('description'))
+        }
+        if ($request->has('description')) {
             $forum_post->description = $request->description;
+        }
         $forum_post->save();
 
         return redirect()->route('forum_post.index');

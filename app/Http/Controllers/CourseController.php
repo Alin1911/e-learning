@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Course;
+use App\Models\CourseMetaTag;
 use App\Models\Exercise;
 use App\Models\Forum;
 use Illuminate\Http\Request;
-use App\Models\Course;
 use Illuminate\Support\Facades\Auth;
-use App\Models\CourseMetaTag;
-use Psy\Command\WhereamiCommand;
 
 class CourseController extends Controller
 {
@@ -105,8 +104,9 @@ class CourseController extends Controller
     public function edit($id)
     {
         $course = Course::find($id);
-        if (empty($course))
+        if (empty($course)) {
             return redirect()->route('course.index');
+        }
         $categories = Category::all();
         $user = Auth::user();
         $courses = $user->courses;
@@ -116,26 +116,36 @@ class CourseController extends Controller
     public function update(Request $request)
     {
         $course = Course::find($request->id);
-        if ($request->has('title'))
+        if ($request->has('title')) {
             $course->title = $request->title;
-        if ($request->has('description'))
+        }
+        if ($request->has('description')) {
             $course->description = $request->description;
-        if ($request->has('category_id'))
+        }
+        if ($request->has('category_id')) {
             $course->category_id = $request->category_id;
-        if ($request->has('price'))
+        }
+        if ($request->has('price')) {
             $course->price = $request->price;
-        if ($request->has('level'))
+        }
+        if ($request->has('level')) {
             $course->level = $request->level;
-        if ($request->has('duration'))
+        }
+        if ($request->has('duration')) {
             $course->duration = $request->duration;
-        if ($request->has('discount'))
+        }
+        if ($request->has('discount')) {
             $course->discount = $request->discount;
-        if ($request->has('additional_info'))
+        }
+        if ($request->has('additional_info')) {
             $course->additional_info = $request->additional_info;
-        if ($request->has('instructor_id'))
+        }
+        if ($request->has('instructor_id')) {
             $course->instructor_id = $request->instructor_id;
-        if ($request->has('language'))
+        }
+        if ($request->has('language')) {
             $course->language = $request->language;
+        }
 
         $course->save();
 

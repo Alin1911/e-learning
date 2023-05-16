@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
-use App\Models\Lesson;
 use App\Models\Test;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +15,7 @@ class TestController extends Controller
         if ($request->has('course_id')) {
             $course_id = $request->input('course_id');
             $tests = Test::where('course_id', $course_id)->get();
-        } else if ($request->has('lesson_id')) {
+        } elseif ($request->has('lesson_id')) {
             $tests = Test::where('lesson_id', $request->input('lesson_id'))->get();
         } else {
             $tests = Test::all();

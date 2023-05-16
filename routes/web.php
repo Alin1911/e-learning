@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'LearningController@index');
 Route::get('/team', 'LearningController@team');

@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Masbug\Flysystem\GoogleDriveAdapter;
 
 class GoogleDriveServiceProvider extends ServiceProvider
 {
