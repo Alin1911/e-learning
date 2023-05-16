@@ -1,10 +1,6 @@
 <template>
     <div>
-        <div
-            class="bg-white my-2 shadow p-4"
-            v-for="forum in forums"
-            :key="forum.id"
-        >
+        <div class="bg-white my-2 shadow p-4" v-for="forum in forums" :key="forum.id">
             <div class="d-flex justify-content-between">
                 <div>
                     <h3>{{ forum.title }}</h3>
@@ -12,7 +8,7 @@
                 </div>
                 <div>
                     <p>{{ forum.topics.length }} topicuri</p>
-                    <p>{{ posts }} postări</p>
+                    <p>{{ forum.posts }} postări</p>
                     <a class="btn btn-primary" :href="'forums/' + forum.id">
                         <span>Accesează</span>
                     </a>
@@ -29,7 +25,6 @@ export default {
     data() {
         return {
             forums: [],
-            posts: 0,
         };
     },
     async created() {
@@ -39,8 +34,9 @@ export default {
         const response = await axios.get("/forums").then((response) => {
             this.forums = response.data;
             this.forums.forEach((forum) => {
+                forum.posts = 0;
                 forum.topics.forEach((topic) => {
-                    this.posts += topic.posts.length;
+                    forum.posts += topic.posts.length;
                 });
             });
         });
