@@ -5,7 +5,7 @@
         "watch": "mix watch",
         "hot": "mix watch --hot",
         "build": "mix --production",
-        "prettier": "prettier --write \"{,!(storage)/**/}*.{js,vue,css,html,scss}\"",
+        "prettier": "prettier --write \"{,!(storage)/**/}*.{js,vue,css,html,scss,blade.php}\"",
         "php-cs-fixer": "vendor/bin/php-cs-fixer fix",
         "format": "npm run prettier && npm run php-cs-fixer"
     },
@@ -20,6 +20,7 @@
         "html-webpack-plugin": "^5.5.1",
         "laravel-vite-plugin": "^0.7.2",
         "prettier": "2.8.8",
+        "prettier-plugin-blade": "^1.1.8",
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.62.0",
         "sass-loader": "^13.2.2",
