@@ -10,6 +10,11 @@ class Course extends Model
 {
 	use HasFactory;
 
+	public function forum()
+	{
+		return $this->hasOne(Forum::class);
+	}
+	
 	public function category()
 	{
 		return $this->hasOne(Category::class, 'id', 'category_id');

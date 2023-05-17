@@ -17,6 +17,8 @@ import Test from "@/components/learn/Test.vue";
 import ForumList from "@/components/forum/ForumList.vue";
 import TopicList from "@/components/forum/ForumView.vue";
 import TopicView from "@/components/forum/TopicView.vue";
+import ProblemForm from "@/components/problem/ProblemForm.vue";
+import ProblemList from "@/components/problem/ProblemList.vue";
 
 import createNewStore from "./store.js";
 
@@ -39,6 +41,8 @@ const app = createApp({
 		"forum-list": ForumList,
 		"topic-list": TopicList,
 		"topic-view": TopicView,
+		"problem-form": ProblemForm,
+		"problem-list": ProblemList,
 	},
 });
 

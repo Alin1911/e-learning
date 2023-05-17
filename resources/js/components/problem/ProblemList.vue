@@ -1,22 +1,65 @@
 <template>
-	<div>
-		<h2>Lista de exerciții</h2>
+	<div class="mt-5">
+		<div
+			class="border-bottom border-primary pb-2 mb-2 d-flex justify-content-between align-items-center"
+		>
+			<h2>Exerciții recomandate</h2>
+			<a href="/problem/create" class="btn btn-primary"
+				>Adauga un Exercițiu</a
+			>
+		</div>
 		<div
 			v-for="(exercise, index) in exercises"
 			:key="exercise.id"
-			class="exercise"
+			class="exercise mb-4"
 		>
-			<h3 @click="toggleDetails(index)">{{ exercise.title }}</h3>
-			<div v-show="exercise.showDetails">
-				<p>{{ exercise.description }}</p>
-				<p v-if="exercise.example">Exemplu: {{ exercise.example }}</p>
-				<p v-if="exercise.hints">Indicii: {{ exercise.hints }}</p>
-				<p v-if="exercise.restrictions">
-					Restricții: {{ exercise.restrictions }}
-				</p>
-				<p v-if="exercise.similar_problems">
-					Probleme similare: {{ exercise.similar_problems }}
-				</p>
+			<div class="shadow pb-2 pt-3 px-3 bg-white">
+				<div
+					class="mb-2 d-flex justify-content-between align-items-center"
+				>
+					<h4
+						class="w-100"
+						@click="toggleDetails(index)"
+						style="cursor: pointer"
+					>
+						<i class="fa-sharp fa-solid fa-chevron-down"></i>
+						{{ exercise.title }}
+					</h4>
+					<a
+						:href="'/problem/' + exercise.id"
+						class="btn btn-sm btn-outline-primary"
+						>Deschide</a
+					>
+				</div>
+				<div class="h5" v-show="openIndex === index">
+					<div class="row">
+						<div class="col-md-12 mb-1">
+							<p>{{ exercise.description }}</p>
+						</div>
+					</div>
+					<div class="row" v-if="exercise.example">
+						<div class="col-md-12 mb-1">
+							<strong>Exemplu:</strong> {{ exercise.example }}
+						</div>
+					</div>
+					<div class="row" v-if="exercise.hints">
+						<div class="col-md-12 mb-1">
+							<strong>Indicii:</strong> {{ exercise.hints }}
+						</div>
+					</div>
+					<div class="row" v-if="exercise.restrictions">
+						<div class="col-md-12 mb-1">
+							<strong>Restricții:</strong>
+							{{ exercise.restrictions }}
+						</div>
+					</div>
+					<div class="row" v-if="exercise.similar_problems">
+						<div class="col-md-12 mb-1">
+							<strong>Probleme similare:</strong>
+							{{ exercise.similar_problems }}
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -30,10 +73,14 @@ export default {
 			default: () => [],
 		},
 	},
+	data() {
+		return {
+			openIndex: null,
+		};
+	},
 	methods: {
 		toggleDetails(index) {
-			this.exercises[index].showDetails =
-				!this.exercises[index].showDetails;
+			this.openIndex = this.openIndex === index ? null : index;
 		},
 	},
 };

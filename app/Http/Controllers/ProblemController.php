@@ -7,10 +7,13 @@ use Illuminate\Http\Request;
 
 class ProblemController extends Controller
 {
-	public function index()
+	public function index(Request $request)
 	{
-		$problems = Problem::all();
-		return view('problems.index', compact('problems'));
+		$exercises = Problem::all();
+		if($request->wantsJson()) {
+			return json_encode($exercises);
+		}
+		return view('problems.index', compact('exercises'));
 	}
 
 	public function show($id)

@@ -32,18 +32,6 @@
 	</div>
 
 	<div class="form-group">
-		<label for="t">T</label>
-		<input
-			type="number"
-			name="t"
-			id="t"
-			class="form-control"
-			value="{{ old("t", isset($problem) ? $problem->t : "") }}"
-			required
-		/>
-	</div>
-
-	<div class="form-group">
 		<label for="pairs">Pairs</label>
 		<input
 			type="text"

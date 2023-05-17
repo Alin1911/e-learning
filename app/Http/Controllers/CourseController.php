@@ -93,7 +93,7 @@ class CourseController extends Controller
 			return redirect()->route('course.index');
 		}
 		$course->load('category', 'lessons', 'lessons.tests', 'lessons.userLessons', 'tests', 'questions', 'instructor', 'metaTag', 'exercises');
-		if(!Auth::check()){
+		if(!Auth::check()) {
 			return view('course.show')->with(['course' => $course]);
 		}
 		$userId = Auth::user()->id;
