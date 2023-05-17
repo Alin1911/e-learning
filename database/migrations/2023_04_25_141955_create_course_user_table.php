@@ -5,26 +5,26 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    /**
-     * Run the migrations.
-     */
-    public function up()
-    {
-        Schema::create('course_user', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('course_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->dateTime('enrollment_date');
-            $table->boolean('completed')->default(false);
-            $table->timestamps();
-        });
-    }
+	/**
+	 * Run the migrations.
+	 */
+	public function up()
+	{
+		Schema::create('course_user', function (Blueprint $table) {
+			$table->id();
+			$table->foreignId('course_id')->constrained()->onDelete('cascade');
+			$table->foreignId('user_id')->constrained()->onDelete('cascade');
+			$table->dateTime('enrollment_date');
+			$table->boolean('completed')->default(false);
+			$table->timestamps();
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down() : void
-    {
-        Schema::dropIfExists('course_user');
-    }
+	/**
+	 * Reverse the migrations.
+	 */
+	public function down() : void
+	{
+		Schema::dropIfExists('course_user');
+	}
 };

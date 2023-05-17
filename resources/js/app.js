@@ -23,23 +23,23 @@ import createNewStore from "./store.js";
 const store = createNewStore();
 
 const app = createApp({
-    components: {
-        course: Course,
-        lesson: Lesson,
-        test: Test,
-        instructors: Instructors,
-        categories: Categories,
-        "course-manager": CourseManager,
-        "lesson-create": LessonCreate,
-        "test-create": TestCreate,
-        "test-component": TestComponent,
-        "exercise-create": ExerciseCreate,
-        "add-forum": AddForum,
-        "course-add": CourseAdd,
-        "forum-list": ForumList,
-        "topic-list": TopicList,
-        "topic-view": TopicView,
-    },
+	components: {
+		course: Course,
+		lesson: Lesson,
+		test: Test,
+		instructors: Instructors,
+		categories: Categories,
+		"course-manager": CourseManager,
+		"lesson-create": LessonCreate,
+		"test-create": TestCreate,
+		"test-component": TestComponent,
+		"exercise-create": ExerciseCreate,
+		"add-forum": AddForum,
+		"course-add": CourseAdd,
+		"forum-list": ForumList,
+		"topic-list": TopicList,
+		"topic-view": TopicView,
+	},
 });
 
 app.use(store);

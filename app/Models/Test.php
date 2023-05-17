@@ -7,25 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Test extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    public function course()
-    {
-        return $this->belongsTo(Course::class);
-    }
+	public function course()
+	{
+		return $this->belongsTo(Course::class);
+	}
 
-    public function lesson()
-    {
-        return $this->belongsTo(Lesson::class);
-    }
+	public function lesson()
+	{
+		return $this->belongsTo(Lesson::class);
+	}
 
-    public function exercises()
-    {
-        return $this->hasMany(Exercise::class);
-    }
+	public function exercises()
+	{
+		return $this->hasMany(Exercise::class);
+	}
 
-    public function questions()
-    {
-        return $this->hasMany(Question::class);
-    }
+	public function questions()
+	{
+		return $this->hasMany(Question::class);
+	}
 }

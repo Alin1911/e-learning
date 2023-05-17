@@ -5,9 +5,9 @@
         "watch": "mix watch",
         "hot": "mix watch --hot",
         "build": "mix --production",
-        "prettier": "prettier --write \"{,!(storage)/**/}*.{js,vue,css,html,scss,blade.php}\"",
+        "prettier": "prettier --write --use-tabs \"{,!(node_modules|vendor|storage)/**/}*.{js,vue,css,html,blade.php}\"",
         "php-cs-fixer": "vendor/bin/php-cs-fixer fix",
-        "format": "npm run prettier && npm run php-cs-fixer"
+        "format": "npm run prettier & npm run php-cs-fixer"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",

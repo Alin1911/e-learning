@@ -7,17 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class CourseAnswer extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    protected $table = 'course_answers';
+	protected $table = 'course_answers';
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
 
-    public function questuion()
-    {
-        return $this->belongsTo(CourseQuestion::class);
-    }
+	public function questuion()
+	{
+		return $this->belongsTo(CourseQuestion::class);
+	}
 }

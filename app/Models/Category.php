@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasFactory;
-    protected $table = 'categories';
+	use HasFactory;
+	protected $table = 'categories';
 
-    public function courses()
-    {
-        return $this->hasMany(Course::class);
-    }
+	public function courses()
+	{
+		return $this->hasMany(Course::class);
+	}
 }

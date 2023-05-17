@@ -3,7 +3,9 @@
 $finder = Symfony\Component\Finder\Finder::create()
     ->notPath('vendor')
     ->notPath('bootstrap')
-    ->exclude('storage') // Schimbă această linie
+    ->notPath('node_modules')
+    ->notPath('storage')
+    ->exclude('storage')
     ->in(__DIR__)
     ->name('*.php')
     ->notName('*.blade.php');
@@ -15,5 +17,8 @@ return $config
         'array_syntax' => ['syntax' => 'short'],
         'ordered_imports' => ['sort_algorithm' => 'alpha'],
         'no_unused_imports' => true,
+        'linebreak_after_opening_tag' => true,
+        'indentation_type' => true,
     ])
+    ->setIndent("\t")
     ->setFinder($finder);

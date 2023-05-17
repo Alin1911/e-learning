@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExerciseOrderingItem extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    public function exercise()
-    {
-        return $this->belongsTo(Exercise::class);
-    }
+	public function exercise()
+	{
+		return $this->belongsTo(Exercise::class);
+	}
 }

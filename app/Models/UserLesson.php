@@ -8,22 +8,22 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserLesson extends Model
 {
-    use HasFactory;
-    protected $fillable = [
-        'user_id',
-        'lesson_id',
-        'completed_at',
-    ];
+	use HasFactory;
+	protected $fillable = [
+		'user_id',
+		'lesson_id',
+		'completed_at',
+	];
 
-    protected $table = 'user_lessons';
+	protected $table = 'user_lessons';
 
-    public function user() : BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+	public function user() : BelongsTo
+	{
+		return $this->belongsTo(User::class, 'user_id');
+	}
 
-    public function lesson() : BelongsTo
-    {
-        return $this->belongsTo(Lesson::class, 'lesson_id');
-    }
+	public function lesson() : BelongsTo
+	{
+		return $this->belongsTo(Lesson::class, 'lesson_id');
+	}
 }
