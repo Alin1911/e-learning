@@ -2,22 +2,13 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 my-3">
-				<button
-					class="btn btn-primary"
-					@click="selectedComponent = 'userAccount'"
-				>
+				<button class="btn btn-primary" @click="selectedComponent = 'userAccount'">
 					Contul meu
 				</button>
-				<button
-					class="btn btn-primary ms-2"
-					@click="selectedComponent = 'enrolledCourses'"
-				>
+				<button class="btn btn-primary ms-2" @click="selectedComponent = 'enrolledCourses'">
 					Cursuri înrolate
 				</button>
-				<button
-					class="btn btn-primary ms-2"
-					@click="selectedComponent = 'userStats'"
-				>
+				<button class="btn btn-primary ms-2" @click="selectedComponent = 'userStats'">
 					Vezi statistici
 				</button>
 			</div>
@@ -36,6 +27,13 @@ import EnrolledCourses from "./EnrolledCourses.vue";
 import UserStats from "./UserStats.vue";
 
 export default {
+	name: "MyAccount",
+	props: {
+		user: {
+			type: Object,
+			required: true,
+		},
+	},
 	data() {
 		return {
 			selectedComponent: "userAccount",

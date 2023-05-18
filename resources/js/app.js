@@ -19,6 +19,7 @@ import TopicList from "@/components/forum/ForumView.vue";
 import TopicView from "@/components/forum/TopicView.vue";
 import ProblemForm from "@/components/problem/ProblemForm.vue";
 import ProblemList from "@/components/problem/ProblemList.vue";
+import AccountMenu from "@/components/user/MyAccount.vue";
 
 import createNewStore from "./store.js";
 
@@ -43,6 +44,7 @@ const app = createApp({
 		"topic-view": TopicView,
 		"problem-form": ProblemForm,
 		"problem-list": ProblemList,
+		"account-menu": AccountMenu,
 	},
 });
 
