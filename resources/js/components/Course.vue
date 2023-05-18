@@ -3,7 +3,13 @@
 		<div class="container mb-3">
 			<div class="row g-0 d-flex justify-content-center">
 				<div v-if="course.image" class="col-md-8 mb-5">
-					<img :src="course.image" class="img-fluid rounded-start" alt="Course image" width="800" height="450" />
+					<img
+						:src="course.image"
+						class="img-fluid rounded-start"
+						alt="Course image"
+						width="800"
+						height="450"
+					/>
 				</div>
 				<div class="col-12">
 					<div class="card-body">
@@ -17,14 +23,29 @@
 							Description not available
 						</p>
 						<p class="card-text">
-							<small v-if="course.level ||
-								course.language ||
-								course.duration
-								" class="text-muted">
-								<span v-if="course.level" class="course-level me-2">Nivel: {{ course.level }}</span>
-								<span v-if="course.language" class="course-language me-2">Limba: {{ course.language
-								}}</span>
-								<span v-if="course.duration" class="course-duration">Durata: {{ course.duration }}</span>
+							<small
+								v-if="
+									course.level ||
+									course.language ||
+									course.duration
+								"
+								class="text-muted"
+							>
+								<span
+									v-if="course.level"
+									class="course-level me-2"
+									>Nivel: {{ course.level }}</span
+								>
+								<span
+									v-if="course.language"
+									class="course-language me-2"
+									>Limba: {{ course.language }}</span
+								>
+								<span
+									v-if="course.duration"
+									class="course-duration"
+									>Durata: {{ course.duration }}</span
+								>
 							</small>
 						</p>
 						<p v-if="course.category_id" class="card-text">
@@ -37,15 +58,22 @@
 							{{ course.additional_info }}
 						</p>
 						<div class="course-price mt-3">
-							<span v-if="course.discount" class="text-danger me-1">
-								<s v-if="course.price">{{ course.price }} RON</s>
+							<span
+								v-if="course.discount"
+								class="text-danger me-1"
+							>
+								<s v-if="course.price"
+									>{{ course.price }} RON</s
+								>
 							</span>
-							<span v-if="course.price">{{
-								course.discount
-								? course.price - course.discount
-								: course.price
-							}}
-								RON</span>
+							<span v-if="course.price"
+								>{{
+									course.discount
+										? course.price - course.discount
+										: course.price
+								}}
+								RON</span
+							>
 						</div>
 					</div>
 				</div>
