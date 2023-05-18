@@ -49,7 +49,6 @@ class CourseController extends Controller
 
 	public function store(Request $request)
 	{
-		dd($request->all());
 		$course = new Course();
 		$user = Auth::user();
 		$course->user_id = $user->id;
@@ -64,9 +63,10 @@ class CourseController extends Controller
 		$course->instructor_id = 1;
 		$course->language = $request->get('language', 'english');
 		if ($request->has('image')) {
-			$course->image = $request->file('image')->store('courses');
+			$path = $request->file('image')->store('public/courses');
+			$course->image = asset('storage/' . substr($path, 7));
 		} else {
-			$course->image = 'storage/images/2.png';
+			$course->image = asset('storage/images/2.png');
 		}
 		$course->save();
 		$metaTag = new CourseMetaTag();
