@@ -49,7 +49,7 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/account/{{ Auth::user()->id }}" style="color: #000;">
+                        <a class="dropdown-item" href="/account/{{ Auth::user()->id }}/edit" style="color: #000;">
                             Contul meu
                         </a>
                         <a class="dropdown-item" href="/home" style="color: #000;">
