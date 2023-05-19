@@ -25,6 +25,7 @@ class HomeController extends Controller
 	{
 		$user = Auth::user();
 		$learningCourses = $user->learningCourses;
-		return view('home')->with(['user' => $user, 'learningCourses' => $learningCourses]);
+		$user->load('learningCourses', 'posts', 'posts.topic', 'posts.topic.forum', 'role', 'problems');
+		return view('home')->with(['user' => $user]);
 	}
 }

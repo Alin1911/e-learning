@@ -6,7 +6,7 @@
 				Am creat LearningHub având în vedere experiența utilizatorului.
 				Găsește rapid ceea ce te interesează și navighează cu ușurință.
 			</p>
-			<a href="/features" class="btn btn-primary">
+			<a href="/features" class="btn btn-danger">
 				Descoperă Caracteristicile Noastre
 			</a>
 		</div>

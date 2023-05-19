@@ -6,7 +6,7 @@
 			@foreach ($courses as $course)
 				<div
 					class="card m-2 shadow p-0"
-					style="width: 18rem; height: 370px"
+					style="width: 18rem; height: 300px"
 				>
 					<div
 						class="p-0 card-body background-index"
@@ -39,26 +39,28 @@
 						@else
 							<li class="list-group-item">Romana</li>
 						@endif
-						@if ($course->price)
-							<li class="list-group-item">
-								<div class="course-price mt-3">
-									@if ($course->discount)
-										<span class="text-danger me-1">
-											<s>{{ $course->price }} RON</s>
-										</span>
-									@endif
-
-									@if ($course->price)
-										<span>
-											{{ $course->discount ? $course->price - $course->discount : $course->price }}
-											RON
-										</span>
-									@endif
-								</div>
-							</li>
-						@else
-							<li class="list-group-item">Inscrie-te gratuit!</li>
-						@endif
+						{{--
+          @if ($course->price)
+          <li class="list-group-item">
+          <div class="course-price mt-3">
+          @if ($course->discount)
+          <span class="text-danger me-1">
+          <s>{{ $course->price }} RON</s>
+          </span>
+          @endif
+          
+          @if ($course->price)
+          <span>
+          {{ $course->discount ? $course->price - $course->discount : $course->price }}
+          RON
+          </span>
+          @endif
+          </div>
+          </li>
+          @else
+          <li class="list-group-item">Inscrie-te acum!</li>
+          @endif
+      --}}
 					</ul>
 					<div class="card-body">
 						<a

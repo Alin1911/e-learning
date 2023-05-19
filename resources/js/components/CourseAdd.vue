@@ -25,30 +25,17 @@
 				></textarea>
 			</div>
 
-			<!-- Preț -->
+			<!-- Preț
 			<div class="form-group">
 				<label for="price">Preț</label>
-				<input
-					type="number"
-					step="0.01"
-					class="form-control"
-					id="price"
-					v-model="course.price"
-					required
-				/>
-			</div>
+				<input type="number" step="0.01" class="form-control" id="price" v-model="course.price" required />
+			</div> -->
 
 			<!-- Discount -->
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<label for="discount">Discount</label>
-				<input
-					type="number"
-					step="0.01"
-					class="form-control"
-					id="discount"
-					v-model="course.discount"
-				/>
-			</div>
+				<input type="number" step="0.01" class="form-control" id="discount" v-model="course.discount" />
+			</div> -->
 			<!-- Image-->
 			<div class="form-group">
 				<label for="image">Image</label>
@@ -72,7 +59,9 @@
 
 			<!-- Informații adiționale -->
 			<div class="form-group">
-				<label for="additional_info">Informații adiționale</label>
+				<label for="additional_info"
+					>Referințe și informații adiționale</label
+				>
 				<textarea
 					class="form-control"
 					id="additional_info"
@@ -111,7 +100,7 @@
 				</select>
 			</div>
 
-			<!-- ID-ul instructorului -->
+			<!-- ID-ul instructorului
 			<div class="form-group">
 				<label for="instructor">Instructor</label>
 				<select
@@ -127,7 +116,7 @@
 						{{ instructor.name }}
 					</option>
 				</select>
-			</div>
+			</div> -->
 
 			<!-- Limba -->
 			<div class="form-group">
@@ -203,11 +192,11 @@ export default {
 			levels: ["Începător", "Intermediar", "Avansat"],
 			durations: [
 				"2 weeks",
+				"1 week",
+				"3 weeks",
 				"1 month",
-				"2 months",
-				"3 months",
-				"6 months",
-				"1 year",
+				"6 weeks",
+				"2 month",
 			],
 			selectedFile: null,
 		};

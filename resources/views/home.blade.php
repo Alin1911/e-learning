@@ -13,7 +13,7 @@
 				<h3>{{ __("Cursurile tale:") }}</h3>
 				<hr class="text-danger bg-danger" />
 				<div class="row">
-					@foreach ($learningCourses as $learningCourse)
+					@foreach ($user->learningCourses as $learningCourse)
 						<!-- Înlocuiți cu un ciclu foreach care parcurge cursurile utilizatorului și afișează informațiile relevante despre fiecare curs -->
 						<div class="col-md-4">
 							<div class="card mb-4 p-3 border-0 shadow">
@@ -52,8 +52,76 @@
 							</div>
 						</div>
 					@endforeach
-
-					<!-- Sfârșitul exemplului de card curs -->
+				</div>
+				<div
+					id="carouselExampleIndicators"
+					class="carousel slide mt-4"
+					data-ride="carousel"
+				>
+					<h3 class="border-bottom border-primary mb-3 pb-2">
+						Discuții în care ești implicat
+					</h3>
+					<div class="carousel-inner shadow bg-light p-2">
+						@foreach ($user->posts as $index => $post)
+							<div
+								class="carousel-item @if($index == 0) active @endif"
+								style="min-height: 200px"
+							>
+								<div
+									class="m-5 row d-flex justify-content-center"
+								>
+									<div
+										class="mx-5 col-6 d-flex justify-content-between"
+									>
+										<h4>
+											{{ $post->topic->forum->title }}
+										</h4>
+										<a
+											class="btn btn-success"
+											href="/forums/{{ $post->topic->forum->id }}"
+										>
+											Acceseaza forumul
+										</a>
+									</div>
+									<div
+										class="mx-5 col-6 d-flex justify-content-between mt-1"
+									>
+										<h4>{{ $post->topic->title }}</h4>
+										<a
+											class="btn btn-success"
+											href="/topics/{{ $post->topic->id }}"
+										>
+											Acceseaza discuția
+										</a>
+									</div>
+									<div class="col-6 mt-4">
+										<h3 class="">Postarea ta:</h3>
+										<p>{{ $post->content }}</p>
+									</div>
+								</div>
+							</div>
+						@endforeach
+					</div>
+					<a
+						class="carousel-control-prev"
+						href="#carouselExampleIndicators"
+						role="button"
+						data-slide="prev"
+					>
+						<span class="text-dark">
+							<i class="fa-solid fa-angle-left"></i>
+						</span>
+					</a>
+					<a
+						class="carousel-control-next"
+						href="#carouselExampleIndicators"
+						role="button"
+						data-slide="next"
+					>
+						<span class="text-dark">
+							<i class="fa-solid fa-angle-right"></i>
+						</span>
+					</a>
 				</div>
 				<hr class="text-danger bg-danger" />
 				<blockquote class="blockquote">

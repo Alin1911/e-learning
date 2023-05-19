@@ -57,7 +57,7 @@
 						<p v-if="course.additional_info" class="card-text">
 							{{ course.additional_info }}
 						</p>
-						<div class="course-price mt-3">
+						<!-- <div class="course-price mt-3">
 							<span
 								v-if="course.discount"
 								class="text-danger me-1"
@@ -74,7 +74,7 @@
 								}}
 								RON</span
 							>
-						</div>
+						</div> -->
 					</div>
 				</div>
 				<button class="enroll-btn btn btn-primary mt-3" @click="enroll">

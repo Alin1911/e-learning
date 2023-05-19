@@ -1,79 +1,81 @@
 <footer class="footer-bg pt-4">
-	<div class="container">
-		<div class="row text-dark" style="font-size: 20px">
-			<div class="col-md-3 col-12">
-				<h2 class="text-white mb-4">Cursuri populare</h2>
-				<div><a href="/course/1">Curs de Python</a></div>
-				<div><a href="/course/2">Curs de JavaScript</a></div>
-				<div><a href="/course/3">Curs de HTML și CSS</a></div>
-			</div>
-			<div class="col-md-3 col-12">
-				<h2 class="text-white mb-4">Filtrare cursuri</h2>
-				<form action="/course" method="get">
-					<div class="mb-3 text-white">
-						<label for="nivel-dificultate" class="form-label">
-							Nivel dificultate
-						</label>
-						<select
-							class="form-select"
-							id="nivel-dificultate"
-							name="nivel"
-							required
-						>
-							<option selected value="">
-								Alege nivelul de dificultate
-							</option>
-							<option value="incepator">Începător</option>
-							<option value="intermediar">Intermediar</option>
-							<option value="avansat">Avansat</option>
-						</select>
-					</div>
-					<div class="mb-3 text-white">
-						<label for="limbaj-programare" class="form-label">
-							Limbaj programare
-						</label>
-						<select
-							class="form-select"
-							id="limbaj-programare"
-							name="search"
-							required
-						>
-							<option selected value="">
-								Alege limbajul de programare
-							</option>
-							<option value="python">Python</option>
-							<option value="javascript">JavaScript</option>
-							<option value="html-css">HTML și CSS</option>
-						</select>
-					</div>
-					<button type="submit" class="btn btn-danger w-100">
-						Filtrează
+	<div class="container pt-4">
+		<div class="row d-flex justify-content-center">
+			<div class="row" style="font-size: 18px">
+				<div class="col-md-3 col-12">
+					<h3 class="text-white mb-4">Cursuri populare</h3>
+					<div><a href="/course/1">Curs de Python</a></div>
+					<div><a href="/course/2">Curs de JavaScript</a></div>
+					<div><a href="/course/3">Curs de HTML și CSS</a></div>
+				</div>
+				<div class="col-md-4 col-12">
+					<h3 class="text-white mb-4">Filtrare cursuri</h3>
+					<form action="/course" method="get">
+						<div class="mb-3 text-white">
+							<label for="nivel-dificultate" class="form-label">
+								Nivel dificultate
+							</label>
+							<select
+								class="form-select"
+								id="nivel-dificultate"
+								name="nivel"
+								required
+							>
+								<option selected value="">
+									Alege nivelul de dificultate
+								</option>
+								<option value="incepator">Începător</option>
+								<option value="intermediar">Intermediar</option>
+								<option value="avansat">Avansat</option>
+							</select>
+						</div>
+						<div class="mb-3 text-white">
+							<label for="limbaj-programare" class="form-label">
+								Limbaj programare
+							</label>
+							<select
+								class="form-select"
+								id="limbaj-programare"
+								name="search"
+								required
+							>
+								<option selected value="">
+									Alege limbajul de programare
+								</option>
+								<option value="python">Python</option>
+								<option value="javascript">JavaScript</option>
+								<option value="html-css">HTML și CSS</option>
+							</select>
+						</div>
+						<button type="submit" class="btn btn-danger w-100">
+							Filtrează
+						</button>
+					</form>
+				</div>
+				<div class="col-md-3 col-12 text-white">
+					<h3 class="text-white mb-4">Joc de programare</h3>
+					<p>
+						Încearcă jocul nostru de programare pentru a-ți testa
+						abilitățile.
+					</p>
+					<button
+						type="button"
+						class="btn btn-danger w-100"
+						data-toggle="modal"
+						data-target="#jocModal"
+					>
+						Joacă acum
 					</button>
-				</form>
-			</div>
-			<div class="col-md-3 col-12 text-white">
-				<h2 class="text-white mb-4">Joc de programare</h2>
-				<p>
-					Încearcă jocul nostru de programare pentru a-ți testa
-					abilitățile.
-				</p>
-				<button
-					type="button"
-					class="btn btn-danger w-100"
-					data-toggle="modal"
-					data-target="#jocModal"
-				>
-					Joacă acum
-				</button>
-			</div>
-			<div class="col-md-3 col-12 text-white">
-				<h2 class="text-white mb-4">Despre noi</h2>
-				<div><a href="/team">Echipa noastră</a></div>
-				<div><a href="/contact">Contact</a></div>
-				<div><a href="/term">Termeni și condiții</a></div>
+				</div>
+				<div class="col-md-2 col-12 text-white pl-4">
+					<h3 class="text-white mb-4">Despre noi</h3>
+					<div><a href="/team">Echipa noastră</a></div>
+					<div><a href="/contact">Contact</a></div>
+					<div><a href="/term">Termeni și condiții</a></div>
+				</div>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row mt-5">
 			<div
 				class="col-md-12 d-flex justify-content-center py-4 text-white"
 			>
