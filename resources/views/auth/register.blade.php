@@ -34,7 +34,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-12 col-md-8 form-group my-1">
+				<div class="col-12 col-md-8 form-group my-3">
 					<div class="form-group row">
 						<label for="email" class="col-sm-2 col-form-label">
 							{{ __("Email Address") }}
@@ -79,7 +79,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-12 col-md-8 form-group my-1">
+				<div class="col-12 col-md-8 form-group my-3">
 					<div class="form-group row">
 						<label
 							for="password-confirm"

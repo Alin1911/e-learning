@@ -1,44 +1,43 @@
 @extends("layouts.app")
 
 @section("content")
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-8">
-				<div class="card">
-					<div class="card-header">{{ __("Reset Password") }}</div>
-
-					<div class="card-body">
+	<div class="container my-5 py-5">
+		<div class="px-3 py-4 row justify-content-center my-5 py-5 shadow bg-light"
+			>
+				<div class=" col-12 col-md-8 py-2">
+					<strong class="h2">
+						{{ __("Reset Password") }}
+					</strong>
+					<div class="pt-4 col-12 form-group my-1 border-top">
 						@if (session("status"))
 							<div class="alert alert-success" role="alert">
 								{{ session("status") }}
 							</div>
 						@endif
-
 						<form
 							method="POST"
 							action="{{ route("password.email") }}"
 						>
 							@csrf
-
-							<div class="row mb-3">
+							<div class="form-group row">
 								<label
 									for="email"
-									class="col-md-4 col-form-label text-md-end"
+									class="col-sm-2 col-form-label"
 								>
 									{{ __("Email Address") }}
 								</label>
 
-								<div class="col-md-6">
+								<div class="col-sm-10">
 									<input
-										id="email"
-										type="email"
-										class="form-control @error("email")  is-invalid @enderror"
-										name="email"
-										value="{{ old("email") }}"
-										required
-										autocomplete="email"
-										autofocus
-									/>
+									id="email"
+									type="email"
+									class="my-input form-control @error("name")  is-invalid @enderror"
+									name="name"
+									value="{{ old("email") }}"
+									required
+									autocomplete="email"
+									autofocus
+								/>
 
 									@error("email")
 										<span
@@ -51,7 +50,7 @@
 								</div>
 							</div>
 
-							<div class="row mb-0">
+							<div class="row mb-0 mt-4">
 								<div class="col-md-6 offset-md-4">
 									<button
 										type="submit"

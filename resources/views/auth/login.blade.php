@@ -34,7 +34,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-12 col-md-8 form-group my-1">
+				<div class="col-12 col-md-8 form-group my-3">
 					<div class="form-group row">
 						<label for="password" class="col-sm-2 col-form-label">
 							{{ __("Password") }}
@@ -59,22 +59,22 @@
 				<div class="col-12 col-md-8 mt-2">
 					<div class="row">
 						<div class="col-12 col-md-6">
-							<div>
-								<input
-									class="mr-2"
-									type="checkbox"
-									name="remember"
-									id="remember"
-									{{
-             old("remember") ? "checked" : ""
-         }}
-								/>
-								<label
-									class="form-check-label ml-2"
-									for="remember"
-								>
-									{{ __("Remember Me") }}
-								</label>
+							<div class="form-group">
+								<div class="form-check form-switch">
+									<input
+										name="remember"
+										class="form-check-input"
+										type="checkbox"
+										id="remember"
+										{{ old("remember") ? "checked" : "" }}
+									/>
+									<label
+										class="form-check-label"
+										for="remember"
+									>
+										{{ __("Remember Me") }}
+									</label>
+								</div>
 							</div>
 
 							@if (Route::has("password.request"))

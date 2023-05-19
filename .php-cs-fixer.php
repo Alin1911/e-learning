@@ -6,6 +6,7 @@ $finder = Symfony\Component\Finder\Finder::create()
     ->notPath('node_modules')
     ->notPath('storage')
     ->exclude('storage')
+    ->exclude('public')
     ->in(__DIR__)
     ->name('*.php')
     ->notName('*.blade.php');
