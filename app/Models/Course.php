@@ -12,7 +12,7 @@ class Course extends Model
 
 	public function forum()
 	{
-		return $this->hasOne(Forum::class);
+		return $this->hasMany(Forum::class);
 	}
 	
 	public function category()

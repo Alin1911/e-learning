@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\CourseMetaTag;
 use App\Models\Exercise;
 use App\Models\Forum;
+use App\Models\ForumTopic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -78,7 +79,7 @@ class CourseController extends Controller
 		$course->title = $request->get('title', '');
 		$course->description = $request->get('description', '');
 		$course->category_id = $request->get('category_id', '');
-		$course->price = $request->get('price', 'free');
+		$course->price = $request->get('price', '0');
 		$course->level = $request->get('level', 'beginner');
 		$course->duration = $request->get('duration', 'anytime');
 		$course->discount = $request->get('discount', '0');
@@ -105,6 +106,16 @@ class CourseController extends Controller
 		$metaTag->level = $course->level;
 
 		$metaTag->save();
+
+		$forum = new Forum();
+		$forum->title = $course->title;
+		$forum->description = $course->description;
+		$forum->course_id = $course->id;
+		$forum->save();
+		$topic = new ForumTopic();
+		$topic->title = $course->title;
+		$topic->forum_id = $forum->id;
+		$topic->save();
 
 		return $course->id;
 	}
