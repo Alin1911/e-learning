@@ -9,44 +9,51 @@
     height: 100%;
     display: none !important;
 }
+
 .background-index::before {
-    background: linear-gradient(
-        180deg,
-        transparent,
-        rgba(0, 0, 0, 0.4) 49.73%,
-        transparent 100%,
-        rgba(0, 0, 0, 0.4) 0
-    );
+    background: linear-gradient(180deg,
+            transparent,
+            rgba(0, 0, 0, 0.4) 49.73%,
+            transparent 100%,
+            rgba(0, 0, 0, 0.4) 0);
     content: "";
     height: 50%;
     width: 100%;
     position: absolute;
     z-index: 0;
 }
+
 .over {
     z-index: 0;
     position: relative;
 }
+
 .active1 {
     display: none !important;
 }
+
 .sidebar.active {
     display: block !important;
 }
+
 .main-content {
-    margin-left: 200px; /* aceasta ar trebui să fie aceeași valoare ca și lățimea meniului */
+    margin-left: 200px;
+    /* aceasta ar trebui să fie aceeași valoare ca și lățimea meniului */
     padding: 1rem;
 }
+
 footer a {
     color: #fff;
     text-decoration: none;
     border-bottom: 2px solid transparent;
     transition: all 0.3s ease;
 }
+
 footer a:hover {
     color: yellow;
     border-bottom-color: yellow;
 }
+
 footer-info a {
     font-size: 18px;
     color: #fff !important;
@@ -58,15 +65,18 @@ footer-info a:hover {
     font-size: 20px;
     text-decoration: none;
 }
+
 footer {
     z-index: 1;
     position: relative;
     bottom: 0;
 }
+
 .footer-bg {
     background: linear-gradient(to bottom, #00498e, #ac3076) !important;
     padding: 20px 0;
 }
+
 .navbar {
     z-index: 1 !important;
     position: fixed !important;
@@ -98,22 +108,26 @@ footer {
     border-bottom: 3px solid #fff;
     transform: scale(1.1);
 }
+
 .lead {
     font-size: 1.5rem;
     line-height: 2rem;
     color: #555;
 }
+
 .rounded-left-1 {
     border-bottom-left-radius: 20px !important;
     border-bottom-right-radius: 0px !important;
     border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
 }
+
 .rounded-right-1 {
     border-top-right-radius: 20px !important;
     border-bottom-right-radius: 20px !important;
     border-bottom-right-radius: 0px !important;
 }
+
 .card {
     height: 100%;
     margin-bottom: 2rem;
@@ -146,6 +160,7 @@ footer {
 .carousel-control-next {
     width: 5%;
 }
+
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     background-image: none;

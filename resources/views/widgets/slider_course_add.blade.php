@@ -2,7 +2,7 @@
 	id="menuToggle"
 	class="btn btn-white bg-white pr-3 py-5 rounded-pill"
 	style="
-		z-index: 10;
+		z-index: 0;
 		position: absolute;
 		top: 35%;
 		border-top-left-radius: 0 !important;

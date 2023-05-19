@@ -1,24 +1,28 @@
 <template>
-	<div class="card">
-		<div class="card-header">
-			<h2 class="mb-0">{{ course.title }}</h2>
+	<div class="row">
+		<div class="col-12 border-bottom border-primary mb-4">
+			<h2>{{ course.title }}</h2>
 		</div>
-		<div class="card-body">
-			<ul class="list-group">
-				<li
+		<div class="col-12">
+			<div class="row">
+				<div
 					v-for="(lesson, index) in lessons"
 					:key="lesson.id"
-					class="list-group-item"
+					class="col-12 m-1 p-2 shadow-sm"
 					:class="{
 						'bg-success': completedLessons.includes(lesson.id),
-						'bg-white': !completedLessons.includes(lesson.id),
+						'bg-light': !completedLessons.includes(lesson.id),
 					}"
 				>
 					<div
 						class="d-flex justify-content-between align-items-center"
 					>
 						<div @click="openLesson(lesson)" class="w-100">
+							<i class="fa-solid fa-person-chalkboard"></i>
 							Lecția - {{ index + 1 }}. {{ lesson.title }}
+							<span v-if="lesson.tests.length > 0">
+								<i class="fa-solid fa-caret-down"></i>
+							</span>
 						</div>
 						<button
 							class="btn btn-sm"
@@ -40,16 +44,19 @@
 						</button>
 					</div>
 					<div v-if="openedLesson === lesson">
-						<ul class="list-group mt-2">
-							<li
-								class="list-group-item"
+						<div class="mt-2">
+							<div
+								class="bg-light col-12 m-1 p-2 shadow-sm"
 								v-for="test in lesson.tests"
 								:key="test.id"
 							>
 								<div
 									class="d-flex justify-content-between align-items-center"
 								>
-									<div>Test - {{ test.title }}</div>
+									<div>
+										<i class="fa-solid fa-list-check"></i>
+										Test - {{ test.title }}
+									</div>
 									<a
 										:href="'/learn/test/' + test.id"
 										class="btn btn-sm btn-primary"
@@ -57,20 +64,23 @@
 										Verifica-ti cunostintele
 									</a>
 								</div>
-							</li>
-						</ul>
+							</div>
+						</div>
 					</div>
-				</li>
-				<li
+				</div>
+				<div
 					v-if="hasTests"
 					v-for="(test, index) in course.tests"
 					:key="test.id"
-					class="list-group-item"
+					class="bg-light col-12 m-1 p-2 shadow-sm"
 				>
 					<div
 						class="d-flex justify-content-between align-items-center"
 					>
-						<div>Test de curs - {{ test.title }}</div>
+						<div>
+							<i class="fa-solid fa-list-check"></i>
+							Test de curs - {{ test.title }}
+						</div>
 						<a
 							:href="'/learn/test/' + test.id"
 							class="btn btn-sm btn-primary"
@@ -78,8 +88,8 @@
 							Verifica-ti cunostintele
 						</a>
 					</div>
-				</li>
-			</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
