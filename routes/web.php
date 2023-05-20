@@ -17,6 +17,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 Route::post('course/{id}/join', [CourseController::class, 'join'])->name('course.join');
 Route::post('course/{id}/leave', [CourseController::class, 'leave'])->name('course.leave');
 Route::resource('/account', "UserController");
+Route::resource('/role/request', "RoleRequestController");
 Auth::routes();
 
 Route::get('/user', 'UserController@currentUser');
