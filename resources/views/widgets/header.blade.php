@@ -62,6 +62,13 @@
                         <a class="dropdown-item" href="/problem/create" style="color: #000;">
                             Adaugă exercițiu
                         </a>
+                        <a class="dropdown-item" href="/role/request" style="color: #000;">
+                            Cereri rol
+                        </a>
+                        @else 
+                        <a class="dropdown-item" href="/role/request/create" style="color: #000;">
+                            Cerere rol
+                        </a>
                         @endif
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();" style="color: #000;">
