@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
-use App\Models\RoleRequest;
 use App\Models\User;
+use App\Models\RoleRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RoleRequestController extends Controller
 {
@@ -20,7 +21,13 @@ class RoleRequestController extends Controller
 	}
 public function store(Request $request)
 {
-	$requestRole = RoleRequest::create($request->all());
+	$requestRole = new RoleRequest();
+	$user = Auth::user();
+	$requestRole->user_id = $user->id;
+	$requestRole->role_id = $request->rol;
+	$requestRole->approved = 0;
+	$requestRole->motivation = $request->motivation;
+	$requestRole->save();
 	return response()->json($requestRole, 201);
 }
 
