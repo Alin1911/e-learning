@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div
-			class="bg-white my-2 shadow p-4"
+			class="bg-white mb-3 shadow px-3 py-3"
 			v-for="forum in forums"
 			:key="forum.id"
 		>

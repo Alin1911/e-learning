@@ -28,8 +28,8 @@
 			style="
 				background: linear-gradient(
 					to bottom,
-					#b9dbfb9c,
-					#ceefffab
+					#99ffe700,
+					#2a1ed329
 				) !important;
 			"
 		>

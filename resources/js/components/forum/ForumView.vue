@@ -1,6 +1,15 @@
 <template>
 	<div>
-		<h2 class="border-bottom border-primary mb-3 py-1">Topicuri</h2>
+		<h2 class="border-bottom border-primary mb-3 py-1">
+			Cele mai actuale subiecte!
+		</h2>
+		<div
+			v-if="topics.length === 0"
+			class="alert alert-success"
+			role="alert"
+		>
+			<p class="text-center">Nu există subiecte în acest forum.</p>
+		</div>
 		<div
 			class="bg-white my-2 shadow p-4"
 			v-for="topic in topics"
@@ -18,6 +27,21 @@
 					</a>
 				</div>
 			</div>
+		</div>
+		<div
+			v-if="forum"
+			class="row d-flex justify-content-center p-3 align-items-center"
+		>
+			<hr class="mb-0" />
+			<div
+				class="col-8 d-flex justify-content-between align-items-center p-3"
+			>
+				<h3 class="m-0">Întreaba ceva sau deschide un nou subiect!</h3>
+				<a class="btn btn-primary" :href="'/forums/' + forum.id">
+					Adauga un subiect nou
+				</a>
+			</div>
+			<hr />
 		</div>
 	</div>
 </template>

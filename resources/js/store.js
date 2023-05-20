@@ -12,6 +12,7 @@ export default function createNewStore() {
 				title: "",
 				tests: [],
 				lessons: [],
+				forum: [],
 			},
 			completedLessons: [],
 		},
@@ -38,6 +39,7 @@ export default function createNewStore() {
 			getOpenedLesson: (state) => state.openedLesson,
 			getCompletedLessons: (state) => state.completedLessons,
 			getCurrentCourse: (state) => state.currentCourse,
+			getForum: (state) => state.currentCourse.forum[0],
 		},
 		mutations: {
 			setUser(state, user) {

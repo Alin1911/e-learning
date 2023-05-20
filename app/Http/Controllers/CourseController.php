@@ -126,7 +126,7 @@ class CourseController extends Controller
 		if (empty($course)) {
 			return redirect()->route('course.index');
 		}
-		$course->load('category', 'lessons', 'lessons.tests', 'lessons.userLessons', 'tests', 'questions', 'instructor', 'metaTag', 'exercises');
+		$course->load('forum', 'category', 'lessons', 'lessons.tests', 'lessons.userLessons', 'tests', 'questions', 'instructor', 'metaTag', 'exercises');
 		if(!Auth::check()) {
 			return view('course.show')->with(['course' => $course]);
 		}
@@ -221,8 +221,9 @@ class CourseController extends Controller
 		$course->load('tests');
 		$course->load('questions');
 		$course->load('category');
-		$course->load('instructor');
-		return view('course.learn')->with('course', $course);
+		$course->load('forum');
+		$course->load('instructor', 'forum');
+		return view('course.learn')->with(['course' => $course, 'forum' => $course->forum]);
 	}
 
 	public function courses()

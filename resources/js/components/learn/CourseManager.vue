@@ -90,6 +90,21 @@
 					</div>
 				</div>
 			</div>
+			<div
+				v-if="forum"
+				class="row d-flex justify-content-center p-3 align-items-center"
+			>
+				<hr class="mb-0" />
+				<div
+					class="col-8 d-flex justify-content-between align-items-center p-3"
+				>
+					<h3 class="m-0">Hai să învățam împreuna</h3>
+					<a class="btn btn-primary" :href="'/forums/' + forum.id">
+						Întrebări și răspunsuri
+					</a>
+				</div>
+				<hr />
+			</div>
 		</div>
 	</div>
 </template>
@@ -103,6 +118,9 @@ export default {
 		},
 	},
 	computed: {
+		forum() {
+			return this.$store.getters.getForum;
+		},
 		course() {
 			return this.$store.getters.getCurrentCourse;
 		},
