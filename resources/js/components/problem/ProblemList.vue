@@ -11,20 +11,20 @@
 		<div
 			v-for="(exercise, index) in exercises"
 			:key="exercise.id"
-			class="exercise mb-4"
+			class="exercise mb-3"
 		>
 			<div class="shadow pb-2 pt-3 px-3 bg-white">
 				<div
 					class="mb-2 d-flex justify-content-between align-items-center"
 				>
-					<h4
-						class="w-100"
+					<h5
+						class="w-100 mb-0"
 						@click="toggleDetails(index)"
 						style="cursor: pointer"
 					>
 						<i class="fa-sharp fa-solid fa-chevron-down"></i>
 						{{ exercise.title }}
-					</h4>
+					</h5>
 					<a
 						:href="'/problem/' + exercise.id"
 						class="btn btn-sm btn-outline-primary"

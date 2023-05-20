@@ -20,13 +20,13 @@
 			<div
 				v-for="post in topic.posts"
 				:key="post.id"
-				class="bg-light rounded shadow py-4 px-3 mb-3"
+				class="bg-light border rouned-0 shadow pt-3 pb-2 px-3 mb-2"
 			>
 				<div class="d-flex justify-content-between">
 					<div class="col-10">
 						<p>{{ post.content }}</p>
 					</div>
-					<div class="col-2">
+					<div class="col-2 bg-light text-dark px-2">
 						<p>{{ post.user.name }}</p>
 						<p>{{ post.likes }} like-uri</p>
 						<p v-if="post.created_at">
