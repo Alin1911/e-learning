@@ -254,11 +254,11 @@
 				}
 				intrebareCurenta++;
 				if (intrebareCurenta == 3) {
-					var curs = "Curs de nivel începător";
+					var curs = " un curs de nivel începător";
 					if (raspunsuriCorecte == 2) {
-						curs = "Curs de nivel intermediar";
+						curs = " un curs de nivel intermediar";
 					} else if (raspunsuriCorecte == 3) {
-						curs = "Curs de nivel avansat";
+						curs = " un curs de nivel avansat";
 					}
 					$("#verifica-raspuns").text("Vezi rezultatul");
 					$("#verifica-raspuns").attr("data-bs-dismiss", "modal");
@@ -268,9 +268,9 @@
 					$("#rezultat--final").append(
 						"<p>Ai răspuns corect la " +
 							raspunsuriCorecte +
-							" din 2 întrebări. Cel mai bun curs pentru tine este: " +
+							" din 2 întrebări.<br> Cel mai bun curs pentru tine este <b> " +
 							curs +
-							"</p>"
+							"</b></p>"
 					);
 					$("#rezultat--final").removeClass("d-none");
 				} else {
