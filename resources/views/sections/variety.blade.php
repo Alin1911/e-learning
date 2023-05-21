@@ -3,7 +3,7 @@
 		<div class="card-body" style="min-height: 260px">
 			<h3 class="card-title">Diversitate & Flexibilitate</h3>
 			<p class="card-text">
-				La LearningHub, învățarea este adaptată stilului tău. Descoperă
+				La QuickMindshare, învățarea este adaptată stilului tău. Descoperă
 				o gamă largă de cursuri, de la științe exacte la arte, la ritmul
 				tău.
 			</p>

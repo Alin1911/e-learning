@@ -1,6 +1,6 @@
 @extends("layouts.app")
 
-@section('title', 'LearningHub - Începutul călătoriei tale în micro-learning')
+@section('title', 'QuickMindshare - Începutul călătoriei tale în micro-learning')
 
 @section("content")
 	@include("widgets.slider")
@@ -8,7 +8,7 @@
 		<div class="row justify-content-center py-5">
 			<div class="col-md-12 text-center">
 				<h1 class="mb-4">
-					Descoperă LearningHub - portalul tău de micro-learning
+					Descoperă QuickMindshare - portalul tău de micro-learning
 				</h1>
 				<p class="lead">
 					Îmbinăm libertatea cunoașterii cu eficiența
@@ -33,9 +33,9 @@
 		</div>
 		<div class="row my-5">
 			<div class="col-md-8 mx-auto text-center">
-				<h2>Experiența LearningHub</h2>
+				<h2>Experiența QuickMindshare</h2>
 				<p class="lead">
-					La LearningHub, îți oferim nu doar cunoștințe, ci și o
+					La QuickMindshare, îți oferim nu doar cunoștințe, ci și o
 					experiență de învățare adaptată nevoilor tale. Platforma
 					noastră de micro-learning este concepută pentru a te ajuta
 					să înveți în cel mai eficient și plăcut mod posibil.
@@ -50,10 +50,10 @@
 		</div>
 		<div class="row mt-5">
 			<div class="col-md-12 mx-auto text-center">
-				<h2>Află mai multe despre LearningHub</h2>
+				<h2>Află mai multe despre QuickMindshare</h2>
 				<p class="lead">
 					Ești curios să afli mai multe despre cum funcționează
-					LearningHub și ce te așteaptă după ce te înregistrezi?
+					QuickMindshare și ce te așteaptă după ce te înregistrezi?
 					Vizitează secțiunea de Întrebări Frecvente sau
 					contactează-ne direct.
 				</p>
