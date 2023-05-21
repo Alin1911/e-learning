@@ -53,14 +53,14 @@
 						</div>
 					@endforeach
 				</div>
+				<h3 class="border-bottom border-primary mb-3 pb-2">
+					Discuții în care ești implicat
+				</h3>
 				<div
 					id="carouselExampleIndicators"
 					class="carousel slide mt-4"
 					data-ride="carousel"
 				>
-					<h3 class="border-bottom border-primary mb-3 pb-2">
-						Discuții în care ești implicat
-					</h3>
 					<div class="carousel-inner shadow bg-light p-2">
 						@foreach ($user->posts as $index => $post)
 							<div
