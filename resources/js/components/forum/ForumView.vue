@@ -77,6 +77,7 @@ export default {
 						response = await axios.get(`/forums/${this.forum_id}/topics`);
 						this.forum = response.data;
 						this.topics = response.data.topics;
+						this.showForm = false;
 					})
 			} catch (error) {
 				alert("A apărut o eroare la adaugarea subiectului!");

@@ -27,7 +27,11 @@ class ForumTopicController extends Controller
 			$id = $request->forum_id;
 		}
 		$forum = Forum::findOrFail($id);
-		$topic = new ForumTopic(['title' => $request->title]);
+		$topic = new ForumTopic();
+		$topic->title = $request->title;
+		if($request->has('description')){
+			$topic->description = $request->description;
+		}
 		$forum->topics()->save($topic);
 
 		return $topic;
