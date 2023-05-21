@@ -8,7 +8,7 @@
 					class="card m-2 shadow p-0"
 					style="width: 18rem; height: 300px"
 				>
-				<a href="/learn/course/{{ $course->id }}" style="text-decoration: none;">
+				<a href="/course/{{ $course->id }}" style="text-decoration: none;">
 					<div
 						class="p-0 card-body background-index"
 						style="
