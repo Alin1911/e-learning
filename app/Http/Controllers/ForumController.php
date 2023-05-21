@@ -11,11 +11,11 @@ class ForumController extends Controller
 	public function topics(Request $request, $id)
 	{
 		$forum = Forum::with(['topics', 'topics.posts'])->findOrFail($id);
-	
+
 		if ($request->wantsJson()) {
 			return json_encode($forum);
 		}
-	
+
 		return $forum;
 	}
 

@@ -32,7 +32,6 @@ Route::resource('/test', 'TestController');
 Route::resource('/lesson', 'LessonController');
 Route::resource('/question', 'CourseQuestionController');
 
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/forums', 'ForumController@index');

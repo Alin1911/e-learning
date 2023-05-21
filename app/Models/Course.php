@@ -14,7 +14,7 @@ class Course extends Model
 	{
 		return $this->hasMany(Forum::class);
 	}
-	
+
 	public function category()
 	{
 		return $this->hasOne(Category::class, 'id', 'category_id');

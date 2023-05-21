@@ -33,8 +33,9 @@
 		role="button"
 		data-slide="prev"
 	>
-		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		<span class="sr-only">Previous</span>
+		<span class="text-white">
+			<i class="fa-solid fa-angle-left"></i>
+		</span>
 	</a>
 	<a
 		class="carousel-control-next"
@@ -42,7 +43,8 @@
 		role="button"
 		data-slide="next"
 	>
-		<span class="carousel-control-next-icon" aria-hidden="true"></span>
-		<span class="sr-only">Next</span>
+		<span class="text-white">
+			<i class="fa-solid fa-angle-right"></i>
+		</span>
 	</a>
 </div>

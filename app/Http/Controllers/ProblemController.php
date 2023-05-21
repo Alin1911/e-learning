@@ -22,7 +22,6 @@ class ProblemController extends Controller
 		return view('problems.show', compact('problem'));
 	}
 
-
 	public function create()
 	{
 		return view('problems.create');
