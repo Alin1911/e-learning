@@ -16,11 +16,11 @@ class CourseController extends Controller
 {
 	public function index(Request $request)
 	{
-		$perPage = 10;
+		$perPage = 12;
 		if (! empty($request->input('search', ''))) {
 			$search = $request->input('search');
 		} else {
-			$courses = Course::all();
+			$courses = Course::paginate($perPage);
 			return view('course.index')->with('courses', $courses);
 		}
 		try {
@@ -59,7 +59,7 @@ class CourseController extends Controller
 			->orWhere('description', 'like', '%' . $search . '%')
 			->paginate(10);
 
-		return view('course.index')->with(['courses' => $courses, 'exercises' => $exercise, 'forums' => $forums]);
+		return view('course.index')->with(['courses' => $courses, 'exercises' => $exercise, 'forums' => $forums, 'search' => $search]);
 	}
 
 	public function create()

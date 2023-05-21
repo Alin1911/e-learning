@@ -23,7 +23,14 @@
             <form class="rounded-pill" action="{{ route('course.index') }}" method="GET">
                 <div class="input-group">
                     <div class="form-outline">
-                        <input id="form1" type="search" class="form-control border-white rounded-left-1" placeholder="Caută cursuri" name="search" style="min-width: 400px;">
+                        <input 
+                            id="form1"
+                            type="search"
+                            class="form-control border-white rounded-left-1"
+                            placeholder="Caută cursuri"
+                            name="search"
+                            @if(isset($search)) value="{{ $search }}" @endif
+                            style="min-width: 400px;">
                     </div>
                     <button class="btn  btn-primar bg-white rounded-right-1" type="submit"><i class="fas fa-search"></i></button>
                 </div>
