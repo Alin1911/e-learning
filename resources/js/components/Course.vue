@@ -56,8 +56,16 @@
 						</div> -->
 					</div>
 				</div>
+				<div v-if="course.lessons.length > 0" class="col-12">
+					<h5 class="mt-5 mb-3 pb-2 border-bottom border-primary">Module și lecții cuprinse în acest curs:</h5>
+					<div v-for="lesson in course.lessons" class="row">
+						<div class="col-12 p-3 shadow m-2">
+							{{ lesson.title }}
+						</div>
+					</div>
+				</div>
 				<button class="enroll-btn btn btn-primary mt-3" @click="enroll">
-					Inscrie-te
+					Înscrie-te acum la acest curs
 				</button>
 			</div>
 		</div>
