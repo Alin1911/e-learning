@@ -55,7 +55,9 @@
                 </div>
 
                 <div class="card-footer d-flex justify-content-between ">
-                    <a href="/problem/{{$problem->id}}/edit" class="btn btn-primary">Editează</a>
+                    @if(Auth::user()->hasRole('admin') || Auth::user()->id == $problem->user_id)
+                        <a href="/problem/{{$problem->id}}/edit" class="btn btn-primary">Editează</a>
+                    @endif
                     <a href="/problem" class="btn btn-secondary">Înapoi la lista de probleme</a>
                 </div>
             </div>
