@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ForumTopic;
+use App\Models\Forum;
 use Illuminate\Http\Request;
 
 class ForumTopicController extends Controller
@@ -22,9 +23,10 @@ class ForumTopicController extends Controller
 		$request->validate([
 			'title' => 'required|string|max:255',
 		]);
-
+		if($request->has('forum_id')){
+			$id = $request->forum_id;
+		}
 		$forum = Forum::findOrFail($id);
-
 		$topic = new ForumTopic(['title' => $request->title]);
 		$forum->topics()->save($topic);
 

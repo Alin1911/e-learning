@@ -5,62 +5,42 @@
 		</div>
 		<div class="col-12">
 			<div class="row">
-				<div
-					v-for="(lesson, index) in lessons"
-					:key="lesson.id"
-					class="col-12 m-1 p-2 shadow-sm"
-					:class="{
-						'bg-success': completedLessons.includes(lesson.id),
-						'bg-light': !completedLessons.includes(lesson.id),
-					}"
-				>
-					<div
-						class="d-flex justify-content-between align-items-center"
-					>
-						<div @click="openLesson(lesson)" class="w-100">
+				<div v-for="(lesson, index) in lessons" :key="lesson.id" class="col-12 m-1 p-2 shadow-sm" :class="{
+					'bg-success': completedLessons.includes(lesson.id),
+					'bg-light': !completedLessons.includes(lesson.id),
+				}">
+					<div class="d-flex justify-content-between align-items-center">
+						<div @click="openLesson(lesson)" class="w-100" style="cursor: pointer;">
 							<i class="fa-solid fa-person-chalkboard"></i>
 							Lecția - {{ index + 1 }}. {{ lesson.title }}
 							<span v-if="lesson.tests.length > 0">
 								<i class="fa-solid fa-caret-down"></i>
 							</span>
 						</div>
-						<button
-							class="btn btn-sm"
-							:class="{
-								'btn-success': completedLessons.includes(
-									lesson.id
-								),
-								'btn-secondary': !completedLessons.includes(
-									lesson.id
-								),
-							}"
-							@click="toggleLessonCompletion(lesson)"
-						>
+						<button class="btn btn-sm" :class="{
+							'btn-success': completedLessons.includes(
+								lesson.id
+							),
+							'btn-secondary': !completedLessons.includes(
+								lesson.id
+							),
+						}" @click="toggleLessonCompletion(lesson)">
 							{{
 								completedLessons.includes(lesson.id)
-									? "Parcursă"
-									: "Parcurge"
+								? "Parcursă"
+								: "Parcurge"
 							}}
 						</button>
 					</div>
 					<div v-if="openedLesson === lesson">
 						<div class="mt-2">
-							<div
-								class="bg-light col-12 m-1 p-2 shadow-sm"
-								v-for="test in lesson.tests"
-								:key="test.id"
-							>
-								<div
-									class="d-flex justify-content-between align-items-center"
-								>
+							<div class="bg-light col-12 m-1 p-2 shadow-sm" v-for="test in lesson.tests" :key="test.id">
+								<div class="d-flex justify-content-between align-items-center">
 									<div>
 										<i class="fa-solid fa-list-check"></i>
 										Test - {{ test.title }}
 									</div>
-									<a
-										:href="'/learn/test/' + test.id"
-										class="btn btn-sm btn-primary"
-									>
+									<a :href="'/learn/test/' + test.id" class="btn btn-sm btn-primary">
 										Verifica-ti cunostintele
 									</a>
 								</div>
@@ -68,36 +48,22 @@
 						</div>
 					</div>
 				</div>
-				<div
-					v-if="hasTests"
-					v-for="(test, index) in course.tests"
-					:key="test.id"
-					class="bg-light col-12 m-1 p-2 shadow-sm"
-				>
-					<div
-						class="d-flex justify-content-between align-items-center"
-					>
+				<div v-if="hasTests" v-for="(test, index) in course.tests" :key="test.id"
+					class="bg-light col-12 m-1 p-2 shadow-sm">
+					<div class="d-flex justify-content-between align-items-center">
 						<div>
 							<i class="fa-solid fa-list-check"></i>
 							Test de curs - {{ test.title }}
 						</div>
-						<a
-							:href="'/learn/test/' + test.id"
-							class="btn btn-sm btn-primary"
-						>
+						<a :href="'/learn/test/' + test.id" class="btn btn-sm btn-primary">
 							Verifica-ti cunostintele
 						</a>
 					</div>
 				</div>
 			</div>
-			<div
-				v-if="forum"
-				class="row d-flex justify-content-center p-3 align-items-center"
-			>
+			<div v-if="forum" class="row d-flex justify-content-center p-3 align-items-center">
 				<hr class="mb-0" />
-				<div
-					class="col-8 d-flex justify-content-between align-items-center p-3"
-				>
+				<div class="col-8 d-flex justify-content-between align-items-center p-3">
 					<h3 class="m-0">Hai să învățam împreuna</h3>
 					<a class="btn btn-primary" :href="'/forums/' + forum.id">
 						Întrebări și răspunsuri
