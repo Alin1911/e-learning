@@ -8,6 +8,7 @@
 					class="card m-2 shadow p-0"
 					style="width: 18rem; height: 300px"
 				>
+				<a href="/learn/course/{{ $course->id }}" style="text-decoration: none;">
 					<div
 						class="p-0 card-body background-index"
 						style="
@@ -24,6 +25,7 @@
 							{{ substr($course->description, 0, 50) }}
 						</p>
 					</div>
+				</a>
 					<ul class="list-group list-group-flush">
 						@if ($course->levle)
 							<li class="list-group-item">
