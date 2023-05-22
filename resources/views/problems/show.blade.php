@@ -17,9 +17,13 @@
                     <h5>Perechi:</h5>
                     @php $pairs = json_decode($problem->pairs, true) @endphp
                     <ul>
+                        @if(is_object(json_decode($pairs)))
                         @foreach($pairs as $pair)
                             <li>{{ $pair['key'] }}: {{ $pair['value'] }}</li>
                         @endforeach
+                        @else
+                        <li>{{ $pairs }}</li>
+                        @endif
                     </ul>
                     @endif
 
@@ -27,9 +31,13 @@
                     <h5>Rezultate:</h5>
                     @php $results = json_decode($problem->results, true) @endphp
                     <ul>
+                        @if(is_object(json_decode($results)))
                         @foreach($results as $result)
                             <li>{{ $result['key'] }}: {{ $result['value'] }}</li>
                         @endforeach
+                        @else
+                        <li>{{ $results }}</li>
+                        @endif
                     </ul>
                     @endif
 
@@ -55,8 +63,11 @@
                 </div>
 
                 <div class="card-footer d-flex justify-content-between ">
-                    @if(Auth::user()->hasRole('admin') || Auth::user()->id == $problem->user_id)
+                    @if(auth()->check() && ( Auth::user()->hasRole('admin') || Auth::user()->id == $problem->user_id))
+                    <div>
                         <a href="/problem/{{$problem->id}}/edit" class="btn btn-primary">Editează</a>
+                        <button class="btn btn-danger mx-2" onclick="delete1({{$problem->id}})">Șterge</button>
+                    </div>
                     @endif
                     <a href="/problem" class="btn btn-secondary">Înapoi la lista de probleme</a>
                 </div>
@@ -64,4 +75,18 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    function delete1(id) {
+            axios.delete('/problem/' + id)
+                .then(function(response) {
+                    window.location.href = '/problem';
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+    };
+</script>
 @endsection

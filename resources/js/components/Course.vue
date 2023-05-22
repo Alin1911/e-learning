@@ -3,7 +3,13 @@
 		<div class="container mb-3">
 			<div class="row g-0 d-flex justify-content-center">
 				<div v-if="course.image" class="col-md-8 mb-5">
-					<img :src="course.image" class="img-fluid rounded-start" alt="Course image" width="800" height="450" />
+					<img
+						:src="course.image"
+						class="img-fluid rounded-start"
+						alt="Course image"
+						width="800"
+						height="450"
+					/>
 				</div>
 				<div class="col-12">
 					<div class="card-body">
@@ -17,14 +23,29 @@
 							Description not available
 						</p>
 						<p class="card-text">
-							<small v-if="course.level ||
-								course.language ||
-								course.duration
-								" class="text-muted">
-								<span v-if="course.level" class="course-level me-2">Nivel: {{ course.level }}</span>
-								<span v-if="course.language" class="course-language me-2">Limba: {{ course.language
-								}}</span>
-								<span v-if="course.duration" class="course-duration">Durata: {{ course.duration }}</span>
+							<small
+								v-if="
+									course.level ||
+									course.language ||
+									course.duration
+								"
+								class="text-muted"
+							>
+								<span
+									v-if="course.level"
+									class="course-level me-2"
+									>Nivel: {{ course.level }}</span
+								>
+								<span
+									v-if="course.language"
+									class="course-language me-2"
+									>Limba: {{ course.language }}</span
+								>
+								<span
+									v-if="course.duration"
+									class="course-duration"
+									>Durata: {{ course.duration }}</span
+								>
 							</small>
 						</p>
 						<p v-if="course.category_id" class="card-text">
@@ -57,7 +78,9 @@
 					</div>
 				</div>
 				<div v-if="course.lessons.length > 0" class="col-12">
-					<h5 class="mt-5 mb-3 pb-2 border-bottom border-primary">Module și lecții cuprinse în acest curs:</h5>
+					<h5 class="mt-5 mb-3 pb-2 border-bottom border-primary">
+						Module și lecții cuprinse în acest curs:
+					</h5>
 					<div v-for="lesson in course.lessons" class="row">
 						<div class="col-12 p-3 shadow m-2">
 							{{ lesson.title }}
@@ -95,14 +118,18 @@ export default {
 						},
 					}
 				);
-
-				if (response.ok) {
+				if (response.status == 401) {
+					window.location.href = "/login";
+				} else if (response.ok) {
 					const data = await response.json();
 					console.log(data);
 					window.location.href = `/learn/course/${this.course.id}`;
 				} else {
 					const errorData = await response.json();
-					if (errorData.message == "User is already enrolled in this course") {
+					if (
+						errorData.message ==
+						"User is already enrolled in this course"
+					) {
 						window.location.href = `/learn/course/${this.course.id}`;
 					}
 				}

@@ -3,6 +3,7 @@
 		<h2 v-if="!editMode">Adaugă exercițiu</h2>
 		<h2 v-else>Editare exercițiu</h2>
 		<form @submit.prevent="submitForm">
+			<input type="hidden" name="_token" :value="csrf" />
 			<div>
 				<label for="title">Titlu:</label>
 				<input
@@ -63,6 +64,7 @@ export default {
 	},
 	data() {
 		return {
+			csrf: document.querySelector('meta[name="csrf-token"]').content,
 			exercise: { ...this.initialExercise },
 		};
 	},

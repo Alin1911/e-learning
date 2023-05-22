@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Problem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProblemController extends Controller
 {
@@ -24,24 +25,57 @@ class ProblemController extends Controller
 
 	public function create()
 	{
+		if (!auth()->check()) {
+			return redirect()->route('login');
+		}
+
 		return view('problems.create');
 	}
 
 	public function store(Request $request)
 	{
 		// Validarea datelor din formular
+		$user = Auth::user();
+		if (! auth()->check()) {
+			redirect()->route('login');
+			abort(403);
+		}
+		if(!$user->hasRole('admin')) {
+			abort(403);
+		}
 		$request->validate([
 			'title' => 'required',
 			'description' => 'required',
-			// Adăugați aici și alte câmpuri necesare pentru validare
 		]);
 
 		// Crearea problemei
-		$problem = new Problem($request->all());
+		$problem = new Problem();
+		$problem->title = $request->title;
+		$problem->description = $request->description;
+		$problem->user_id = $user->id;
+		if($request->has('pairs')) {
+			$problem->pairs = json_encode($request->pairs);
+		}
+		if($request->has('results')) {
+			$problem->results = json_encode($request->results);
+		}
+		if($request->has('restrictions')) {
+			$problem->restrictions = $request->restrictions;
+		}
+		if($request->has('example')) {
+			$problem->example = $request->example;
+		}
+		if($request->has('hints')) {
+			$problem->hints = $request->hints;
+		}
+		if($request->has('similar_problems')) {
+			$problem->similar_problems = $request->similar_problems;
+		}
+
 		$problem->save();
 
 		// Redirecționarea către pagina de probleme cu mesaj de succes
-		return redirect()->route('problems.index')->with('success', 'Problem created successfully');
+		return redirect('/problem');
 	}
 
 	public function edit($id)
@@ -64,13 +98,13 @@ class ProblemController extends Controller
 		$problem->update($request->all());
 
 		// Redirecționarea către pagina de probleme cu mesaj de succes
-		return redirect()->route('problems.index')->with('success', 'Problem updated successfully');
+		return redirect('/problem');
 	}
 
 	public function destroy($id)
 	{
 		$problem = Problem::find($id);
 		$problem->delete();
-		return redirect()->route('problems.index')->with('success', 'Problem deleted successfully');
+		return 204;
 	}
 }
