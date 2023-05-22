@@ -34,6 +34,9 @@ class ForumPostController extends Controller
 	}
 	public function store(Request $request, $id)
 	{
+		if(!auth()->check()) {
+			abort(401, 'Unauthorized');
+		}
 		$user = Auth::user();
 		$request->validate([
 			'content' => 'required|string',
