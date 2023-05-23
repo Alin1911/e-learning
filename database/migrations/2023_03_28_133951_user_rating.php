@@ -10,15 +10,19 @@ return new class extends Migration {
 	 */
 	public function up(): void
 	{
-		Schema::create('user_ratings', function (Blueprint $table) {
-			$table->id();
-			$table->unsignedBigInteger('user_id');
-			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-			$table->decimal('activity_rating', 3, 2)->default(0);
-			$table->decimal('review_rating', 3, 2)->default(0);
-			$table->decimal('post_rating', 3, 2)->default(0);
-			$table->timestamps();
-		});
+        Schema::dropIfExists('user_ratings');
+
+        Schema::create('user_activity', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->string('activity_model');
+            $table->unsignedBigInteger('activity_id');
+            $table->decimal('rating', 3, 2)->default(0.00);
+            $table->text('review_text')->nullable();
+            $table->timestamps();
+
+            $table->index('user_id');
+        });
 	}
 
 	/**
