@@ -48,7 +48,6 @@ class ForumPostController extends Controller
 
 		$post = new ForumPost();
 		$post->content = $request->content;
-		$post->likes = 0;
 		$post->forum_topic_id = $topic->id;
 		$post->user()->associate($user);
 		$post->save();
