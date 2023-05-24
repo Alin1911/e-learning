@@ -93,4 +93,16 @@ class User extends Authenticatable
 	{
 		return $this->hasMany(ForumPost::class);
 	}
+	public function topics()
+	{
+		return $this->hasMany(ForumTopic::class);
+	}
+	public function activities()
+	{
+		return $this->hasMany(UserActivity::class);
+	}
+	public function likes($id)
+	{
+		return $this->activities()->where('activity_id', $id)->where('activity_model', 'App\Models\ForumPost')->get();
+	}
 }

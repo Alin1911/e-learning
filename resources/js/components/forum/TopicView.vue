@@ -19,9 +19,16 @@
 					<div class="col-2 bg-light text-dark px-2">
 						<p><i class="fa-regular fa-user"></i> {{ post.user.name }}</p>
 						<p>
-							<button class="btn btn-primary" :disabled="!post.like">
+							{{ post.likes }} aprecieri
+						</p>
+						<p class="d-flex align-items-center">
+							<button v-if="!post.liked" class="btn btn-outline-primary" @click="addLike(post)">
 								<i class="fa-regular fa-thumbs-up" aria-hidden="true"></i>
-								{{ post.likes }} aprecieri
+								îmi place
+							</button>
+							<button v-else class="btn btn-primary" @click="addLike(post)">
+								<i class="fa-regular fa-thumbs-up" aria-hidden="true"></i>
+								plăcut
 							</button>
 						</p>
 						<p v-if="post.created_at">
@@ -56,6 +63,19 @@ export default {
 			const date = new Date(dateString);
 			return `${date.getDate()}.${date.getMonth() + 1
 				}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+		},
+		addLike(post) {
+			var token = document.head.querySelector('meta[name="csrf-token"]');
+			axios.defaults.headers.common["X-CSRF-TOKEN"] = token.content;
+			let response = axios.post(`/posts/${post.id}/likes`)
+				.then((response) => {
+					post.likes = response.data.likes;
+					post.liked = response.data.liked;
+				}).catch((error) => {
+					if (error.response.status === 401) {
+						window.location.href = "/login";
+					}
+				});
 		},
 	},
 	async created() {

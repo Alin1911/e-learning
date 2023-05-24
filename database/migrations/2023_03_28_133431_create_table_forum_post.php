@@ -17,7 +17,6 @@ return new class extends Migration {
 			$table->unsignedBigInteger('forum_topic_id ');
 			$table->foreign('forum_topic_id ')->references('id')->on('forum_topics')->onDelete('cascade');
 			$table->text('content');
-			$table->integer('likes')->default(0);
 			$table->timestamps();
 		});
 	}

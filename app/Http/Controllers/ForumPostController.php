@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ForumPost;
 use App\Models\ForumTopic;
+use App\Models\UserActivity;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -58,6 +60,28 @@ class ForumPostController extends Controller
 	{
 		$forum_post = ForumPost::find($id);
 		return view('forum_post.edit', compact('forum_post'));
+	}
+
+	public function likes($id)
+	{
+		if (!auth()->check()){
+			abort(401, 'Unauthorized');
+		}
+		$user = Auth::user();
+		$user->load('activities');
+		$post = ForumPost::findOrFail($id);
+		$is_liked = $user->likes($id);
+		if ($is_liked->isNotEmpty()) {
+			$is_liked->first()->delete();
+		} else {
+			$userActivity = new UserActivity();
+			$userActivity->user_id = $user->id;
+			$userActivity->activity_id = $post->id;
+			$userActivity->activity_model = 'App\Models\ForumPost';
+			$userActivity->rating = 1;
+			$userActivity->save();
+		}
+		return $post;
 	}
 
 }

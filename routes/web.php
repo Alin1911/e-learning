@@ -41,5 +41,5 @@ Route::get('/forums/{id}/topics', 'ForumController@topics');
 Route::get('/topics/{id}', 'ForumTopicController@show');
 Route::post('/forums/{id}/topics', 'ForumTopicController@store');
 Route::get('/topics/{id}/posts', 'ForumTopicController@posts');
-
+Route::post('/posts/{id}/likes', 'ForumPostController@likes');
 Route::post('/topics/{id}/posts', 'ForumPostController@store');

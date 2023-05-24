@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ForumPost extends Model
 {
 	use HasFactory;
-	protected $fillable = ['content', 'likes'];
+	protected $fillable = ['content'];
+	protected $appends = ['likes', 'liked'];
 
 	public function topic()
 	{
@@ -18,5 +19,25 @@ class ForumPost extends Model
 	public function user()
 	{
 		return $this->belongsTo(User::class);
+	}
+
+	public function  getLikesAttribute()
+	{
+		$likes = UserActivity::where('activity_model', 'App\Models\ForumPost')
+			->where('activity_id', $this->id)
+			->count();
+		return $likes;
+	}
+
+	public function  getLikedAttribute()
+	{
+		if(!auth()->check()){
+			return false;
+		}
+		$liked = UserActivity::where('activity_model', 'App\Models\ForumPost')
+			->where('activity_id', $this->id)
+			->where('user_id', auth()->user()->id)
+			->exists();
+		return $liked;
 	}
 }
