@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\ForumPost;
 use App\Models\ForumTopic;
 use App\Models\UserActivity;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -63,7 +62,7 @@ class ForumPostController extends Controller
 
 	public function likes($id)
 	{
-		if (!auth()->check()){
+		if (!auth()->check()) {
 			abort(401, 'Unauthorized');
 		}
 		$user = Auth::user();

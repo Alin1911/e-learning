@@ -21,7 +21,7 @@ class ForumPost extends Model
 		return $this->belongsTo(User::class);
 	}
 
-	public function  getLikesAttribute()
+	public function getLikesAttribute()
 	{
 		$likes = UserActivity::where('activity_model', 'App\Models\ForumPost')
 			->where('activity_id', $this->id)
@@ -29,9 +29,9 @@ class ForumPost extends Model
 		return $likes;
 	}
 
-	public function  getLikedAttribute()
+	public function getLikedAttribute()
 	{
-		if(!auth()->check()){
+		if(!auth()->check()) {
 			return false;
 		}
 		$liked = UserActivity::where('activity_model', 'App\Models\ForumPost')
