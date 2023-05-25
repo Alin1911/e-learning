@@ -113,4 +113,19 @@ class User extends Authenticatable
 			->count();
 		return $likes;
 	}
+
+	public function likesCount()
+	{
+		$post = $this->posts()->pluck('id');
+		$likes = UserActivity::where('activity_model', 'App\Models\ForumPost')
+			->whereIn('activity_id', $post)
+			->count();
+		return $likes;
+	}
+
+	public function points()
+	{
+		$point = $this->likesCount() * 10;
+		return $point;
+	}
 }
