@@ -105,4 +105,12 @@ class User extends Authenticatable
 	{
 		return $this->activities()->where('activity_id', $id)->where('activity_model', 'App\Models\ForumPost')->get();
 	}
+
+	public function getLikesAttribute()
+	{
+		$likes = UserActivity::where('activity_model', 'App\Models\ForumPost')
+			->where('activity_id', $this->id)
+			->count();
+		return $likes;
+	}
 }
