@@ -13,7 +13,7 @@ return new class extends Migration {
 		Schema::table('lessons', function (Blueprint $table) {
 			$table->text('content')->nullable()->after('description');
 			$table->string('video_url')->nullable()->after('content');
-			$table->integer('duration')->nullable()->after('video_url');
+			$table->string('duration')->nullable()->after('video_url');
 			$table->string('file')->nullable()->after('duration');
 			$table->boolean('is_published')->default(false)->after('file');
 		});

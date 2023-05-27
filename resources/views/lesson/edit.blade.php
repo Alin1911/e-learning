@@ -52,22 +52,34 @@
 {{ $lesson->content }}</textarea
 						>
 					</div>
-
-					<div class="form-group">
-						<label for="video_url">Video URL</label>
-						<input
-							type="text"
-							class="form-control"
-							id="video_url"
-							name="video_url"
-							value="{{ $lesson->video_url }}"
-						/>
+					<div class="row my-2">
+						<div class="form-group col-9">
+							<label for="video">Încarcă un nou video</label>
+							<input
+								id="video"
+								type="file"
+								name="video"
+								class="form-control"
+							/>
+						</div>
+						<div class="form-group col-3 mt-3">
+							@if (! empty($lesson->video_url))
+								<video controls>
+									<source
+										src="{{ Storage::url($lesson->video_url) }}"
+										type="video/mp4"
+									/>
+									Browser-ul tău nu suportă elementul video.
+								</video>
+							@else
+								<p>Nu există video pentru această lecție.</p>
+							@endif
+						</div>
 					</div>
-
 					<div class="form-group">
 						<label for="duration">Duration</label>
 						<input
-							type="number"
+							type="text"
 							class="form-control"
 							id="duration"
 							name="duration"

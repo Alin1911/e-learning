@@ -13,13 +13,25 @@
 					</div>
 				@endif
 
-				@if ($lesson->video_url)
-					<div class="embed-responsive embed-responsive-16by9">
-						<iframe
-							class="embed-responsive-item"
-							src="{{ $lesson->video_url }}"
-							allowfullscreen
-						></iframe>
+				@if (! empty($lesson->video_url))
+					<div class="row justify-content-center">
+						<div class="col-md-8">
+							<div
+								class="embed-responsive embed-responsive-16by9"
+							>
+								<video
+									class="embed-responsive-item"
+									controls
+									style="max-width: 100%; height: auto"
+								>
+									<source
+										src="{{ $lesson->video_url }}"
+										type="video/mp4"
+									/>
+									Browser-ul tău nu suportă elementul video.
+								</video>
+							</div>
+						</div>
 					</div>
 				@endif
 
@@ -43,6 +55,35 @@
 					</div>
 				@endif
 			</div>
+			<button
+				class="btn btn-success mt-3"
+				onclick="finishLesson({{ $lesson->id }})"
+			>
+				Completează lecția
+			</button>
 		</div>
 	</div>
+@endsection
+
+@section("scripts")
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+		function finishLesson(lessonId) {
+			var token = document.head.querySelector(
+				'meta[name="csrf-token"]'
+			).content;
+			axios.defaults.headers.common["X-CSRF-TOKEN"] = token;
+			axios
+				.post("/lesson/finish", {
+					lessonId: lessonId,
+				})
+				.then(function (response) {
+					console.log(response);
+					window.location.href = "/course/" + response.data.courseId;
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+		}
+	</script>
 @endsection

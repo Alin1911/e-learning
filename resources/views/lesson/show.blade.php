@@ -6,11 +6,23 @@
 			<div class="col-12">
 				<h1>{{ $lesson->title }}</h1>
 				<p>ID: {{ $lesson->id }}</p>
-				<p>Course: {{ $lesson->course->title }}</p>
-				<p>Description: {{ $lesson->description }}</p>
-				<p>Content: {!! $lesson->content !!}</p>
-				<p>Video URL: {{ $lesson->video_url }}</p>
-				<p>Duration: {{ $lesson->duration }}</p>
+				<p><h4 class="border-bottom">Course:</h4> {{ $lesson->course->title }}</p>
+				<p><h4 class="border-bottom">Description:</h4>{!! nl2br(e($lesson->description)) !!}</p>
+				<p><h4 class="border-bottom">Content:</h4> {!! nl2br(e($lesson->content)) !!}</p>
+				<p class="border-top pt-2">Video URL: {{ $lesson->video_url }}</p>
+				<div class="row justify-content-center">
+					<div class="col-md-8">
+						@if (!empty($lesson->video_url))
+							<div class="embed-responsive embed-responsive-16by9">
+								<video class="embed-responsive-item" controls style="max-width: 100%; height: auto;">
+									<source src="{{ $lesson->video_url }}" type="video/mp4">
+									Browser-ul tău nu suportă elementul video.
+								</video>
+							</div>
+						@endif
+					</div>
+				</div>
+				<p class="border-top pt-2">Duration: {{ $lesson->duration }}</p>
 				<p>File: {{ $lesson->file }}</p>
 				<p>Is Published: {{ $lesson->is_published ? "Yes" : "No" }}</p>
 				<p>Created at: {{ $lesson->created_at }}</p>

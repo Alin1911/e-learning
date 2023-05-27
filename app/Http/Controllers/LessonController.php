@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class LessonController extends Controller
 {
@@ -88,12 +89,6 @@ class LessonController extends Controller
 	 */
 	public function update(Request $request, string $id)
 	{
-		$request->validate([
-			'course_id' => 'required',
-			'title' => 'required',
-			'description' => 'required',
-			'video_url' => 'required',
-		]);
 		$lesson = Lesson::findOrFail($id);
 		if ($request->has('course_id')) {
 			$lesson->course_id = $request->input('course_id');
@@ -104,10 +99,32 @@ class LessonController extends Controller
 		if ($request->has('description')) {
 			$lesson->description = $request->input('description');
 		}
-		if ($request->has('video_url')) {
-			$lesson->video_url = $request->input('video_url');
+		if($request->has('content')) {
+			$lesson->content = $request->input('content');
+		}
+		if($request->has('duration')) {
+			$lesson->duration = $request->input('duration');
+		}
+		if($request->has('is_published')) {
+			$lesson->is_published = $request->input('is_published');
+		}
+		if($request->has('order')) {
+			$lesson->order = $request->input('order');
+		}
+		if(isset($request->video)) {
+			if(isset($lesson->video_url)) {
+				$video = substr($lesson->video_url, 22);
+				Storage::disk('public')->delete($video);
+			}
+			$video = $request->file('video')->store('lessons/videos', 'public');
+			$lesson->video_url = asset('storage/' . $video);
+		}
+		if(isset($request->file)) {
+			$file = $request->file('file')->store('files', 'public/lessons');
+			$lesson->file .= ',' . asset('storage/' . substr($file, 7));
 		}
 		$lesson->save();
+		return redirect('/lesson/'. $lesson->id);
 	}
 
 	/**
