@@ -9,7 +9,7 @@
 				</div>
 				@if (! empty($lesson->description))
 					<div>
-						<p>{{ $lesson->description }}</p>
+						<p>{!! nl2br(e($lesson->description)) !!}</p>
 					</div>
 				@endif
 
@@ -42,17 +42,6 @@
 						</a>
 					</div>
 				@endif
-
-				<hr />
-				<h4>Teste pentru această lecție:</h4>
-				<div class="row">
-					@foreach ($lesson->tests as $test)
-						<div class="col-12">
-							<strong>{{ $test->title }}</strong>
-							- {{ $test->description }}
-						</div>
-					@endforeach
-				</div>
 			</div>
 		</div>
 	</div>
