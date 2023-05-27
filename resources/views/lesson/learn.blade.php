@@ -66,7 +66,7 @@
 @endsection
 
 @section("scripts")
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script>
 		function finishLesson(lessonId) {
 			var token = document.head.querySelector(

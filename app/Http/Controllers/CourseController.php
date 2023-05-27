@@ -16,6 +16,7 @@ class CourseController extends Controller
 {
 	public function index(Request $request)
 	{
+		$segmentLength = 3;
 		$perPage = 12;
 		if (! empty($request->input('search', ''))) {
 			$search = $request->input('search');
@@ -37,7 +38,9 @@ class CourseController extends Controller
 					->whereRaw("MATCH (title, description, keywords, language, author, duration, level) AGAINST (? IN NATURAL LANGUAGE MODE)", [$searchTerm])
 					->get()->toArray();
 			}
-			$courses = Course::whereIn('id', array_column($results, 'course_id'))->paginate($perPage);
+			array_column($results, 'course_id');
+			$results = CourseMetaTag::countSegmentOccurrences($request->input('search', ''), $segmentLength);
+			$courses = Course::whereIn('id', $results)->paginate($perPage);
 		} catch (\Exception $e) {
 			$courses = Course::search($search)->paginate(10);
 		} finally {
@@ -98,7 +101,7 @@ class CourseController extends Controller
 		$metaTag->title = $course->title;
 		$metaTag->description = $course->description;
 		$metaTag->price = $course->price;
-		$metaTag->keywords = implode(', ', array_slice(explode(' ', $course->description), 0, 10)); // primele 10 cuvinte din descriere
+		$metaTag->keywords = implode(', ', array_slice(explode(' ', $course->description), 0, 10));
 		$metaTag->language = $course->language;
 		$metaTag->author = $user->name;
 		$metaTag->publish_date = date('Y-m-d');
