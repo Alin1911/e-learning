@@ -135,7 +135,7 @@ class CourseController extends Controller
 			return view('course.show')->with(['course' => $course]);
 		}
 		$userId = Auth::user()->id;
-		$completedLessons = $course->completedLessonsForUser($userId);
+		$completedLessons = $course->completedLessonsForUser($userId)->pluck('id')->toArray();
 		$course->totalPoints = $course->totalPoints();
 		$course->userPoints = $course->getUserPoints();
 		$course->minimalPoints = $course->minimalPoints();

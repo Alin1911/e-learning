@@ -33,13 +33,8 @@ Route::resource('/lesson', 'LessonController');
 Route::resource('/question', 'CourseQuestionController');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::post('/lesson/finish', 'LessonController@finish');
+Route::post('/test/{id}/check', 'TestController@check');
 Route::get('/forums', 'ForumController@index');
 Route::get('/forums/{id}', 'ForumController@show');
 Route::get('/forums/{id}/topics', 'ForumController@topics');
-
-Route::get('/topics/{id}', 'ForumTopicController@show');
-Route::post('/forums/{id}/topics', 'ForumTopicController@store');
-Route::get('/topics/{id}/posts', 'ForumTopicController@posts');
-Route::post('/posts/{id}/likes', 'ForumPostController@likes');
-Route::post('/topics/{id}/posts', 'ForumPostController@store');

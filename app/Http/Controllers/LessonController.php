@@ -142,4 +142,16 @@ class LessonController extends Controller
 		$lesson->load('course', 'course.user', 'tests');
 		return view('lesson.learn')->with(['lesson' => $lesson]);
 	}
+
+	public function finish(Request $request)
+	{
+		$request->validate([
+			'lessonId' => 'required',
+		]);
+		$lesson = Lesson::findOrFail($request->input('lessonId'));
+		$user = Auth::user();
+		$userActivity = $lesson->addPointsForUser($user->id);
+
+		return response()->json($userActivity, 200);
+	}
 }

@@ -14,6 +14,11 @@ class Exercise extends Model
 		return $this->belongsTo(Course::class);
 	}
 
+	public function tests()
+	{
+		return $this->belongsToMany(Test::class);
+	}
+
 	public function options()
 	{
 		return $this->hasMany(ExerciseOption::class);
@@ -31,7 +36,7 @@ class Exercise extends Model
 
 	public function checkMultipleChoiceMultipleAnswers($answers)
 	{
-		$correctOptions = $this->options()->where('correct', true)->pluck('id')->toArray();
+		$correctOptions = $this->options()->where('is_correct', true)->pluck('id')->toArray();
 		sort($correctOptions);
 		sort($answers);
 		return $correctOptions === $answers;
@@ -39,7 +44,7 @@ class Exercise extends Model
 
 	public function checkMultipleChoiceSingleAnswer($answer)
 	{
-		$correctOption = $this->options()->where('correct', true)->first();
+		$correctOption = $this->options()->where('is_correct', true)->first();
 		return $correctOption->id === $answer;
 	}
 

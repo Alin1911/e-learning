@@ -119,23 +119,22 @@ export default {
 					})
 				);
 
-				const response = await axios.post(
-					`/test/${this.test.id}/check`,
-					answersArray,
-					{
+				const response = await axios
+					.post(`/test/${this.test.id}/check`, answersArray, {
 						headers: {
 							"Content-Type": "application/json",
 						},
-					}
-				);
-
-				if (response.status === 200) {
-					// Handle success response
-				} else {
-					// Handle error response
-				}
+					})
+					.then((response) => {
+						alert(response.data.result.review_text);
+						window.location.href =
+							"/learn/course/" + response.data.course_id;
+					})
+					.catch((error) => {
+						alert(error);
+					});
 			} catch (error) {
-				// Handle error
+				console.error("Error submitting test:", error);
 			}
 		},
 

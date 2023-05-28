@@ -4,7 +4,7 @@
 			<h2>{{ course.title }}</h2>
 		</div>
 		<div class="col-12">
-			<div class="row">
+			<div class="row mb-3">
 				<div class="progress">
 					<div
 						class="progress-bar progress-bar-striped progress-bar-animated"
@@ -25,7 +25,8 @@
 					:key="lesson.id"
 					class="col-12 m-1 p-2 shadow-sm"
 					:class="{
-						'bg-success': completedLessons.includes(lesson.id),
+						'bg-success text-white rounded':
+							completedLessons.includes(lesson.id),
 						'bg-light': !completedLessons.includes(lesson.id),
 					}"
 				>
@@ -46,10 +47,10 @@
 						<button
 							class="btn btn-sm"
 							:class="{
-								'btn-success': completedLessons.includes(
+								'btn-light': completedLessons.includes(
 									lesson.id
 								),
-								'btn-secondary': !completedLessons.includes(
+								'btn-success': !completedLessons.includes(
 									lesson.id
 								),
 							}"
@@ -63,26 +64,24 @@
 						</button>
 					</div>
 					<div v-if="openedLesson === lesson">
-						<div class="mt-2">
+						<div
+							class="bg-light col-12 mt-2 m-1 p-2 shadow-sm"
+							v-for="test in lesson.tests"
+							:key="test.id"
+						>
 							<div
-								class="bg-light col-12 m-1 p-2 shadow-sm"
-								v-for="test in lesson.tests"
-								:key="test.id"
+								class="d-flex justify-content-between align-items-center"
 							>
-								<div
-									class="d-flex justify-content-between align-items-center"
-								>
-									<div>
-										<i class="fa-solid fa-list-check"></i>
-										Test - {{ test.title }}
-									</div>
-									<a
-										:href="'/learn/test/' + test.id"
-										class="btn btn-sm btn-primary"
-									>
-										Verifica-ti cunostintele
-									</a>
+								<div>
+									<i class="fa-solid fa-list-check"></i>
+									Test - {{ test.title }}
 								</div>
+								<a
+									:href="'/learn/test/' + test.id"
+									class="btn btn-sm btn-primary"
+								>
+									Verifica-ti cunostintele
+								</a>
 							</div>
 						</div>
 					</div>

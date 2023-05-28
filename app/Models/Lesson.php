@@ -42,9 +42,9 @@ class Lesson extends Model
 			$userPoints->user_id = $userId;
 			$userPoints->activity_model = 'App\Models\Lesson';
 			$userPoints->activity_id = $this->id;
+			$userPoints->rating = $this->points();
 			$userPoints->review_text = 'Lesson completed';
 		}
-		$user->points += $this->points();
 		$userPoints->save();
 		return $userPoints;
 	}

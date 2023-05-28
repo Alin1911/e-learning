@@ -68,6 +68,7 @@
 @section("scripts")
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script>
+		var course_id = {{ $lesson->course_id }};
 		function finishLesson(lessonId) {
 			var token = document.head.querySelector(
 				'meta[name="csrf-token"]'
@@ -79,7 +80,7 @@
 				})
 				.then(function (response) {
 					console.log(response);
-					window.location.href = "/course/" + response.data.courseId;
+					window.location.href = "/learn/course/" + course_id;
 				})
 				.catch(function (error) {
 					console.log(error);

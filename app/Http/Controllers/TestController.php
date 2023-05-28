@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Exercise;
 use App\Models\Test;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -81,5 +82,36 @@ class TestController extends Controller
 			return json_encode(['test' => $test]);
 		}
 		return view('test.learn')->with(['test' => $test]);
+	}
+
+	public function check($id, Request $request)
+	{
+		$test = Test::find($id);
+		$user = Auth::user();
+		$points  = 0;
+		foreach($request->all() as $exercise) {
+			$e = Exercise::find($exercise['exercise_id']);
+			if($e->exercise_type  == 'multiple_choice_single_answer') {
+				$answer = $e->checkMultipleChoiceSingleAnswer($exercise['selected_answers'][0]);
+				if($answer) {
+					$points += $e->points;
+				}
+			}
+			if($e->exercise_type  == 'multiple_choice_multiple_answers') {
+				$answer = $e->checkMultipleChoiceMultipleAnswers($exercise['selected_answers']);
+				if($answer) {
+					$points += $e->points;
+				}
+
+			}
+		}
+		$total = $test->exercises->sum('points');
+		$result = $test->setUserAcivity($points, $total);
+		if(isset($test->lesson)) {
+			$cours_id = $test->lesson->course->id;
+		} else {
+			$cours_id = $test->course->id;
+		}
+		return response()->json(['result' => $result, 'course_id' => $cours_id], 200);
 	}
 }

@@ -69,7 +69,7 @@ class Course extends Model
 	{
 		$completedLessons = UserActivity::where('activity_model', 'App\Models\Lesson')
 			->where('user_id', $userId)
-			->where('activity_id', 'IN', $this->lessons->pluck('id'))
+			->whereIn('activity_id', $this->lessons->pluck('id'))
 			->pluck('activity_id');
 		$completedCourseLessons = Lesson::whereIn('id', $completedLessons)->where('course_id', $this->id)->get();
 		return $completedCourseLessons;
@@ -133,21 +133,21 @@ class Course extends Model
 			->where('activity_id', $this->id)
 			->where('user_id', $user->id)
 			->sum('rating');
-		$coursesId = $this->courses?->pluck('id');
+		$lessonIds = $this->lessons->pluck('id');
 		$userPoints += UserActivity::where('activity_model', 'App\Models\Lesson')
 			->where('user_id', $user->id)
-			->where('activity_id', 'IN', $coursesId)
+			->whereIn('activity_id', $lessonIds)
 			->sum('rating');
 		$testIds = $this->tests?->pluck('id');
 		$userPoints += UserActivity::where('activity_model', 'App\Models\Test')
 			->where('user_id', $user->id)
-			->where('activity_id', 'IN', $testIds)
+			->whereIn('activity_id', $testIds)
 			->sum('rating');
 		foreach ($this->lessons as $lesson) {
 			$testIds = $lesson->tests?->pluck('id');
 			$userPoints += UserActivity::where('activity_model', 'App\Models\Test')
 				->where('user_id', $user->id)
-				->where('activity_id', 'IN', $testIds)
+				->whereIn('activity_id', $testIds)
 				->sum('rating');
 		}
 		return $userPoints;
