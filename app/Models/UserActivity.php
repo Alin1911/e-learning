@@ -11,6 +11,11 @@ class UserActivity extends Model
 
 	protected $table = 'user_activity';
 
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
+
 	public function getLike($id, $type)
 	{
 		$user = auth()->user();
@@ -22,10 +27,4 @@ class UserActivity extends Model
 			->where('activity_model', $type)
 			->get();
 	}
-
-	public function user()
-	{
-		return $this->belongsTo(User::class);
-	}
-
 }

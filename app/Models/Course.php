@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +13,6 @@ class Course extends Model
 	{
 		return $this->hasMany(Forum::class);
 	}
-
 	public function category()
 	{
 		return $this->hasOne(Category::class, 'id', 'category_id');
@@ -47,24 +45,6 @@ class Course extends Model
 	{
 		return $this->belongsTo(User::class);
 	}
-	public function scopeSearch(Builder $query, string $searchTerm)
-	{
-		return $query->where(function (Builder $query) use ($searchTerm) {
-			$query->where('title', 'LIKE', '%' . $searchTerm . '%')
-				->orWhere('description', 'LIKE', '%' . $searchTerm . '%')
-				->orWhereHas('metaTag', function (Builder $query) use ($searchTerm) {
-					$query->where('keywords', 'LIKE', '%' . $searchTerm . '%')
-						->orWhere('description', 'LIKE', '%' . $searchTerm . '%')
-						->orWhere('title', 'LIKE', '%' . $searchTerm . '%')
-						->orWhere('author', 'LIKE', '%' . $searchTerm . '%')
-						->orWhere('language', 'LIKE', '%' . $searchTerm . '%')
-						->orWhere('level', 'LIKE', '%' . $searchTerm . '%')
-						->orWhere('duration', 'LIKE', '%' . $searchTerm . '%')
-						->orWhere('publish_date', 'LIKE', '%' . $searchTerm . '%')
-						->orWhere('price', 'LIKE', '%' . $searchTerm . '%');
-				});
-		});
-	}
 	public function completedLessonsForUser(int $userId)
 	{
 		$completedLessons = UserActivity::where('activity_model', 'App\Models\Lesson')
@@ -75,7 +55,6 @@ class Course extends Model
 		return $completedCourseLessons;
 
 	}
-
 	public function completedTestsForUser(int $userId)
 	{
 		$ids = [];
@@ -92,12 +71,10 @@ class Course extends Model
 		$completedCourseTests = Test::whereIn('id', $completedTests)->where('course_id', $this->id)->get();
 		return $completedCourseTests;
 	}
-
 	public function metaTag()
 	{
 		return $this->hasOne(CourseMetaTag::class);
 	}
-
 	public function addPointsForUser(int $userId)
 	{
 		$userPoints = UserActivity::where('activity_model', 'App\Models\Course')
@@ -133,7 +110,6 @@ class Course extends Model
 		}
 		return $totalPoint;
 	}
-
 	public function minimalPoints() : int
 	{
 		$totalPoint = $this->totalPoints();
@@ -142,7 +118,6 @@ class Course extends Model
 		}
 		return $totalPoint * 0.6;
 	}
-
 	public function getUserPoints() : int
 	{
 		$user = auth()->user();
@@ -169,5 +144,4 @@ class Course extends Model
 		}
 		return $userPoints;
 	}
-
 }
