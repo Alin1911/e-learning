@@ -76,6 +76,23 @@ class Course extends Model
 
 	}
 
+	public function completedTestsForUser(int $userId)
+	{
+		$ids = [];
+		foreach ($this->lessons as $lesson) {
+			foreach ($lesson->tests as $test) {
+				$ids[] = $test->id;
+			}
+		}
+		$ids = array_merge($ids, $this->tests->pluck('id')->toArray());
+		$completedTests = UserActivity::where('activity_model', 'App\Models\Test')
+			->where('user_id', $userId)
+			->whereIn('activity_id', $ids)
+			->pluck('activity_id');
+		$completedCourseTests = Test::whereIn('id', $completedTests)->where('course_id', $this->id)->get();
+		return $completedCourseTests;
+	}
+
 	public function metaTag()
 	{
 		return $this->hasOne(CourseMetaTag::class);

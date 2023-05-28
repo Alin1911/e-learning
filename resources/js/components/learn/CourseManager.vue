@@ -5,6 +5,9 @@
 		</div>
 		<div class="col-12">
 			<div class="row mb-3">
+				<div>
+					<h5>Progresul tău</h5>
+				</div>
 				<div class="progress">
 					<div
 						class="progress-bar progress-bar-striped progress-bar-animated"
@@ -20,14 +23,19 @@
 				</div>
 			</div>
 			<div class="row">
+				<div class="mt-4 pt-4 border-top border-primary">
+					<h5>Însușește-ți noile cunoștiințe</h5>
+				</div>
 				<div
 					v-for="(lesson, index) in lessons"
 					:key="lesson.id"
 					class="col-12 m-1 p-2 shadow-sm"
 					:class="{
-						'bg-success text-white rounded':
+						' bg-success text-white    rounded':
 							completedLessons.includes(lesson.id),
-						'bg-light': !completedLessons.includes(lesson.id),
+						'bg-light text-dark': !completedLessons.includes(
+							lesson.id
+						),
 					}"
 				>
 					<div
@@ -50,7 +58,7 @@
 								'btn-light': completedLessons.includes(
 									lesson.id
 								),
-								'btn-success': !completedLessons.includes(
+								'btn-primary': !completedLessons.includes(
 									lesson.id
 								),
 							}"
@@ -65,9 +73,16 @@
 					</div>
 					<div v-if="openedLesson === lesson">
 						<div
-							class="bg-light col-12 mt-2 m-1 p-2 shadow-sm"
+							class="col-12 mt-2 m-1 p-2 shadow-sm"
 							v-for="test in lesson.tests"
 							:key="test.id"
+							:class="{
+								' bg-success text-white    rounded':
+									completedTests.includes(test.id),
+								'bg-light text-dark': !completedTests.includes(
+									test.id
+								),
+							}"
 						>
 							<div
 								class="d-flex justify-content-between align-items-center"
@@ -78,9 +93,21 @@
 								</div>
 								<a
 									:href="'/learn/test/' + test.id"
-									class="btn btn-sm btn-primary"
+									class="btn btn-sm"
+									:class="{
+										'btn-light': completedTests.includes(
+											test.id
+										),
+										'btn-primary': !completedTests.includes(
+											test.id
+										),
+									}"
 								>
-									Verifica-ti cunostintele
+									{{
+										completedTests.includes(test.id)
+											? "Încearcă din nou"
+											: "Verifica-ti cunostintele"
+									}}
 								</a>
 							</div>
 						</div>
@@ -88,9 +115,20 @@
 				</div>
 				<div
 					v-if="hasTests"
+					class="mt-4 pt-4 border-top border-primary"
+				>
+					<h5>Verifică-ți cunoștiințele parcurgând testele</h5>
+				</div>
+				<div
+					v-if="hasTests"
 					v-for="(test, index) in course.tests"
 					:key="test.id"
-					class="bg-light col-12 m-1 p-2 shadow-sm"
+					class="col-12 m-1 p-2 shadow-sm"
+					:class="{
+						' bg-success text-white    rounded':
+							completedTests.includes(test.id),
+						'bg-light': !completedTests.includes(test.id),
+					}"
 				>
 					<div
 						class="d-flex justify-content-between align-items-center"
@@ -101,18 +139,27 @@
 						</div>
 						<a
 							:href="'/learn/test/' + test.id"
-							class="btn btn-sm btn-primary"
+							class="btn btn-sm"
+							:class="{
+								'btn-light': completedTests.includes(test.id),
+								'btn-primary': !completedTests.includes(
+									test.id
+								),
+							}"
 						>
-							Verifica-ti cunostintele
+							{{
+								completedTests.includes(test.id)
+									? "Încearcă din nou"
+									: "Verifica-ti cunostintele"
+							}}
 						</a>
 					</div>
 				</div>
 			</div>
 			<div
 				v-if="forum"
-				class="row d-flex justify-content-center p-3 align-items-center"
+				class="row d-flex justify-content-center p-3 align-items-center border-top border-bottom my-3 shadow"
 			>
-				<hr class="mb-0" />
 				<div
 					class="col-8 d-flex justify-content-between align-items-center p-3"
 				>
@@ -121,7 +168,6 @@
 						Întrebări și răspunsuri
 					</a>
 				</div>
-				<hr />
 			</div>
 		</div>
 	</div>
@@ -155,6 +201,9 @@ export default {
 		},
 		completedLessons() {
 			return this.$store.getters.getCompletedLessons;
+		},
+		completedTests() {
+			return this.$store.getters.getCompletedTests;
 		},
 		openedLesson: {
 			get() {

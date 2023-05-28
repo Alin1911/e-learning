@@ -136,13 +136,22 @@ class CourseController extends Controller
 		}
 		$userId = Auth::user()->id;
 		$completedLessons = $course->completedLessonsForUser($userId)->pluck('id')->toArray();
+		$completedTests = $course->completedTestsForUser($userId)->pluck('id')->toArray();
 		$course->totalPoints = $course->totalPoints();
 		$course->userPoints = $course->getUserPoints();
 		$course->minimalPoints = $course->minimalPoints();
 		if ($request->wantsJson()) {
-			return json_encode(['course' => $course, 'completedLessons' => $completedLessons]);
+			return json_encode([
+				'course' => $course,
+				'completedLessons' => $completedLessons,
+				'completedTests' => $completedTests,
+			]);
 		}
-		return view('course.show')->with(['course' => $course, 'completedLessons' => $completedLessons]);
+		return view('course.show')->with([
+			'course' => $course,
+			'completedLessons' => $completedLessons,
+			'completedTests' => $completedTests
+		]);
 	}
 
 	public function edit($id)

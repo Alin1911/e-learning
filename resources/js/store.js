@@ -15,6 +15,7 @@ export default function createNewStore() {
 				forum: [],
 			},
 			completedLessons: [],
+			completedTests: [],
 		},
 		getters: {
 			getUser: (state) => state.user,
@@ -38,6 +39,7 @@ export default function createNewStore() {
 				state.currentCourse ? state.currentCourse.lessons : [],
 			getOpenedLesson: (state) => state.openedLesson,
 			getCompletedLessons: (state) => state.completedLessons,
+			getCompletedTests: (state) => state.completedTests,
 			getCurrentCourse: (state) => state.currentCourse,
 			getForum: (state) => state.currentCourse.forum[0],
 		},
@@ -59,6 +61,9 @@ export default function createNewStore() {
 			},
 			setCompletedLessons(state, completedLessons) {
 				state.completedLessons = completedLessons;
+			},
+			setCompletedTests(state, completedTests) {
+				state.completedTests = completedTests;
 			},
 		},
 		actions: {
@@ -86,6 +91,7 @@ export default function createNewStore() {
 				console.log(data);
 				commit("setCurrentCourse", data.course);
 				commit("setCompletedLessons", data.completedLessons);
+				commit("setCompletedTests", data.completedTests);
 			},
 			async toggleLessonCompletion(
 				{ state, commit },
