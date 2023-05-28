@@ -5,6 +5,18 @@
 		</div>
 		<div class="col-12">
 			<div class="row">
+				<div class="progress">
+					<div
+						class="progress-bar progress-bar-striped progress-bar-animated"
+						role="progressbar"
+						:aria-valuenow="course.pointC"
+						aria-valuemin="0"
+						:aria-valuemax="course.pointT"
+						:style="'width: ' + course.pointC + '%'"
+					></div>
+				</div>
+			</div>
+			<div class="row">
 				<div
 					v-for="(lesson, index) in lessons"
 					:key="lesson.id"

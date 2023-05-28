@@ -89,6 +89,7 @@ class CourseController extends Controller
 		$course->additional_info = $request->get('additional_info', '');
 		$course->instructor_id = 1;
 		$course->language = $request->get('language', 'english');
+		$course->points = $request->get('points', '0');
 		if ($request->has('image')) {
 			$path = $request->file('image')->store('public/courses');
 			$course->image = asset('storage/' . substr($path, 7));
@@ -129,12 +130,12 @@ class CourseController extends Controller
 		if (empty($course)) {
 			return redirect()->route('course.index');
 		}
-		$course->load('forum', 'category', 'lessons', 'lessons.tests', 'lessons.userLessons', 'tests', 'questions', 'instructor', 'metaTag', 'exercises');
+		$course->load('forum', 'category', 'lessons', 'lessons.tests', 'tests', 'questions', 'instructor', 'metaTag', 'exercises');
 		if(!Auth::check()) {
 			return view('course.show')->with(['course' => $course]);
 		}
 		$userId = Auth::user()->id;
-		$completedLessons = $course->completedLessonsForUser($userId)->get();
+		$completedLessons = $course->completedLessonsForUser($userId);
 		if ($request->wantsJson()) {
 			return json_encode(['course' => $course, 'completedLessons' => $completedLessons]);
 		}
@@ -185,6 +186,9 @@ class CourseController extends Controller
 		}
 		if ($request->has('language')) {
 			$course->language = $request->language;
+		}
+		if ($request->has('points')) {
+			$course->points = $request->points;
 		}
 
 		$course->save();

@@ -25,6 +25,21 @@
 				></textarea>
 			</div>
 
+			<div class="form-group">
+				<label for="price"
+					>Procent puncte necesare pentru a completa cursul</label
+				>
+				<input
+					type="number"
+					step="5"
+					max="100"
+					min="0"
+					class="form-control"
+					id="points"
+					v-model="course.points"
+					required
+				/>
+			</div>
 			<!-- Preț
 			<div class="form-group">
 				<label for="price">Preț</label>
@@ -177,6 +192,7 @@ export default {
 			category_id: null,
 			instructor_id: null,
 			language: "",
+			points: 50,
 		};
 
 		return {

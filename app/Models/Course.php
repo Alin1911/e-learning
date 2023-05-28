@@ -65,17 +65,92 @@ class Course extends Model
 				});
 		});
 	}
-	public function completedLessonsForUser(int $userId) : Builder
+	public function completedLessonsForUser(int $userId)
 	{
-		return Lesson::query()
-			->join('user_lessons', 'lessons.id', '=', 'user_lessons.lesson_id')
-			->where('lessons.course_id', $this->id)
-			->where('user_lessons.user_id', $userId)
-			->whereNotNull('user_lessons.completed_at')
-			->select('lessons.*');
+		$completedLessons = UserActivity::where('activity_model', 'App\Models\Lesson')
+			->where('user_id', $userId)
+			->where('activity_id', 'IN', $this->lessons->pluck('id'))
+			->pluck('activity_id');
+		$completedCourseLessons = Lesson::whereIn('id', $completedLessons)->where('course_id', $this->id)->get();
+		return $completedCourseLessons;
+
 	}
+
 	public function metaTag()
 	{
 		return $this->hasOne(CourseMetaTag::class);
 	}
+
+	public function addPointsForUser(int $userId)
+	{
+		$userPoints = UserActivity::where('activity_model', 'App\Models\Course')
+			->where('activity_id', $this->id)
+			->where('user_id', $userId)
+			->first();
+		if (!$userPoints) {
+			$userPoints = new UserActivity();
+			$userPoints->user_id = $userId;
+			$userPoints->activity_model = 'App\Models\Course';
+			$userPoints->activity_id = $this->id;
+			$userPoints->review_text = 'Course completed';
+		}
+		$user->points += $this->points();
+		$userPoints->save();
+		return $userPoints;
+	}
+	public function totalPoints() : int
+	{
+		$totalPoint = 0;
+		foreach ($this->lessons as $lesson) {
+			$totalPoint += $lesson->points();
+			foreach ($lesson->tests as $test) {
+				foreach ($test->exercises as $exercise) {
+					$totalPoint += $exercise->points;
+				}
+			}
+		}
+		foreach($this->tests as $test) {
+			foreach($test->exercises as $exercise) {
+				$totalPoint += $exercise->points;
+			}
+		}
+		return $totalPoint;
+	}
+
+	public function minimalPoints() : int
+	{
+		$totalPoint = $this->totalPoints();
+		if(isset($this->points)) {
+			return $totalPoint * $this->points /100;
+		}
+		return $totalPoint * 0.6;
+	}
+
+	public function getUserPoints() : int
+	{
+		$user = auth()->user();
+		$userPoints = UserActivity::where('activity_model', 'App\Models\Course')
+			->where('activity_id', $this->id)
+			->where('user_id', $user->id)
+			->sum('points');
+		$coursesId = $this->courses->pluck('id');
+		$userPoints += UserActivity::where('activity_model', 'App\Models\Lesson')
+			->where('user_id', $user->id)
+			->where('activity_id', 'IN', $coursesId)
+			->sum('points');
+		$testIds = $this->tests->pluck('id');
+		$userPoints += UserActivity::where('activity_model', 'App\Models\Test')
+			->where('user_id', $user->id)
+			->where('activity_id', 'IN', $testIds)
+			->sum('points');
+		foreach ($this->lessons as $lesson) {
+			$testIds = $lesson->tests->pluck('id');
+			$userPoints += UserActivity::where('activity_model', 'App\Models\Test')
+				->where('user_id', $user->id)
+				->where('activity_id', 'IN', $testIds)
+				->sum('points');
+		}
+		return $userPoints;
+	}
+
 }

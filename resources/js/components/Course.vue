@@ -51,9 +51,9 @@
 						<p v-if="course.category_id" class="card-text">
 							Categorie: {{ course.category.name }}
 						</p>
-						<p v-if="course.instructor_id" class="card-text">
+						<!-- <p v-if="course.instructor_id" class="card-text">
 							Instructor: {{ course.instructor_id }}
-						</p>
+						</p> -->
 						<p v-if="course.additional_info" class="card-text">
 							{{ course.additional_info }}
 						</p>

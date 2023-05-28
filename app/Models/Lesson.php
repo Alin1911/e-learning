@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Lesson extends Model
 {
@@ -26,16 +25,28 @@ class Lesson extends Model
 		return $this->hasMany(Test::class);
 	}
 
-	public function completedLessonsByUser(int $userId) : HasManyThrough
+	public function points()
 	{
-		return $this->hasManyThrough(
-			Lesson::class,
-			UserLesson::class,
-			'lesson_id', // cheia străină pe tabela intermediară
-			'id', // cheia străină pe tabela finală
-			'id', // cheia locală pe tabela parent
-			'id' // cheia locală pe tabela intermediară
-		)->where('user_id', $userId)->whereNotNull('completed_at');
+		return 5;
+	}
+
+	public function addPointsForUser(int $userId)
+	{
+		$user = User::find($userId);
+		$userPoints = UserActivity::where('activity_model', 'App\Models\Lesson')
+			->where('activity_id', $this->id)
+			->where('user_id', $userId)
+			->first();
+		if(!$userPoints) {
+			$userPoints = new UserActivity();
+			$userPoints->user_id = $userId;
+			$userPoints->activity_model = 'App\Models\Lesson';
+			$userPoints->activity_id = $this->id;
+			$userPoints->review_text = 'Lesson completed';
+		}
+		$user->points += $this->points();
+		$userPoints->save();
+		return $userPoints;
 	}
 
 }
