@@ -41,6 +41,8 @@ class TestController extends Controller
 		if ($request->has('description')) {
 			$test->description = $request->input('description');
 		}
+		$test->time = $request->get('time', 10);
+
 		$test->save();
 		return response()->json($test, 200);
 	}
@@ -49,6 +51,9 @@ class TestController extends Controller
 		$user = Auth::user();
 		$course = $user->courses;
 		$course->load('lessons', 'tests', 'lessons.tests');
+		if($request->wantsJson()) {
+			return response()->json($course, 200);
+		}
 		return view('test.create')->with(['courses' => $course]);
 	}
 

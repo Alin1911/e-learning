@@ -70,7 +70,7 @@
 				<ul class="list-group mb-3">
 					<div v-for="test in selectedCourse.tests">
 						<li
-							v-if="!test.lesson_id"
+							v-if="test && !test.lesson_id"
 							:key="test.id"
 							class="list-group-item d-flex bd-highlight mb-3"
 						>
@@ -108,6 +108,17 @@
 					/>
 				</div>
 				<div class="mb-3">
+					<label for="test-lesson" class="form-label"
+						>Timp pentru test</label
+					>
+					<input
+						type="number"
+						class="form-control"
+						id="test-time"
+						v-model="newTest.time"
+					/>
+				</div>
+				<div class="mb-3">
 					<label for="test-description" class="form-label"
 						>Descrierea testului</label
 					>
@@ -142,6 +153,7 @@ export default {
 			newTest: {
 				title: "",
 				description: "",
+				time: 10,
 			},
 		};
 	},
@@ -156,22 +168,29 @@ export default {
 			}
 
 			try {
-				const response = await axios.post("/test", {
-					title: this.newTest.title,
-					description: this.newTest.description,
-					course_id: this.selectedCourse.id,
-					lesson_id: this.selectedLesson
-						? this.selectedLesson.id
-						: null,
-				});
+				const response = await axios
+					.post("/test", {
+						title: this.newTest.title,
+						description: this.newTest.description,
+						course_id: this.selectedCourse.id,
+						lesson_id: this.selectedLesson
+							? this.selectedLesson.id
+							: null,
+					})
+					.then((response) => {
+						return response;
+					})
+					.catch((error) => {
+						return error.response;
+					});
 
 				if (response.status === 200) {
 					alert("Testul a fost adăugat cu succes!");
-					// Actualizează lista de teste a cursului sau lecției selectate cu datele primite de la server
+					console.log(response.data);
 					if (this.selectedLesson) {
-						this.selectedLesson.tests = response.data;
+						this.selectedLesson.tests.push(response.data);
 					} else {
-						this.selectedCourse.tests = response.data;
+						this.selectedCourse.tests.push(response.data);
 					}
 				} else {
 					alert("A apărut o eroare la adăugarea testului!");
