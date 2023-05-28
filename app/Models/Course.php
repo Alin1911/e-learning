@@ -25,10 +25,6 @@ class Course extends Model
 	{
 		return $this->hasMany(Lesson::class);
 	}
-	public function questions()
-	{
-		return $this->hasMany(CourseQuestion::class);
-	}
 	public function exercises()
 	{
 		return $this->hasMany(Exercise::class);

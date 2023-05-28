@@ -24,11 +24,6 @@ class Test extends Model
 		return $this->hasMany(Exercise::class);
 	}
 
-	public function questions()
-	{
-		return $this->hasMany(Question::class);
-	}
-
 	public function setUserAcivity($points, $total)
 	{
 		$user = auth()->user();

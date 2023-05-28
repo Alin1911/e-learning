@@ -77,7 +77,7 @@ class TestController extends Controller
 	public function verify($id, Request $request)
 	{
 		$test = Test::find($id);
-		$test->load('course', 'lesson', 'exercises', 'exercises.options', 'exercises.orderingItems', 'exercises.fillInTheBlankItems', 'questions');
+		$test->load('course', 'lesson', 'exercises', 'exercises.options', 'exercises.orderingItems', 'exercises.fillInTheBlankItems');
 		if ($request->wantsJson()) {
 			return json_encode(['test' => $test]);
 		}

@@ -130,7 +130,7 @@ class CourseController extends Controller
 		if (empty($course)) {
 			abort(404);
 		}
-		$course->load('forum', 'category', 'lessons', 'lessons.tests', 'tests', 'questions', 'instructor', 'metaTag', 'exercises');
+		$course->load('forum', 'category', 'lessons', 'lessons.tests', 'tests', 'instructor', 'metaTag', 'exercises');
 		if(!Auth::check()) {
 			return view('course.show')->with(['course' => $course]);
 		}
@@ -238,7 +238,6 @@ class CourseController extends Controller
 		$course = Course::find($id);
 		$course->load('lessons');
 		$course->load('tests');
-		$course->load('questions');
 		$course->load('category');
 		$course->load('forum');
 		$course->load('instructor', 'forum');
@@ -248,7 +247,7 @@ class CourseController extends Controller
 	public function courses()
 	{
 		$user = auth()->user();
-		$user->load('courses', 'courses.lessons', 'courses.exercises', 'courses.tests', 'courses.questions');
+		$user->load('courses', 'courses.lessons', 'courses.exercises', 'courses.tests');
 		$courses = $user->courses;
 		return json_encode($courses);
 	}
