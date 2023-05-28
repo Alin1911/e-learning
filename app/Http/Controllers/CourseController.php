@@ -128,7 +128,7 @@ class CourseController extends Controller
 	{
 		$course = Course::find($id);
 		if (empty($course)) {
-			return redirect()->route('course.index');
+			abort(404);
 		}
 		$course->load('forum', 'category', 'lessons', 'lessons.tests', 'tests', 'questions', 'instructor', 'metaTag', 'exercises');
 		if(!Auth::check()) {
@@ -136,6 +136,9 @@ class CourseController extends Controller
 		}
 		$userId = Auth::user()->id;
 		$completedLessons = $course->completedLessonsForUser($userId);
+		$course->totalPoints = $course->totalPoints();
+		$course->userPoints = $course->getUserPoints();
+		$course->minimalPoints = $course->minimalPoints();
 		if ($request->wantsJson()) {
 			return json_encode(['course' => $course, 'completedLessons' => $completedLessons]);
 		}

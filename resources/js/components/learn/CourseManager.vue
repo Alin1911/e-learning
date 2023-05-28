@@ -9,11 +9,14 @@
 					<div
 						class="progress-bar progress-bar-striped progress-bar-animated"
 						role="progressbar"
-						:aria-valuenow="course.pointC"
+						:aria-valuenow="course.userPoints"
 						aria-valuemin="0"
-						:aria-valuemax="course.pointT"
-						:style="'width: ' + course.pointC + '%'"
+						:aria-valuemax="course.totalPoints"
+						:style="'width: ' + getProgres + '%'"
 					></div>
+					{{ course.userPoints }} / {{ course.totalPoints }} ({{
+						getProgres
+					}}%)
 				</div>
 			</div>
 			<div class="row">
@@ -134,6 +137,14 @@ export default {
 		},
 	},
 	computed: {
+		getProgres() {
+			return Math.floor(
+				Math.min(
+					100,
+					(this.course.userPoints / this.course.minimalPoints) * 100
+				)
+			);
+		},
 		forum() {
 			return this.$store.getters.getForum;
 		},
