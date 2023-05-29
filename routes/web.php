@@ -41,4 +41,3 @@ Route::post('/test/{id}/check', 'TestController@check');
 Route::get('/forums', 'ForumController@index');
 Route::get('/forums/{id}', 'ForumController@show');
 Route::get('/forums/{id}/topics', 'ForumController@topics');
-

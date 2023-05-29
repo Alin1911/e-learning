@@ -4,7 +4,7 @@
 			class="d-flex justify-content-between border-bottom border-danger mb-4 pb-2"
 		>
 			<h2>Test: {{ test.title }}</h2>
-			<h3>
+			<h3 v-if="this.test.time > 0">
 				Timp rămas:
 				<span class="text-danger">{{ minutes }}:{{ seconds }}</span>
 			</h3>
@@ -61,7 +61,7 @@ export default {
 			},
 			selectedAnswers: {},
 			timer: null,
-			minutes: 30,
+			minutes: 0,
 			seconds: 0,
 		};
 	},
@@ -82,6 +82,7 @@ export default {
 					}
 				);
 				this.test = response.data.test;
+				this.minutes = this.test.time;
 
 				this.test.exercises.forEach((exercise) => {
 					this.selectedAnswers = {
@@ -146,7 +147,7 @@ export default {
 					this.seconds = 59;
 				}
 
-				if (this.minutes < 0) {
+				if (this.minutes < 0 && this.test.time > 0) {
 					clearInterval(this.timer);
 					this.submitTest();
 				}
