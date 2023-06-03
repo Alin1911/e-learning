@@ -33,7 +33,7 @@ Route::resource('/lesson', 'LessonController');
 Route::resource('/question', 'CourseQuestionController');
 Route::post('/posts/{id}/likes', 'ForumPostController@likes');
 Route::post('/topics/{id}/posts', 'ForumPostController@store');
-
+Route::post('/forums/{id}/topics', 'ForumTopicController@store');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/topics', 'ForumTopicController');
 Route::post('/lesson/finish', 'LessonController@finish');
