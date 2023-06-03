@@ -10,7 +10,6 @@ use App\Models\Forum;
 use App\Models\ForumTopic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -24,30 +23,9 @@ class CourseController extends Controller
 			$courses = Course::paginate($perPage);
 			return view('course.index')->with('courses', $courses);
 		}
-		try {
-			$searchTerm = $search;
-
-			$results = DB::table('course_meta_tags')
-				->select('course_id')
-				->whereRaw("MATCH (title, description, keywords, language, author, duration, level) AGAINST (? IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)", [$searchTerm])
-				->get()->toArray();
-
-			if (count($results) >= $perPage) {
-				$results = DB::table('course_meta_tags')
-					->select('course_id')
-					->whereRaw("MATCH (title, description, keywords, language, author, duration, level) AGAINST (? IN NATURAL LANGUAGE MODE)", [$searchTerm])
-					->get()->toArray();
-			}
-			array_column($results, 'course_id');
-			$results = CourseMetaTag::countSegmentOccurrences($request->input('search', ''), $segmentLength);
-			$courses = Course::whereIn('id', $results)->paginate($perPage);
-		} catch (\Exception $e) {
-			$courses = Course::search($search)->paginate(10);
-		} finally {
-			if(!isset($courses) || $courses->total() == 0) {
-				$courses = Course::search($search)->paginate(10);
-			}
-		}
+		
+		$results = CourseMetaTag::countSegmentOccurrences($search, $segmentLength);
+		$courses = Course::whereIn('id', $results)->paginate($perPage);
 
 		if ($request->has('nivel')) {
 			$courses = $courses->where('level', $request->nivel);
