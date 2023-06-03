@@ -1,43 +1,62 @@
 <?php
 
-use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'LearningController@index');
-Route::get('/team', 'LearningController@team');
-Route::get('/contact', 'LearningController@contact');
-Route::get('/term', 'LearningController@term');
-Route::post('/course/{id}/enroll', 'CourseController@enroll');
+// Learning routes
+Route::get('/', 'LearningController@index')->name('learning.index');
+Route::get('/team', 'LearningController@team')->name('learning.team');
+Route::get('/contact', 'LearningController@contact')->name('learning.contact');
+Route::get('/term', 'LearningController@term')->name('learning.term');
 
-Route::resource('course', CourseController::class);
-Route::resource('/problem', ProblemController::class);
+// Course routes
+Route::resource('/course', 'CourseController'); // This generates multiple routes with names
+Route::post('/course/{id}/enroll', 'CourseController@enroll')->name('course.enroll');
+Route::get('/courses', 'CourseController@courses')->name('courses.index');
+Route::get('/learn/course/{id}', 'CourseController@learnCourse')->name('course.learn');
+Route::post('course/{id}/join', 'CourseController@join')->name('course.join');
+Route::post('course/{id}/leave', 'CourseController@leave')->name('course.leave');
 
-Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
-Route::post('course/{id}/join', [CourseController::class, 'join'])->name('course.join');
-Route::post('course/{id}/leave', [CourseController::class, 'leave'])->name('course.leave');
-Route::resource('/account', "UserController");
-Route::resource('/role/request', "RoleRequestController");
-Auth::routes();
+// Problem routes
+Route::resource('/problem', 'ProblemController'); // This generates multiple routes with names
 
-Route::get('/user', 'UserController@currentUser');
-Route::get('/courses', 'CourseController@courses');
-Route::get('/learn/course/{id}', 'CourseController@learnCourse');
-Route::get('/learn/lesson/{id}', 'LessonController@learnLesson');
-Route::get('/learn/test/{id}', 'TestController@verify');
-Route::get('/exercise', 'ExerciseController@index');
-Route::resource('/answer', 'CourseAnswerController');
-Route::resource('/test/{test_id}/exercise', 'ExerciseController');
-Route::resource('/test', 'TestController');
-Route::resource('/lesson', 'LessonController');
-Route::resource('/question', 'CourseQuestionController');
-Route::post('/posts/{id}/likes', 'ForumPostController@likes');
-Route::post('/topics/{id}/posts', 'ForumPostController@store');
-Route::post('/forums/{id}/topics', 'ForumTopicController@store');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('/topics', 'ForumTopicController');
-Route::post('/lesson/finish', 'LessonController@finish');
-Route::post('/test/{id}/check', 'TestController@check');
-Route::get('/forums', 'ForumController@index');
-Route::get('/forums/{id}', 'ForumController@show');
-Route::get('/forums/{id}/topics', 'ForumController@topics');
+// Authentication routes
+Auth::routes(); // This generates multiple routes with names
+
+// Home route
+Route::get('/home', 'HomeController@index')->name('home');
+
+// User routes
+Route::resource('/account', 'UserController'); // This generates multiple routes with names
+Route::get('/user', 'UserController@currentUser')->name('user.current');
+
+// Role Request routes
+Route::resource('/role/request', 'RoleRequestController'); // This generates multiple routes with names
+
+// Lesson routes
+Route::get('/learn/lesson/{id}', 'LessonController@learnLesson')->name('lesson.learn');
+Route::resource('/lesson', 'LessonController'); // This generates multiple routes with names
+Route::post('/lesson/finish', 'LessonController@finish')->name('lesson.finish');
+
+// Test routes
+Route::get('/learn/test/{id}', 'TestController@verify')->name('test.verify');
+Route::resource('/test', 'TestController'); // This generates multiple routes with names
+Route::post('/test/{id}/check', 'TestController@check')->name('test.check');
+
+// Exercise routes
+Route::get('/exercise', 'ExerciseController@index')->name('exercise.index');
+Route::resource('/test/{test_id}/exercise', 'ExerciseController'); // This generates multiple routes with names
+
+// Answer routes
+Route::resource('/answer', 'CourseAnswerController'); // This generates multiple routes with names
+
+// Question routes
+Route::resource('/question', 'CourseQuestionController'); // This generates multiple routes with names
+
+// Forum routes
+Route::post('/posts/{id}/likes', 'ForumPostController@likes')->name('post.likes');
+Route::post('/topics/{id}/posts', 'ForumPostController@store')->name('topic.posts');
+Route::post('/forums/{id}/topics', 'ForumTopicController@store')->name('forum.topics');
+Route::get('/forums', 'ForumController@index')->name('forum.index');
+Route::get('/forums/{id}', 'ForumController@show')->name('forum.show');
+Route::get('/forums/{id}/topics', 'ForumController@topics')->name('forum.topics');
+Route::resource('/topics', 'ForumTopicController'); // This generates multiple routes with names
