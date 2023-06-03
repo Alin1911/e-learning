@@ -21,7 +21,7 @@
             </ul>
             <div class="row d-none d-md-block">
             <form class="rounded-pill" action="{{ route('course.index') }}" method="GET">
-                <div class="input-group">
+                <div class="input-group"  style="display: ruby;">
                     <div class="form-outline">
                         <input 
                             id="form1"
@@ -32,7 +32,7 @@
                             @if(isset($search)) value="{{ $search }}" @endif
                             style="min-width: 400px;">
                     </div>
-                    <button class="btn  btn-primar bg-white rounded-right-1" type="submit"><i class="fas fa-search"></i></button>
+                    <button class="btn  btn-primar bg-white rounded-right-1 mb-1" type="submit"><i class="fas fa-search"></i></button>
                 </div>
             </form>
         </div>
