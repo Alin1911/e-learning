@@ -99,7 +99,7 @@ export default {
 			try {
 				this.newTopic.forum_id = this.forum_id;
 				const a = await axios
-					.post("/forums/" + this.forum.id + "/topics", this.newTopic)
+					.post("/topics/" + this.forum.id + "/topics", this.newTopic)
 					.then(async (response) => {
 						axios.defaults.headers.common["Content-Type"] =
 							"application/json";
