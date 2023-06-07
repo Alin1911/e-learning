@@ -33,10 +33,6 @@ class Course extends Model
 	{
 		return $this->hasMany(Test::class);
 	}
-	public function instructor()
-	{
-		return $this->hasOne(Instructor::class, 'id', 'instructor_id');
-	}
 	public function user()
 	{
 		return $this->belongsTo(User::class);

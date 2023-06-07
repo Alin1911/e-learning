@@ -4,7 +4,6 @@ import "@popperjs/core";
 
 import Course from "@/components/Course.vue";
 import CourseAdd from "@/components/CourseAdd.vue";
-import Instructors from "@/components/Instructors.vue";
 import Categories from "@/components/Categories.vue";
 import CourseManager from "@/components/learn/CourseManager.vue";
 import LessonCreate from "@/components/LessonCreate.vue";
@@ -32,7 +31,6 @@ const app = createApp({
 		course: Course,
 		lesson: Lesson,
 		test: Test,
-		instructors: Instructors,
 		categories: Categories,
 		"course-manager": CourseManager,
 		"lesson-create": LessonCreate,

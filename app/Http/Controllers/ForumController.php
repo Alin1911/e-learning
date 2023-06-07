@@ -8,31 +8,34 @@ use Illuminate\Http\Request;
 class ForumController extends Controller
 {
 
+	// Fetch and return all topics of a specific forum
 	public function topics(Request $request, $id)
 	{
-		$forum = Forum::with(['topics', 'topics.posts'])->findOrFail($id);
+		$specificForum = Forum::with(['topics', 'topics.posts'])->findOrFail($id);
 
 		if ($request->wantsJson()) {
-			return json_encode($forum);
+			return json_encode($specificForum);
 		}
 
-		return $forum;
+		return $specificForum;
 	}
 
+	// Fetch and display all forums that are not linked with any course
 	public function index(Request $request)
 	{
+		$standaloneForums = Forum::whereNull('course_id')->get();
+		$standaloneForums->load('topics', 'topics.posts');
 
-		$forums = Forum::whereNull('course_id')->get();
-		$forums->load('topics', 'topics.posts');
+		// Return data as JSON if required
 		if($request->wantsJson()) {
-			return json_encode($forums);
+			return json_encode($standaloneForums);
 		}
-		return view('forum.index')->with('forums', $forums);
+
+		// Send data to the view
+		return view('forum.index')->with('forums', $standaloneForums);
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 */
+	// Display form for creating a new forum
 	public function create()
 	{
 		$user = auth()->user();
@@ -40,62 +43,51 @@ class ForumController extends Controller
 		return view('forum.create')->with(['courses' => $courses]);
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 */
+	// Store a newly created forum in the database
 	public function store(Request $request)
 	{
-		$forum = new Forum();
+		$newForum = new Forum();
 		if ($request->has('title')) {
-			$forum->title = $request->input('title');
+			$newForum->title = $request->input('title');
 		}
 		if ($request->has('description')) {
-			$forum->description = $request->input('description');
+			$newForum->description = $request->input('description');
 		}
-		$forum->save();
+		$newForum->save();
 	}
 
-	/**
-	 * Display the specified resource.
-	 */
+	// Display a specific forum
 	public function show(string $id)
 	{
 		$forum = Forum::find($id);
 		$forum->load('topics');
 		return view('topic.index')->with('forum', $forum);
-
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 */
+	// Display form for editing a specific forum
 	public function edit(string $id)
 	{
-		$forum = Forum::find($id);
-		return view('forum.edit')->with('forum', $forum);
+		$forumToEdit = Forum::find($id);
+		return view('forum.edit')->with('forum', $forumToEdit);
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 */
+	// Update the specified forum in the database
 	public function update(Request $request, string $id)
 	{
-		$forum = Forum::find($id);
+		$forumToUpdate = Forum::find($id);
 		if ($request->has('title')) {
-			$forum->title = $request->input('title');
+			$forumToUpdate->title = $request->input('title');
 		}
 		if ($request->has('description')) {
-			$forum->description = $request->input('description');
+			$forumToUpdate->description = $request->input('description');
 		}
-		$forum->save();
+		$forumToUpdate->save();
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 */
+	// Remove the specified forum from the database
 	public function destroy(string $id)
 	{
-		$forum = Forum::find($id);
-		$forum->delete();
+		$forumToDelete = Forum::find($id);
+		$forumToDelete->delete();
 	}
 }

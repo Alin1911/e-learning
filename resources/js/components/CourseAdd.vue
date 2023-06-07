@@ -171,10 +171,10 @@ export default {
 			type: Object,
 			default: null,
 		},
-		instructors: {
-			type: Array,
-			default: () => [],
-		},
+		// instructors: {
+		// 	type: Array,
+		// 	default: () => [],
+		// },
 		categories: {
 			type: Array,
 			default: () => [],
@@ -190,7 +190,7 @@ export default {
 			additional_info: "",
 			duration: "",
 			category_id: null,
-			instructor_id: null,
+			// instructor_id: null,
 			language: "",
 			points: 50,
 		};

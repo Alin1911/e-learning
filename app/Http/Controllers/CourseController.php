@@ -101,7 +101,6 @@ class CourseController extends Controller
 		$course->duration = $request->get('duration', 'anytime');
 		$course->discount = $request->get('discount', '0');
 		$course->additional_info = $request->get('additional_info', '');
-		$course->instructor_id = 1;
 		$course->language = $request->get('language', 'english');
 		$course->points = $request->get('points', '0');
 
@@ -165,7 +164,7 @@ class CourseController extends Controller
 		}
 
 		// Load relationships for the course
-		$course->load('forum', 'category', 'lessons', 'lessons.tests', 'tests', 'instructor', 'metaTag', 'exercises');
+		$course->load('forum', 'category', 'lessons', 'lessons.tests', 'tests', 'metaTag', 'exercises');
 
 		// Check if user is authenticated
 		if (!Auth::check()) {
@@ -266,9 +265,6 @@ class CourseController extends Controller
 		if ($request->has('additional_info')) {
 			$course->additional_info = $request->additional_info;
 		}
-		if ($request->has('instructor_id')) {
-			$course->instructor_id = $request->instructor_id;
-		}
 		if ($request->has('language')) {
 			$course->language = $request->language;
 		}
@@ -345,7 +341,6 @@ class CourseController extends Controller
 		$course->load('tests');
 		$course->load('category');
 		$course->load('forum');
-		$course->load('instructor', 'forum');
 
 		// Return the view with the necessary data
 		return view('course.learn')->with([
