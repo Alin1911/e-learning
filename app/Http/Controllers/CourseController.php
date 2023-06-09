@@ -43,21 +43,10 @@ class CourseController extends Controller
 			$courses = $courses->where('level', $request->nivel);
 		}
 
-		// Search for exercises and forums based on the provided search input
-		$exercise = Exercise::where('question', 'like', '%' . $search . '%')
-			->orWhere('exercise_type', 'like', '%' . $search . '%')
-			->where('public', 1)
-			->paginate(10);
-
-		$forums = Forum::where('title', 'like', '%' . $search . '%')
-			->orWhere('description', 'like', '%' . $search . '%')
-			->paginate(10);
 
 		// Return the view with the search results
 		return view('course.index')->with([
 			'courses' => $courses,
-			'exercises' => $exercise,
-			'forums' => $forums,
 			'search' => $search
 		]);
 	}
