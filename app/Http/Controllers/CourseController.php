@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\CourseMetaTag;
-use App\Models\Exercise;
 use App\Models\Forum;
 use App\Models\ForumTopic;
 use Illuminate\Http\Request;
@@ -42,7 +41,6 @@ class CourseController extends Controller
 		if ($request->has('nivel')) {
 			$courses = $courses->where('level', $request->nivel);
 		}
-
 
 		// Return the view with the search results
 		return view('course.index')->with([

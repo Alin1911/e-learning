@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,8 @@ class LessonController extends Controller
 	{
 		$user = Auth::user();
 		$courses = $user->courses;
-		$courses->load('lessons');
+		$courses->load('lessons', 'lessons.tests', 'lessons.user');
+
 		return view('lesson.create', compact('courses'));
 	}
 
@@ -55,9 +57,20 @@ class LessonController extends Controller
 		if ($request->has('video_url')) {
 			$lesson->video_url = $request->input('video_url');
 		}
+		$user = Auth::user();
+		if($user->id != $lesson->course->user_id) {
+			$lesson->user_id = $user->id;
+			if($request->has('argumente')) {
+				$lesson->argumente = $request->input('argumente');
+			}
+		}
 		$lesson->order = Lesson::where('course_id', $lesson->course_id)->count() + 1;
+		$lesson->is_published = 0;
 		$lesson->save();
 		$lessons = Lesson::where('course_id', $lesson->course_id)->get();
+		if($user->id != $lesson->course->user_id) {
+			return redirect()->back();
+		}
 		return response()->json($lessons, 200);
 	}
 
@@ -106,7 +119,7 @@ class LessonController extends Controller
 			$lesson->duration = $request->input('duration');
 		}
 		if($request->has('is_published')) {
-			$lesson->is_published = $request->input('is_published');
+			$lesson->is_published = $request->input('is_published') ? 1 : 0;
 		}
 		if($request->has('order')) {
 			$lesson->order = $request->input('order');
@@ -141,6 +154,19 @@ class LessonController extends Controller
 		$lesson = Lesson::findOrFail($id);
 		$lesson->load('course', 'course.user', 'tests');
 		return view('lesson.learn')->with(['lesson' => $lesson]);
+	}
+
+	public function propune($id)
+	{
+		if(!auth()->check()) {
+			abort(403);
+		}
+		$user =  Auth::user();
+		$course = Course::findOrFail($id);
+		if($user->id != $course->user_id) {
+			return view('lesson.propune')->with(['course' => $course, 'user' => $user]);
+		}
+		return redirect('/lesson/create');
 	}
 
 	public function finish(Request $request)

@@ -113,6 +113,14 @@
 						</div>
 					</div>
 				</div>
+				<div class="d-flex justify-content-end mt-3 p-0">
+					<button
+						class="btn btn-success col-auto"
+						@click="propuneLesson"
+					>
+						Propune o nouă lecție
+					</button>
+				</div>
 				<div
 					v-if="hasTests"
 					class="mt-4 pt-4 border-top border-primary"
@@ -197,8 +205,11 @@ export default {
 			return this.$store.getters.getCurrentCourse;
 		},
 		lessons() {
-			return this.$store.getters.getLessons;
+			return this.$store.getters.getLessons.filter(
+				(lesson) => lesson.is_published == 1
+			);
 		},
+
 		completedLessons() {
 			return this.$store.getters.getCompletedLessons;
 		},
@@ -226,6 +237,9 @@ export default {
 				course_id: this.course_id,
 				lessonId: lesson.id,
 			});
+		},
+		propuneLesson() {
+			window.location.href = "/learn/propune-lectie/" + this.course_id;
 		},
 	},
 	mounted() {

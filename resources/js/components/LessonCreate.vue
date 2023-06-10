@@ -30,6 +30,12 @@
 					>
 						<b class="p-2 bd-highlight">{{ lesson.title }}</b>
 						<div class="ms-auto p-2 bd-highlight">
+							<small v-if="lesson.user" class="text-secondary">
+								Propusa de:
+								<span class="text-dark">{{
+									lesson.user.name
+								}}</span>
+							</small>
 							<a class="m-1" :href="'/lesson/' + lesson.id"
 								><i class="fa-solid fa-eye"></i
 							></a>

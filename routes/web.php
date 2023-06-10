@@ -36,6 +36,7 @@ Route::resource('/role/request', 'RoleRequestController'); // This generates mul
 Route::get('/learn/lesson/{id}', 'LessonController@learnLesson')->name('lesson.learn');
 Route::resource('/lesson', 'LessonController'); // This generates multiple routes with names
 Route::post('/lesson/finish', 'LessonController@finish')->name('lesson.finish');
+Route::get('/learn/propune-lectie/{id}', 'LessonController@propune');
 
 // Test routes
 Route::get('/learn/test/{id}', 'TestController@verify')->name('test.verify');

@@ -3,10 +3,18 @@
 		<h2 class="border-bottom border-primary mb-3 py-1">
 			Cele mai actuale subiecte!
 		</h2>
-		<div v-if="topics.length === 0" class="alert alert-success" role="alert">
+		<div
+			v-if="topics.length === 0"
+			class="alert alert-success"
+			role="alert"
+		>
 			<p class="text-center">Nu există subiecte în acest forum.</p>
 		</div>
-		<div class="bg-white my-2 shadow p-4" v-for="topic in topics" :key="topic.id">
+		<div
+			class="bg-white my-2 shadow p-4"
+			v-for="topic in topics"
+			:key="topic.id"
+		>
 			<div class="d-flex justify-content-between">
 				<div>
 					<h3>{{ topic.title }}</h3>
@@ -27,20 +35,35 @@
 			<form @submit.prevent="submitTopic">
 				<div class="form-group">
 					<label for="title">Titlu:</label>
-					<input type="text" class="form-control" id="title" v-model="newTopic.title" required />
+					<input
+						type="text"
+						class="form-control"
+						id="title"
+						v-model="newTopic.title"
+						required
+					/>
 				</div>
 				<div class="form-group">
 					<label for="description">Descriere:</label>
-					<textarea class="form-control" id="description" v-model="newTopic.description"></textarea>
+					<textarea
+						class="form-control"
+						id="description"
+						v-model="newTopic.description"
+					></textarea>
 				</div>
 				<button type="submit" class="mt-3 btn btn-primary">
 					Adaugă
 				</button>
 			</form>
 		</div>
-		<div v-if="forum" class="row d-flex justify-content-center p-3 align-items-center">
+		<div
+			v-if="forum"
+			class="row d-flex justify-content-center p-3 align-items-center"
+		>
 			<hr class="mb-0" />
-			<div class="col-8 d-flex justify-content-between align-items-center p-3">
+			<div
+				class="col-8 d-flex justify-content-between align-items-center p-3"
+			>
 				<h3 class="m-0">Întreaba ceva sau deschide un nou subiect!</h3>
 				<button class="btn btn-primary" @click="addTopic">
 					Adauga un subiect nou
