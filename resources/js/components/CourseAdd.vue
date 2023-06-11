@@ -2,7 +2,6 @@
 	<div>
 		<h1>{{ isUpdate ? "Actualizare curs" : "Creare curs" }}</h1>
 		<form @submit.prevent="submitCourse">
-			<!-- Titlu -->
 			<div class="form-group">
 				<label for="title">Titlu</label>
 				<input
@@ -14,7 +13,6 @@
 				/>
 			</div>
 
-			<!-- Descriere -->
 			<div class="form-group">
 				<label for="description">Descriere</label>
 				<textarea
@@ -40,18 +38,7 @@
 					required
 				/>
 			</div>
-			<!-- Preț
-			<div class="form-group">
-				<label for="price">Preț</label>
-				<input type="number" step="0.01" class="form-control" id="price" v-model="course.price" required />
-			</div> -->
 
-			<!-- Discount -->
-			<!-- <div class="form-group">
-				<label for="discount">Discount</label>
-				<input type="number" step="0.01" class="form-control" id="discount" v-model="course.discount" />
-			</div> -->
-			<!-- Image-->
 			<div class="form-group">
 				<label for="image">Image</label>
 				<input
@@ -62,7 +49,6 @@
 				/>
 			</div>
 
-			<!-- Nivel -->
 			<div class="form-group">
 				<label for="level">Nivel</label>
 				<select class="form-control" id="level" v-model="course.level">
@@ -72,7 +58,6 @@
 				</select>
 			</div>
 
-			<!-- Informații adiționale -->
 			<div class="form-group">
 				<label for="additional_info"
 					>Referințe și informații adiționale</label
@@ -84,7 +69,6 @@
 				></textarea>
 			</div>
 
-			<!-- Durata -->
 			<div class="form-group">
 				<label for="duration">Durată</label>
 				<select
@@ -114,26 +98,6 @@
 					</option>
 				</select>
 			</div>
-
-			<!-- ID-ul instructorului
-			<div class="form-group">
-				<label for="instructor">Instructor</label>
-				<select
-					class="form-control"
-					id="instructor"
-					v-model="course.instructor_id"
-				>
-					<option
-						v-for="instructor in instructors"
-						:key="instructor.id"
-						:value="instructor.id"
-					>
-						{{ instructor.name }}
-					</option>
-				</select>
-			</div> -->
-
-			<!-- Limba -->
 			<div class="form-group">
 				<label for="language">Limbă</label>
 				<select
@@ -171,10 +135,6 @@ export default {
 			type: Object,
 			default: null,
 		},
-		// instructors: {
-		// 	type: Array,
-		// 	default: () => [],
-		// },
 		categories: {
 			type: Array,
 			default: () => [],
@@ -190,7 +150,6 @@ export default {
 			additional_info: "",
 			duration: "",
 			category_id: null,
-			// instructor_id: null,
 			language: "",
 			points: 50,
 		};
@@ -207,8 +166,13 @@ export default {
 			],
 			levels: ["Începător", "Intermediar", "Avansat"],
 			durations: [
-				"2 weeks",
+				"1 day",
+				"2 days",
+				"3 days",
+				"4 days",
+				"5 days",
 				"1 week",
+				"2 weeks",
 				"3 weeks",
 				"1 month",
 				"6 weeks",

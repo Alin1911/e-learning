@@ -51,30 +51,9 @@
 						<p v-if="course.category_id" class="card-text">
 							Categorie: {{ course.category.name }}
 						</p>
-						<!-- <p v-if="course.instructor_id" class="card-text">
-							Instructor: {{ course.instructor_id }}
-						</p> -->
 						<p v-if="course.additional_info" class="card-text">
 							{{ course.additional_info }}
 						</p>
-						<!-- <div class="course-price mt-3">
-							<span
-								v-if="course.discount"
-								class="text-danger me-1"
-							>
-								<s v-if="course.price"
-									>{{ course.price }} RON</s
-								>
-							</span>
-							<span v-if="course.price"
-								>{{
-									course.discount
-										? course.price - course.discount
-										: course.price
-								}}
-								RON</span
-							>
-						</div> -->
 					</div>
 				</div>
 				<div v-if="course.lessons.length > 0" class="col-12">

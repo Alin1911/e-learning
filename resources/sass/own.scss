@@ -99,6 +99,10 @@ footer {
     border-bottom: 3px solid transparent;
 }
 
+.navbar-toggler-focus {
+    box-shadow: none !important;
+}
+
 .nav-link {
     color: #fff !important;
     font-size: 18px;
