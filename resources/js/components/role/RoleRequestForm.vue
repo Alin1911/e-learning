@@ -6,25 +6,15 @@
 		<form @submit.prevent="submit">
 			<div class="form-group">
 				<label for="rol">Rol:</label>
-				<select
-					class="form-control"
-					id="rol"
-					name="rol"
-					v-model="form.rol"
-				>
-					<option key="rol" :value="2">Administrator</option>
+				<select class="form-control" id="rol" name="rol" v-model="form.rol">
+					<option key="rol" :value="1">Administrator</option>
+					<option key="rol" :value="3">Profesor</option>
 				</select>
 			</div>
 			<div class="form-group mt-2">
 				<label for="motivation">De ce vrei acest rol?</label>
-				<textarea
-					type="text"
-					class="form-control"
-					id="motivation"
-					name="motivation"
-					required
-					v-model="form.motivation"
-				>
+				<textarea type="text" class="form-control" id="motivation" name="motivation" required
+					v-model="form.motivation">
 				</textarea>
 			</div>
 			<button class="mt-2 btn btn-success" type="submit">
