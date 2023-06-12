@@ -9,6 +9,19 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto d-flex align-items-start">
+                <li class="my-3 w-100 d-block d-md-none">
+                            <form class="row rounded" action="{{ route('course.index') }}" method="GET">
+                                <input 
+                                    id="form1"
+                                    type="search"
+                                    class="form-control border-white rounded-0 rounded-top"
+                                    placeholder="Caută cursuri"
+                                    name="search"
+                                    @if(isset($search)) value="{{ $search }}" @endif
+                                    style="min-width: 400px;">
+                                <button class="btn btn-primary rounded-0 rounded-bottom" type="submit"><i class="fas text-white fa-search"></i></button>
+                            </form>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/course" style="color: #000;">Cursuri</a>
                 </li>
@@ -19,10 +32,9 @@
                     <a class="nav-link" href="/forums" style="color: #000;">Discuții</a>
                 </li>
             </ul>
-            <div class="row d-none d-md-block">
-            <form class="rounded-pill" action="{{ route('course.index') }}" method="GET">
-                <div class="input-group"  style="display: ruby;">
-                    <div class="form-outline">
+            <div class="row w-100 d-flex justify-content-center d-none d-md-flex">
+                <div class="col-auto d-flex">
+                    <form class="input-group rounded-pill" action="{{ route('course.index') }}" method="GET">
                         <input 
                             id="form1"
                             type="search"
@@ -31,11 +43,10 @@
                             name="search"
                             @if(isset($search)) value="{{ $search }}" @endif
                             style="min-width: 400px;">
-                    </div>
-                    <button class="btn  btn-primar bg-white rounded-right-1 mb-1" type="submit"><i class="fas fa-search"></i></button>
+                        <button class="btn bg-white rounded-right-1" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
                 </div>
-            </form>
-        </div>
+            </div>
             <ul class="navbar-nav ms-auto">
                 @guest
                 @if (Route::has('login'))

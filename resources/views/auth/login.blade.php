@@ -93,7 +93,7 @@
 								type="submit"
 								class="btn btn-primary col-12 rounded-pill"
 							>
-							Conectează-te
+								Conectează-te
 							</button>
 						</div>
 					</div>
