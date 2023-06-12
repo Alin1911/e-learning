@@ -9,7 +9,7 @@
 						{{ session("status") }}
 					</div>
 				@endif
-
+				@if(count($user->learningCourses))
 				<h3>{{ __("Cursurile tale:") }}</h3>
 				<hr class="text-danger bg-danger" />
 				<div class="row">
@@ -53,6 +53,12 @@
 						</div>
 					@endforeach
 				</div>
+				@else
+				<h3 class="text-center m-5 pb-2">
+					Nu ești înscris la niciun curs
+				</h3>
+				@endif
+				@if(count($user->posts))
 				<h3 class="border-bottom border-primary mb-3 pb-2">
 					Discuții în care ești implicat
 				</h3>
@@ -123,7 +129,16 @@
 						</span>
 					</a>
 				</div>
+				@else
 				<hr class="text-danger bg-danger" />
+				<h3 class="text-center m-5 pb-2">
+					Nu ești implicat în nicio discuție
+				</h3>
+				@endif
+				<hr class="text-danger bg-danger" />
+				<h3 class="py-3">
+					Câteva citate motivaționale pentru a te ajuta să înveți mai bine
+				</h3>
 				<blockquote class="blockquote">
 					<p>
 						"Educația este cea mai puternică armă pe care o poți
@@ -138,6 +153,14 @@
 						purtat de valurile vieții."
 					</p>
 					<footer class="blockquote-footer">Autor necunoscut</footer>
+				</blockquote>
+				<blockquote class="blockquote">
+					<p>
+						"Învață din ieri, trăiește pentru azi, speră pentru
+						mâine. Cel mai important lucru este să nu încetezi să te
+						întrebi."
+					</p>
+					<footer class="blockquote-footer">Albert Einstein</footer>
 				</blockquote>
 			</div>
 		</div>

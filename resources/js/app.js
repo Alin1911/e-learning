@@ -9,7 +9,7 @@ import CourseManager from "@/components/learn/CourseManager.vue";
 import LessonCreate from "@/components/LessonCreate.vue";
 import TestCreate from "@/components/TestCreate.vue";
 import TestComponent from "@/components/TestComponent.vue";
-import ExerciseCreate from "@/components/Exercise.vue";
+import ExerciseCreate from "@/components/exercise/Exercise.vue";
 import AddForum from "@/components/AddForum.vue";
 import Lesson from "@/components/learn/Lesson.vue";
 import Test from "@/components/learn/Test.vue";

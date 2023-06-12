@@ -14,9 +14,9 @@ return new class extends Migration {
 			$table->id();
 			$table->string('title');
 			$table->text('description');
-			$table->unsignedBigInteger('course_id');
+			$table->unsignedBigInteger('course_id')->nullable();
 			$table->foreign('course_id')->nullable()->references('id')->on('courses')->onDelete('cascade');
-			$table->unsignedBigInteger('lesson_id');
+			$table->unsignedBigInteger('lesson_id')->nullable();
 			$table->foreign('lesson_id')->nullable()->references('id')->on('lessons')->onDelete('cascade');
 			$table->timestamps();
 		});

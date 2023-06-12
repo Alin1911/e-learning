@@ -8,7 +8,7 @@
 				class="px-3 py-4 row justify-content-center my-5 py-5 shadow bg-light"
 			>
 				<div class="border-bottom col-12 col-md-8 h2 py-2">
-					<strong>{{ __("Login") }}</strong>
+					<strong>Conectează-te la contul tău</strong>
 				</div>
 				<div class="mt-4 col-12 col-md-8 form-group my-1">
 					<div class="form-group row">
@@ -60,7 +60,7 @@
 					<div class="row">
 						<div class="col-12 col-md-6">
 							<div class="form-group">
-								<div class="form-check form-switch">
+								<div class="form-check">
 									<input
 										name="remember"
 										class="form-check-input"
@@ -93,7 +93,7 @@
 								type="submit"
 								class="btn btn-primary col-12 rounded-pill"
 							>
-								{{ __("Login") }}
+							Conectează-te
 							</button>
 						</div>
 					</div>

@@ -111,7 +111,7 @@ export default function createNewStore() {
 					commit("setCourses", state.courses);
 					// Aici puteți adăuga logica de actualizare a API-ului
 				}
-				window.location.replace("/learn/lesson/" + lessonId);
+				window.location.href = "/learn/lesson/" + lessonId;
 			},
 		},
 	});

@@ -3,6 +3,14 @@ p {
     overflow-wrap: break-word;
 }
 
+.carousel-control-next {
+    z-index: 0 !important;
+}
+
+.carousel-control-prev {
+    z-index: 0 !important;
+}
+
 .sidebar {
     position: absolute;
     left: 0;

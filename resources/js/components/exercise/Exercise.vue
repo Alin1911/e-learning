@@ -2,11 +2,7 @@
 	<div>
 		<div class="form-group">
 			<label for="exercise-type">Tipul exercițiului:</label>
-			<select
-				class="form-control"
-				id="exercise-type"
-				v-model="selectedExerciseType"
-			>
+			<select class="form-control" id="exercise-type" v-model="selectedExerciseType">
 				<option disabled value="">
 					Selectează un tip de exercițiu
 				</option>
@@ -26,25 +22,13 @@
 			</select>
 		</div>
 
-		<div
-			v-if="selectedExerciseType"
-			class="bg-white py-3 px-2 mt-3 rounded shadow"
-		>
+		<div v-if="selectedExerciseType" class="bg-white py-3 px-2 mt-3 rounded shadow">
 			<div class="form-group">
 				<label for="question">Întrebarea:</label>
-				<input
-					type="text"
-					class="form-control"
-					id="question"
-					v-model="question"
-				/>
+				<input type="text" class="form-control" id="question" v-model="question" />
 			</div>
 
-			<component
-				:is="exerciseComponent"
-				v-model="exerciseData"
-				@input="exerciseData = $event"
-			></component>
+			<component :is="exerciseComponent" v-model="exerciseData" @input="exerciseData = $event"></component>
 
 			<div class="row d-flex justify-content-end">
 				<div class="col-2 d-flex justify-content-end">
@@ -58,11 +42,11 @@
 </template>
 
 <script>
-import MultipleChoiceMultipleAnswers from "./exercise/MultipleChoiceMultipleAnswers.vue";
-import MultipleChoiceSingleAnswer from "./exercise/MultipleChoiceSingleAnswer.vue";
-import Numeric from "./exercise/Numeric.vue";
-import Ordering from "./exercise/Ordering.vue";
-import FillInTheBlank from "./exercise/FillInTheBlank.vue";
+import MultipleChoiceMultipleAnswers from "./MultipleChoiceMultipleAnswers.vue";
+import MultipleChoiceSingleAnswer from "./MultipleChoiceSingleAnswer.vue";
+import Numeric from "./Numeric.vue";
+import Ordering from "./Ordering.vue";
+import FillInTheBlank from "./FillInTheBlank.vue";
 
 export default {
 	props: ["test_id"],
