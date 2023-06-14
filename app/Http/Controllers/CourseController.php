@@ -27,6 +27,9 @@ class CourseController extends Controller
 		// Check if search input is provided
 		if (!empty($request->input('search', ''))) {
 			$search = $request->input('search');
+			if(strlen($search) < $segmentLength) {
+				$segmentLength = strlen($search);
+			}
 		} else {
 			// Fetch all courses and return the view
 			$courses = Course::paginate($perPage);
@@ -222,10 +225,10 @@ class CourseController extends Controller
 	 * @param  Request  $request
 	 * @return int
 	 */
-	public function update(Request $request)
+	public function update(Request $request, $id)
 	{
 		// Find the specified course
-		$course = Course::find($request->id);
+		$course = Course::findOrFail($id);
 
 		// Update the course properties if provided
 		if ($request->has('title')) {
@@ -239,6 +242,10 @@ class CourseController extends Controller
 		}
 		if ($request->has('price')) {
 			$course->price = $request->price;
+		}
+		if ($request->has('image')) {
+			$path = $request->file('image')->store('public/courses');
+			$course->image = asset('storage/' . substr($path, 7));
 		}
 		if ($request->has('level')) {
 			$course->level = $request->level;

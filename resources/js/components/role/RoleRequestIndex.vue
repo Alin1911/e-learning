@@ -13,6 +13,9 @@
 					<p v-if="roleRequest.user.points">
 						Puncte: {{ roleRequest.role.name }}
 					</p>
+					<p v-if="roleRequest.motivation">
+						Motiv: {{ roleRequest.motivation }}
+					</p>
 					<div>
 						<button
 							@click="approveRequest(roleRequest)"

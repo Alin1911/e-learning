@@ -7,7 +7,7 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <i class="fa-solid fa-bars text-white"></i>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse p-1" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto d-flex align-items-start">
                 <li class="my-3 w-100 d-block d-md-none">
                             <form class="row rounded" action="{{ route('course.index') }}" method="GET">
