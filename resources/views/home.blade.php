@@ -45,7 +45,7 @@
 												Accesează cursul
 											</a>
 											<a
-												href="/learn/course/leave/{{ $learningCourse->id }}"
+												href="/course/leave/{{ $learningCourse->id }}"
 												class="btn btn-danger"
 											>
 												Parăsește cursul
