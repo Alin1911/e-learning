@@ -29,6 +29,7 @@ return new class extends Migration {
 				->on('courses')
 				->onDelete('cascade');
 		});
+		DB::statement('ALTER TABLE course_meta_tags ADD FULLTEXT fulltext_index (title, description, keywords, language, author, duration, level)');
 	}
 
 	/**

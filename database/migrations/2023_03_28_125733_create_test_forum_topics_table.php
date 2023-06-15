@@ -13,6 +13,7 @@ return new class extends Migration {
 		Schema::create('forum_topics', function (Blueprint $table) {
 			$table->id();
 			$table->string('title');
+			$table->text('description')->nullable();
 			$table->unsignedBigInteger('forum_id');
 			$table->foreign('forum_id')->references('id')->on('forums')->onDelete('cascade');
 			$table->timestamps();
