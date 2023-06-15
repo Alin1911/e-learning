@@ -354,4 +354,28 @@ class CourseController extends Controller
 		// Return the courses as JSON
 		return json_encode($courses);
 	}
+
+	public function leave($id)
+	{
+		// Check if user is authenticated
+		if (!auth()->check()) {
+			abort(401, 'Unauthorized action.');
+		}
+
+		// Find the specified course
+		$course = Course::find($id);
+		$user = auth()->user();
+
+		// Check if user is enrolled in the course
+		if (!$user->learningCourses->contains($course->id)) {
+			return response()->json(['message' => 'User is not enrolled in this course'], 400);
+		}
+
+		// Detach the course from the user
+		$user->learningCourses()->detach($course);
+
+		// Return the ID of the left course
+		$user->load('learningCourses', 'posts', 'posts.topic', 'posts.topic.forum', 'role', 'problems');
+		return view('home')->with(['user' => $user]);
+	}
 }

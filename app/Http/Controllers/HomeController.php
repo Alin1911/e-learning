@@ -24,7 +24,6 @@ class HomeController extends Controller
 	public function index()
 	{
 		$user = Auth::user();
-		$learningCourses = $user->learningCourses;
 		$user->load('learningCourses', 'posts', 'posts.topic', 'posts.topic.forum', 'role', 'problems');
 		return view('home')->with(['user' => $user]);
 	}
