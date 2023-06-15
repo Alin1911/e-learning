@@ -153,7 +153,7 @@ class CourseController extends Controller
 		}
 
 		// Load relationships for the course
-		$course->load('forum', 'category', 'lessons', 'lessons.tests', 'tests', 'metaTag', 'exercises');
+		$course->load('forum', 'category', 'lessons', 'lessons.tests', 'tests', 'metaTag');
 
 		// Check if user is authenticated
 		if (!Auth::check()) {
