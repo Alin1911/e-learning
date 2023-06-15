@@ -14,6 +14,12 @@ return new class extends Migration {
 			$table->id();
 			$table->string('title');
 			$table->text('description');
+			$table->integer('points')->nullable();
+			$table->decimal('price', 8, 2)->nullable();
+			$table->decimal('discount', 5, 2)->nullable();
+			$table->string('level')->nullable();
+			$table->text('additional_info')->nullable();
+			$table->string('duration')->nullable();
 			$table->timestamps();
 		});
 	}

@@ -92,7 +92,6 @@ class CourseController extends Controller
 		$course->discount = $request->get('discount', '0');
 		$course->additional_info = $request->get('additional_info', '');
 		$course->language = $request->get('language', 'english');
-		$course->points = $request->get('points', '0');
 
 		// Check if an image is uploaded
 		if ($request->has('image')) {
@@ -261,9 +260,6 @@ class CourseController extends Controller
 		}
 		if ($request->has('language')) {
 			$course->language = $request->language;
-		}
-		if ($request->has('points')) {
-			$course->points = $request->points;
 		}
 
 		// Save the updated course to the database
