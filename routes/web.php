@@ -13,8 +13,8 @@ Route::resource('/course', 'CourseController'); // This generates multiple route
 Route::post('/course/{id}/enroll', 'CourseController@enroll')->name('course.enroll');
 Route::get('/courses', 'CourseController@courses')->name('courses.index');
 Route::get('/learn/course/{id}', 'CourseController@learnCourse')->name('course.learn');
-Route::post('course/{id}/join', 'CourseController@join')->name('course.join');
-Route::post('course/{id}/leave', 'CourseController@leave')->name('course.leave');
+Route::post('/course/{id}/join', 'CourseController@join')->name('course.join');
+Route::post('/course/leave/{id}', 'CourseController@leave')->name('course.leave');
 
 // Problem routes
 Route::resource('/problem', 'ProblemController'); // This generates multiple routes with names
