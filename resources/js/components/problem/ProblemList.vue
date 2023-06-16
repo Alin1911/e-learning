@@ -4,9 +4,6 @@
 			class="border-bottom border-primary pb-2 mb-2 d-flex justify-content-between align-items-center"
 		>
 			<h2>Exerciții recomandate</h2>
-			<a href="/problem/create" class="btn btn-primary"
-				>Adauga un Exercițiu</a
-			>
 		</div>
 		<div
 			v-for="(exercise, index) in exercises"
