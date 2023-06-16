@@ -59,10 +59,18 @@
 				</p>
 				<div class="row d-flex justify-content-center mb-5">
 					<div class="col-md-6 d-flex justify-content-between">
-						<a href="/term" class="btn btn-info">
+						<a
+							href="/term"
+							class="btn btn-info"
+							aria-label="Întrebări Frecvente"
+						>
 							Întrebări Frecvente
 						</a>
-						<a href="/contact" class="btn btn-info">
+						<a
+							href="/contact"
+							class="btn btn-info"
+							aria-label="Contactează-ne"
+						>
 							Contactează-ne
 						</a>
 					</div>
