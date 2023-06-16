@@ -67,18 +67,15 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/account/{{ Auth::user()->id }}/edit" style="color: #000;">
-                            Contul meu
-                        </a>
                         <a class="dropdown-item" href="/home" style="color: #000;">
-                            Dashboard
+                            Activitățile mele
                         </a>
                         @if(Auth::user()->isAdmin())
                         <a class="dropdown-item" href="/course/create" style="color: #000;">
-                            Adaugă curs
+                            Cursuri
                         </a>
                         <a class="dropdown-item" href="/problem/create" style="color: #000;">
-                            Adaugă exercițiu
+                            Probleme
                         </a>
                         <a class="dropdown-item" href="/role/request" style="color: #000;">
                             Cereri rol
