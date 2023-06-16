@@ -9,11 +9,12 @@ return new class extends Migration {
 	 * Run the migrations.
 	 */
 	public function up() : void
-	{
+	{ 
 		Schema::create('tests', function (Blueprint $table) {
 			$table->id();
 			$table->string('title');
 			$table->text('description');
+			$table->integer('time')->after('description');
 			$table->unsignedBigInteger('course_id')->nullable();
 			$table->foreign('course_id')->nullable()->references('id')->on('courses')->onDelete('cascade');
 			$table->unsignedBigInteger('lesson_id')->nullable();

@@ -9,7 +9,7 @@ return new class extends Migration {
 	 * Run the migrations.
 	 */
 	public function up()
-	{
+	{ 
 		Schema::table('courses', function (Blueprint $table) {
 			$table->unsignedBigInteger('user_id')->nullable()->after('id');
 

@@ -9,7 +9,7 @@ return new class extends Migration {
 	 * Run the migrations.
 	 */
 	public function up(): void
-	{
+	{ 
 		Schema::dropIfExists('user_ratings');
 	
 		Schema::create('user_activity', function (Blueprint $table) {

@@ -9,13 +9,13 @@ return new class extends Migration {
 	 * Run the migrations.
 	 */
 	public function up() : void
-	{
+	{ 
 		Schema::create('exercises', function (Blueprint $table) {
 			$table->id();
 			$table->unsignedBigInteger('test_id')->nullable();
 			$table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
 			$table->string('question');
-			$table->integer('exercise_type');
+			$table->text('exercise_type');
 			$table->integer('points');
 			$table->json('options')->nullable();
 			$table->json('ordering_items')->nullable();

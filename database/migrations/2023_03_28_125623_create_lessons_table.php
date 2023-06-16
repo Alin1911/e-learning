@@ -9,16 +9,19 @@ return new class extends Migration {
 	 * Run the migrations.
 	 */
 	public function up()
-	{
+	{ 
 		Schema::create('lessons', function (Blueprint $table) {
 			$table->id();
 			$table->unsignedBigInteger('course_id');
 			$table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
 			$table->string('title');
 			$table->text('description');
+			$table->text('argumente')->nullable();
+			$table->unsignedBigInteger('user_id')->nullable();
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+			$table->integer('order');
 			$table->timestamp('created_at')->nullable();
 			$table->timestamp('updated_at')->nullable();
-			$table->integer('order');
 		});
 	}
 

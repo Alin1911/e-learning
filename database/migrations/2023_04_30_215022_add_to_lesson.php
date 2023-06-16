@@ -9,7 +9,7 @@ return new class extends Migration {
 	 * Run the migrations.
 	 */
 	public function up()
-	{
+	{ 
 		Schema::table('lessons', function (Blueprint $table) {
 			$table->text('content')->nullable()->after('description');
 			$table->string('video_url')->nullable()->after('content');
