@@ -6,9 +6,7 @@
 				Alătură-te comunității noastre de învățare și împărtășește
 				experiențele tale de micro-learning cu alții ca tine.
 			</p>
-			<a href="/forums" class="btn btn-danger">
-				Alătură-te Comunității
-			</a>
+			<a href="/forums" class="btn btn-danger">Alătură-te Comunității</a>
 		</div>
 	</div>
 </div>

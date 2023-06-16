@@ -9,9 +9,9 @@ return new class extends Migration {
 	 * Run the migrations.
 	 */
 	public function up(): void
-	{ 
+	{
 		Schema::dropIfExists('user_ratings');
-	
+
 		Schema::create('user_activity', function (Blueprint $table) {
 			$table->id();
 			$table->unsignedBigInteger('user_id');
@@ -20,7 +20,7 @@ return new class extends Migration {
 			$table->decimal('rating', 3, 2)->default(0.00);
 			$table->text('review_text')->nullable();
 			$table->timestamps();
-	
+
 			$table->foreign('user_id')->references('id')->on('users');
 			$table->index('user_id');
 		});

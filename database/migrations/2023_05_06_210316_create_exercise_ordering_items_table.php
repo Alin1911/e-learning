@@ -9,7 +9,7 @@ return new class extends Migration {
 	 * Run the migrations.
 	 */
 	public function up() : void
-	{ 
+	{
 		Schema::create('exercise_ordering_items', function (Blueprint $table) {
 			$table->id();
 			$table->unsignedBigInteger('exercise_id');

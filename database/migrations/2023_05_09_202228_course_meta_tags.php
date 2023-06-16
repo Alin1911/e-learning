@@ -9,7 +9,7 @@ return new class extends Migration {
 	 * Run the migrations.
 	 */
 	public function up()
-	{ 
+	{
 		Schema::create('course_meta_tags', function (Blueprint $table) {
 			$table->id();
 			$table->unsignedBigInteger('course_id');
