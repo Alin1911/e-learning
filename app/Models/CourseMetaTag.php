@@ -29,46 +29,39 @@ class CourseMetaTag extends Model
 	{
 		return $this->belongsTo(Course::class);
 	}
-	public static function countSegmentOccurrences($searchString, $segmentLength)
-	{
-		$segments = self::splitStringIntoSegments($searchString, $segmentLength);
-	
-		// Counting occurrences in course_meta_tags
-		$query = DB::table('course_meta_tags');
-		$totalCountsMetaTags = [];
-		foreach ($segments as $index => $segment) {
-			$countColumn = '(
-				(LENGTH(title) - LENGTH(REPLACE(title, "'.$segment.'", "")))/'.$segmentLength.' +
-				(LENGTH(description) - LENGTH(REPLACE(description, "'.$segment.'", "")))/'.$segmentLength.' +
-				(LENGTH(keywords) - LENGTH(REPLACE(keywords, "'.$segment.'", "")))/'.$segmentLength.' +
-				(LENGTH(language) - LENGTH(REPLACE(language, "'.$segment.'", "")))/'.$segmentLength.' +
-				(LENGTH(author) - LENGTH(REPLACE(author, "'.$segment.'", "")))/'.$segmentLength.'
-			)';
-			$totalCountsMetaTags[] = $countColumn;
-		}
-		
-		// Subquery for counting occurrences in lessons
-		$lessonsSubquery = DB::table('lessons')
-			->select('course_id', DB::raw('SUM(
-				(LENGTH(title) - LENGTH(REPLACE(title, "'.$searchString.'", "")))/'.$segmentLength.' +
-				(LENGTH(description) - LENGTH(REPLACE(description, "'.$searchString.'", "")))/'.$segmentLength.' +
-				(LENGTH(content) - LENGTH(REPLACE(content, "'.$searchString.'", "")))/'.$segmentLength.'
-			) as lessonsCount'))
-			->groupBy('course_id');
-		
-		// Joining the results and calculating the total count
-		$query->leftJoinSub($lessonsSubquery, 'lesson_counts', function ($join) {
-			$join->on('course_meta_tags.course_id', '=', 'lesson_counts.course_id');
-		});
-	
-		$totalCountColumn = '('.implode(' + ', $totalCountsMetaTags).'+ COALESCE(lesson_counts.lessonsCount, 0))';
-		$query->addSelect('course_meta_tags.course_id', DB::raw($totalCountColumn.' as totalCount'))
-			  ->where(DB::raw($totalCountColumn), '>', 0)
-			  ->orderBy('totalCount', 'desc');
-	
-		return $query->get()->pluck('course_meta_tags.course_id');
-	}
-	
+
+public static function countSegmentOccurrences($searchString, $segmentLength)
+{
+    $segments = self::splitStringIntoSegments($searchString, $segmentLength);
+
+    $query = DB::table('course_meta_tags')
+        ->leftJoin('lessons', 'course_meta_tags.course_id', '=', 'lessons.course_id');
+
+    $totalCounts = [];
+    $bindings = [];
+
+    foreach ($segments as $index => $segment) {
+        $countColumn = '(
+            (LENGTH(course_meta_tags.title) - LENGTH(REPLACE(course_meta_tags.title, "'.$segment.'", "")))/'.$segmentLength.' +
+            (LENGTH(course_meta_tags.description) - LENGTH(REPLACE(course_meta_tags.description, "'.$segment.'", "")))/'.$segmentLength.' +
+            (LENGTH(course_meta_tags.keywords) - LENGTH(REPLACE(course_meta_tags.keywords, "'.$segment.'", "")))/'.$segmentLength.' +
+            (LENGTH(course_meta_tags.language) - LENGTH(REPLACE(course_meta_tags.language, "'.$segment.'", "")))/'.$segmentLength.' +
+            (LENGTH(course_meta_tags.author) - LENGTH(REPLACE(course_meta_tags.author, "'.$segment.'", "")))/'.$segmentLength.' +
+            (LENGTH(lessons.title) - LENGTH(REPLACE(lessons.title, "'.$segment.'", "")))/'.$segmentLength.' +
+            (LENGTH(lessons.description) - LENGTH(REPLACE(lessons.description, "'.$segment.'", "")))/'.$segmentLength.' +
+            (LENGTH(lessons.content) - LENGTH(REPLACE(lessons.content, "'.$segment.'", "")))/'.$segmentLength.'
+        )';
+
+        $query->addSelect(DB::raw($countColumn.' as count'.$index));
+        $totalCounts[] = $countColumn;
+    }
+
+    $query->addSelect('course_meta_tags.course_id', DB::raw('('.implode(' + ', $totalCounts).') as totalCount'))
+        ->where(DB::raw('('.implode(' + ', $totalCounts).')'), '>', 0)
+        ->orderBy('totalCount', 'desc');
+
+    return $query->get()->pluck('course_id');
+}
 	
 
 	private static function splitStringIntoSegments($string, $segmentLength)
