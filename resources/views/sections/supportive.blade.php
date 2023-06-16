@@ -1,7 +1,7 @@
 <div class="col-md-4">
 	<div class="card">
 		<div class="card-body" style="min-height: 260px">
-			<h3 class="card-title">Suport Continuu</h3>
+			<h2 class="card-title">Suport Continuu</h2>
 			<p class="card-text">
 				Echipa noastră de asistență este aici pentru a răspunde la
 				întrebările tale și a te ajuta în călătoria ta de învățare.

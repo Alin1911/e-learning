@@ -10,7 +10,7 @@
 			/>
 			<div class="card-img-overlay d-flex align-items-center">
 				<div class="col-8 offset-4">
-					<h4 class="card-title text-white">Numele cursului</h4>
+					<h2 class="card-title text-white">Numele cursului</h2>
 					<p class="card-text text-white">
 						Descriere scurtă a cursului, care explică de ce este
 						recomandat, ce vei învăța și cum te va ajuta acest curs

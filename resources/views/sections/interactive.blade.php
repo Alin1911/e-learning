@@ -1,7 +1,7 @@
 <div class="col-md-4">
 	<div class="card">
 		<div class="card-body" style="min-height: 260px">
-			<h3 class="card-title">Învățare Interactivă</h3>
+			<h2 class="card-title">Învățare Interactivă</h2>
 			<p class="card-text">
 				Cursurile noastre includ exerciții interactive, chestionare și
 				proiecte practice pentru a-ți îmbunătăți înțelegerea și a-ți
