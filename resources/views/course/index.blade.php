@@ -19,6 +19,7 @@
 									url('{{ asset($course->image) }}')
 								);
 								height: 145px;
+								background-size: contain;
 							"
 						>
 							<h6 class="pt-3 px-3 text-white card-title over">
@@ -44,28 +45,6 @@
 						@else
 							<li class="list-group-item">Romana</li>
 						@endif
-						{{--
-          @if ($course->price)
-          <li class="list-group-item">
-          <div class="course-price mt-3">
-          @if ($course->discount)
-          <span class="text-danger me-1">
-          <s>{{ $course->price }} RON</s>
-          </span>
-          @endif
-          
-          @if ($course->price)
-          <span>
-          {{ $course->discount ? $course->price - $course->discount : $course->price }}
-          RON
-          </span>
-          @endif
-          </div>
-          </li>
-          @else
-          <li class="list-group-item">Inscrie-te acum!</li>
-          @endif
-      --}}
 					</ul>
 					<div class="card-body">
 						<a
