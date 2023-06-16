@@ -59,7 +59,7 @@
 				</p>
 				<div class="row d-flex justify-content-center mb-5">
 					<div class="col-md-6 d-flex justify-content-between">
-						<a href="/faq" class="btn btn-info">
+						<a href="/term" class="btn btn-info">
 							Întrebări Frecvente
 						</a>
 						<a href="/contact" class="btn btn-info">
@@ -67,11 +67,6 @@
 						</a>
 					</div>
 				</div>
-			</div>
-		</div>
-		<div class="row mt-5">
-			<div class="col-md-12 mx-auto text-center">
-				@include("sections.testimonial")
 			</div>
 		</div>
 	</div>

@@ -80,7 +80,7 @@
 										class="m-5 row d-flex justify-content-center"
 									>
 										<div
-											class="mx-5 col-6 d-flex justify-content-between"
+											class="mx-5 col-9 d-flex justify-content-between"
 										>
 											<h4>
 												{{ $post->topic->forum->title }}
@@ -93,7 +93,7 @@
 											</a>
 										</div>
 										<div
-											class="mx-5 col-6 d-flex justify-content-between mt-1"
+											class="mx-5 col-9 d-flex justify-content-between mt-1"
 										>
 											<h4>{{ $post->topic->title }}</h4>
 											<a
@@ -103,7 +103,7 @@
 												Acceseaza discuția
 											</a>
 										</div>
-										<div class="col-6 mt-4">
+										<div class="col-9 mt-4">
 											<h3 class="">Postarea ta:</h3>
 											<p>{{ $post->content }}</p>
 										</div>

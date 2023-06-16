@@ -6,7 +6,7 @@
 				Te blochezi? Comunitatea noastră de suport este aici pentru a te
 				ajuta. Împărtășește, întreabă și învață de la alții.
 			</p>
-			<a href="/support" class="btn btn-danger">Accesează Suportul</a>
+			<a href="/contact" class="btn btn-danger">Accesează Suportul</a>
 		</div>
 	</div>
 </div>
