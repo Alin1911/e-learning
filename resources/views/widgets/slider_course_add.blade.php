@@ -37,13 +37,6 @@
 				<i class="fas fa-duotone fa-check-double fa-fw me-3"></i>
 				<span>Adauga Test</span>
 			</a>
-			<a
-				href="/forum/create"
-				class="list-group-item list-group-item-action px-5 py-3 ripple @if($active == 4) active @endif"
-			>
-				<i class="fas fa-users fa-fw me-3"></i>
-				<span>Creaza o discutie</span>
-			</a>
 			@if (! @empty($courses))
 				<div class="btn-group">
 					<button
@@ -58,7 +51,7 @@
 					<div class="dropdown-menu p-0" style="width: 240px">
 						@foreach ($courses as $course)
 							<a
-								class="dropdown-item border-bottom py-2"
+								class="dropdown-item border-bottom py-2 text-wrap"
 								href="/course/{{ $course->id }}/edit"
 							>
 								{{ $course->title }}
