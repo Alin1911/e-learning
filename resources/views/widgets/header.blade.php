@@ -19,7 +19,7 @@
                                     name="search"
                                     @if(isset($search)) value="{{ $search }}" @endif
                                     style="min-width: 400px;">
-                                <button class="btn btn-primary rounded-0 rounded-bottom" type="submit"><i class="fas text-white fa-search"></i></button>
+                                    <button class="btn bg-white rounded-right-1" type="submit" aria-label="Trimite formularul"><i class="fas fa-search"></i></button>
                             </form>
                 </li>
                 <li class="nav-item">
@@ -43,7 +43,7 @@
                             name="search"
                             @if(isset($search)) value="{{ $search }}" @endif
                             style="min-width: 400px;">
-                        <button class="btn bg-white rounded-right-1" type="submit"><i class="fas fa-search"></i></button>
+                            <button class="btn bg-white rounded-right-1" type="submit" aria-label="Trimite formularul"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
             </div>
