@@ -10,17 +10,18 @@
         <div class="collapse navbar-collapse p-1" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto d-flex align-items-start">
                 <li class="my-3 w-100 d-block d-md-none">
-                            <form class="row rounded" action="{{ route('course.index') }}" method="GET">
-                                <input 
-                                    id="form1"
-                                    type="search"
-                                    class="form-control border-white rounded-0 rounded-top"
-                                    placeholder="Caută cursuri"
-                                    name="search"
-                                    @if(isset($search)) value="{{ $search }}" @endif
-                                    style="min-width: 400px;">
-                                    <button class="btn bg-white rounded-right-1" type="submit" aria-label="Trimite formularul"><i class="fas fa-search"></i></button>
-                            </form>
+                    <form class="row rounded" action="{{ route('course.index') }}" method="GET">
+                        <input 
+                            id="form1"
+                            type="search"
+                            class="form-control border-white rounded-0 rounded-top"
+                            placeholder="Caută cursuri"
+                            name="search"
+                            @if(isset($search)) value="{{ $search }}" @endif
+                            style="min-width: 400px;">
+                        <button class="btn bg-white rounded-right-1" type="submit" aria-label="Trimite formularul"><i class="fas fa-search"></i></button>
+                    </form>
+                    
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/course" style="color: #000;">Cursuri</a>
@@ -36,14 +37,14 @@
                 <div class="col-auto d-flex">
                     <form class="input-group rounded-pill" action="{{ route('course.index') }}" method="GET">
                         <input 
-                            id="form1"
+                            id="form2"
                             type="search"
                             class="form-control border-white rounded-left-1"
                             placeholder="Caută cursuri"
                             name="search"
                             @if(isset($search)) value="{{ $search }}" @endif
                             style="min-width: 400px;">
-                            <button class="btn bg-white rounded-right-1" type="submit" aria-label="Trimite formularul"><i class="fas fa-search"></i></button>
+                        <button class="btn bg-white rounded-right-1" type="submit" aria-label="Trimite formularul"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
             </div>
