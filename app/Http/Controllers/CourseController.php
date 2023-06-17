@@ -86,10 +86,8 @@ class CourseController extends Controller
 		$course->title = $request->get('title', '');
 		$course->description = $request->get('description', '');
 		$course->category_id = $request->get('category_id', '');
-		$course->price = $request->get('price', '0');
 		$course->level = $request->get('level', 'beginner');
 		$course->duration = $request->get('duration', 'anytime');
-		$course->discount = $request->get('discount', '0');
 		$course->additional_info = $request->get('additional_info', '');
 		$course->language = $request->get('language', 'english');
 
@@ -109,7 +107,6 @@ class CourseController extends Controller
 		$metaTag->course_id = $course->id;
 		$metaTag->title = $course->title;
 		$metaTag->description = $course->description;
-		$metaTag->price = $course->price;
 		$metaTag->keywords = implode(', ', array_slice(explode(' ', $course->description), 0, 10));
 		$metaTag->language = $course->language;
 		$metaTag->author = $user->name;
@@ -239,9 +236,6 @@ class CourseController extends Controller
 		if ($request->has('category_id')) {
 			$course->category_id = $request->category_id;
 		}
-		if ($request->has('price')) {
-			$course->price = $request->price;
-		}
 		if ($request->has('image')) {
 			$path = $request->file('image')->store('public/courses');
 			$course->image = asset('storage/' . substr($path, 7));
@@ -251,9 +245,6 @@ class CourseController extends Controller
 		}
 		if ($request->has('duration')) {
 			$course->duration = $request->duration;
-		}
-		if ($request->has('discount')) {
-			$course->discount = $request->discount;
 		}
 		if ($request->has('additional_info')) {
 			$course->additional_info = $request->additional_info;

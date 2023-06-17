@@ -21,7 +21,6 @@ return new class extends Migration {
 			$table->date('publish_date');
 			$table->string('duration');
 			$table->string('level');
-			$table->decimal('price', 8, 2);
 			$table->timestamps();
 
 			$table->foreign('course_id')
