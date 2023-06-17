@@ -30,39 +30,73 @@ class CourseMetaTag extends Model
 		return $this->belongsTo(Course::class);
 	}
 
-public static function countSegmentOccurrences($searchString, $segmentLength)
-{
-    $segments = self::splitStringIntoSegments($searchString, $segmentLength);
+	public static function countSegmentOccurrences($searchString, $segmentLength)
+	{
+		$segments = self::splitStringIntoSegments($searchString, $segmentLength);
 
-    $query = DB::table('course_meta_tags')
-        ->leftJoin('lessons', 'course_meta_tags.course_id', '=', 'lessons.course_id');
+		// Interogare pentru tabela course_meta_tags
+		$metaQuery = self::buildQueryForCourseMetaTags($segments, $segmentLength);
 
-    $totalCounts = [];
-    $bindings = [];
+		// Interogare pentru tabela lessons
+		$lessonsQuery = self::buildQueryForLessons($segments, $segmentLength);
 
-    foreach ($segments as $index => $segment) {
-        $countColumn = '(
-            (LENGTH(course_meta_tags.title) - LENGTH(REPLACE(course_meta_tags.title, "'.$segment.'", "")))/'.$segmentLength.' +
-            (LENGTH(course_meta_tags.description) - LENGTH(REPLACE(course_meta_tags.description, "'.$segment.'", "")))/'.$segmentLength.' +
-            (LENGTH(course_meta_tags.keywords) - LENGTH(REPLACE(course_meta_tags.keywords, "'.$segment.'", "")))/'.$segmentLength.' +
-            (LENGTH(course_meta_tags.language) - LENGTH(REPLACE(course_meta_tags.language, "'.$segment.'", "")))/'.$segmentLength.' +
-            (LENGTH(course_meta_tags.author) - LENGTH(REPLACE(course_meta_tags.author, "'.$segment.'", "")))/'.$segmentLength.' +
-            (LENGTH(lessons.title) - LENGTH(REPLACE(lessons.title, "'.$segment.'", "")))/'.$segmentLength.' +
-            (LENGTH(lessons.description) - LENGTH(REPLACE(lessons.description, "'.$segment.'", "")))/'.$segmentLength.' +
-            (LENGTH(lessons.content) - LENGTH(REPLACE(lessons.content, "'.$segment.'", "")))/'.$segmentLength.'
-        )';
+		// Adună scorurile din ambele interogări pentru fiecare course_id
+		$combinedScores = [];
+		foreach ($metaQuery->get() as $result) {
+			$combinedScores[$result->course_id] = $result->totalCount;
+		}
 
-        $query->addSelect(DB::raw($countColumn.' as count'.$index));
-        $totalCounts[] = $countColumn;
-    }
+		foreach ($lessonsQuery->get() as $result) {
+			if (isset($combinedScores[$result->course_id])) {
+				$combinedScores[$result->course_id] += $result->totalCount;
+			} else {
+				$combinedScores[$result->course_id] = $result->totalCount;
+			}
+		}
 
-    $query->addSelect('course_meta_tags.course_id', DB::raw('('.implode(' + ', $totalCounts).') as totalCount'))
-        ->where(DB::raw('('.implode(' + ', $totalCounts).')'), '>', 0)
-        ->orderBy('totalCount', 'desc');
+		// Sortează rezultatele în funcție de scorul total
+		arsort($combinedScores);
 
-    return $query->get()->pluck('course_id');
-}
-	
+		return array_keys($combinedScores);
+	}
+
+	private static function buildQueryForCourseMetaTags($segments, $segmentLength)
+	{
+		$query = DB::table('course_meta_tags');
+		$totalCounts = [];
+		foreach ($segments as $segment) {
+			$lowerSegment = strtolower($segment);
+			$countColumn = '(
+				(LENGTH(LOWER(title)) - LENGTH(REPLACE(LOWER(title), "' . $lowerSegment . '", "")))/' . $segmentLength . ' +
+				(LENGTH(LOWER(description)) - LENGTH(REPLACE(LOWER(description), "' . $lowerSegment . '", "")))/' . $segmentLength . ' +
+				(LENGTH(LOWER(keywords)) - LENGTH(REPLACE(LOWER(keywords), "' . $lowerSegment . '", "")))/' . $segmentLength . ' +
+				(LENGTH(LOWER(language)) - LENGTH(REPLACE(LOWER(language), "' . $lowerSegment . '", "")))/' . $segmentLength . ' +
+				(LENGTH(LOWER(author)) - LENGTH(REPLACE(LOWER(author), "' . $lowerSegment . '", "")))/' . $segmentLength . '
+			)';
+			$totalCounts[] = $countColumn;
+		}
+		return $query->select('course_id', DB::raw('(' . implode(' + ', $totalCounts) . ') as totalCount'))
+			->where(DB::raw('(' . implode(' + ', $totalCounts) . ')'), '>', 0);
+	}
+
+	private static function buildQueryForLessons($segments, $segmentLength)
+	{
+		$query = DB::table('lessons');
+		$totalCounts = [];
+		foreach ($segments as $segment) {
+			$lowerSegment = strtolower($segment);
+			$countColumn = '(
+				(LENGTH(LOWER(title)) - LENGTH(REPLACE(LOWER(title), "' . $lowerSegment . '", "")))/' . $segmentLength . ' +
+				(LENGTH(LOWER(description)) - LENGTH(REPLACE(LOWER(description), "' . $lowerSegment . '", "")))/' . $segmentLength . ' +
+				(LENGTH(LOWER(content)) - LENGTH(REPLACE(LOWER(content), "' . $lowerSegment . '", "")))/' . $segmentLength . '
+			)';
+			$totalCounts[] = $countColumn;
+		}
+		return $query->select('course_id', DB::raw('SUM(' . implode(' + ', $totalCounts) . ') as totalCount'))
+			->where(DB::raw('(' . implode(' + ', $totalCounts) . ')'), '>', 0)
+			->groupBy('course_id');
+	}
+
 
 	private static function splitStringIntoSegments($string, $segmentLength)
 	{
