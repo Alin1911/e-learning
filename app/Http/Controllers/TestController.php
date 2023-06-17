@@ -104,6 +104,24 @@ class TestController extends Controller
 				}
 
 			}
+			if($e->exercise_type  == 'ordering') {
+				$answer = $e->checkOrdering($exercise['selected_answers']);
+				if($answer) {
+					$points += $e->points;
+				}
+			}
+			if($e->exercise_type  == 'fill_in_the_blank') {
+				$answer = $e->checkFillInTheBlank($exercise['selected_answers']);
+				if($answer) {
+					$points += $e->points;
+				}
+			}
+			if($e->exercise_type  == 'numeric') {
+				$answer = $e->checkNumeric($exercise['selected_answers'][0]);
+				if($answer) {
+					$points += $e->points;
+				}
+			}
 		}
 		$total = $test->exercises->sum('points');
 		$result = $test->setUserAcivity($points, $total);
