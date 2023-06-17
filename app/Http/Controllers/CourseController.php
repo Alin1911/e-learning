@@ -38,8 +38,11 @@ class CourseController extends Controller
 
 		// Search for courses based on the provided search input
 		$results = CourseMetaTag::countSegmentOccurrences($search, $segmentLength);
-		$courses = Course::whereIn('id', $results)->paginate($perPage);
-
+		$orderedIds = implode(',', $results);
+		$courses = Course::whereIn('id', $results)
+			->orderByRaw("FIELD(id, {$orderedIds})")
+			->paginate($perPage);
+		
 		// Filter courses by level if 'nivel' parameter is present
 		if ($request->has('nivel')) {
 			$courses = $courses->where('level', $request->nivel);
