@@ -83,18 +83,6 @@
 							name="file"
 						/>
 					</div>
-					<div class="form-group">
-						<label for="argumente">
-							Argumentează de ce ar fi utilă aceeastă lecție
-						</label>
-						<textarea
-							class="form-control"
-							id="argumente"
-							name="argumente"
-							rows="3"
-							required
-						></textarea>
-					</div>
 					<button type="submit" class="mt-3 btn btn-primary">
 						Propune lectie
 					</button>

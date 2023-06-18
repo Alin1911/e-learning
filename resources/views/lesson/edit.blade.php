@@ -88,16 +88,6 @@
 						/>
 					</div>
 
-					<div class="form-group">
-						<label for="file">File</label>
-						<input
-							type="file"
-							class="form-control"
-							id="file"
-							name="file"
-						/>
-					</div>
-
 					<div class="form-group form-check my-3">
 						<input
 							type="checkbox"

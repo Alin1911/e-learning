@@ -132,10 +132,6 @@ class LessonController extends Controller
 			$video = $request->file('video')->store('lessons/videos', 'public');
 			$lesson->video_url = asset('storage/' . $video);
 		}
-		if(isset($request->file)) {
-			$file = $request->file('file')->store('files', 'public/lessons');
-			$lesson->file .= ',' . asset('storage/' . substr($file, 7));
-		}
 		$lesson->save();
 		return redirect('/lesson/'. $lesson->id);
 	}

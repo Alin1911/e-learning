@@ -42,7 +42,7 @@ class ExerciseController extends Controller
 		if ($request->has('public')) {
 			$exercise->public = $request->public;
 		}
-		$exercise->points = $request->get('points', 1);
+		$exercise->points = $request->get('points', 3);
 		$exercise->save();
 
 		// Store options for the exercise if any
