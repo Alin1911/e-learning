@@ -21,7 +21,7 @@ class CourseController extends Controller
 	public function index(Request $request)
 	{
 		// Set default values
-		$segmentLength = 3;
+		$segmentLength = 4;
 		$perPage = 12;
 
 		// Check if search input is provided
@@ -38,6 +38,9 @@ class CourseController extends Controller
 
 		// Search for courses based on the provided search input
 		$results = CourseMetaTag::countSegmentOccurrences($search, $segmentLength);
+		if(count($results) == 0) {
+			$results = CourseMetaTag::countSegmentOccurrences($search, $segmentLength - 1);
+		}
 		$orderedIds = implode(',', $results);
 		$courses = Course::whereIn('id', $results)
 			->orderByRaw("FIELD(id, {$orderedIds})")
