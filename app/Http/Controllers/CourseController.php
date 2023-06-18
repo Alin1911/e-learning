@@ -38,9 +38,7 @@ class CourseController extends Controller
 
 		// Search for courses based on the provided search input
 		$results = CourseMetaTag::countSegmentOccurrences($search, $segmentLength);
-		if(count($results) == 0) {
-			$results = CourseMetaTag::countSegmentOccurrences($search, $segmentLength - 1);
-		}
+
 		$orderedIds = implode(',', $results);
 		$courses = Course::whereIn('id', $results)
 			->orderByRaw("FIELD(id, {$orderedIds})")
