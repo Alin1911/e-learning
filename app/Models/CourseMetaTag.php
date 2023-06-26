@@ -96,7 +96,6 @@ class CourseMetaTag extends Model
 			->groupBy('course_id');
 	}
 
-
 	private static function splitStringIntoSegments($string, $segmentLength)
 	{
 		$segments = [];

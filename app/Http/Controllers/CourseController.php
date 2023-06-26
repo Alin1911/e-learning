@@ -43,7 +43,7 @@ class CourseController extends Controller
 		$courses = Course::whereIn('id', $results)
 			->orderByRaw("FIELD(id, {$orderedIds})")
 			->paginate($perPage);
-		
+
 		// Filter courses by level if 'nivel' parameter is present
 		if ($request->has('nivel')) {
 			$courses = $courses->where('level', $request->nivel);

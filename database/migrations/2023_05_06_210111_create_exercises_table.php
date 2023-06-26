@@ -17,9 +17,6 @@ return new class extends Migration {
 			$table->string('question');
 			$table->text('exercise_type');
 			$table->integer('points');
-			$table->json('options')->nullable();
-			$table->json('ordering_items')->nullable();
-			$table->json('fill_in_the_blank_items')->nullable();
 			$table->timestamps();
 		});
 	}

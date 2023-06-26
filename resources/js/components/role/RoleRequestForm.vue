@@ -17,7 +17,9 @@
 				</select>
 			</div>
 			<div class="form-group mt-2">
-				<label for="motivation">De ce vrei acest rol?</label>
+				<label for="motivation"
+					>Ce te-a determinat sa cauți acest rol:</label
+				>
 				<textarea
 					type="text"
 					class="form-control"

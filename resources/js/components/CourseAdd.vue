@@ -4,23 +4,49 @@
 		<form @submit.prevent="submitCourse">
 			<div class="form-group">
 				<label for="title">Titlu</label>
-				<input type="text" class="form-control" id="title" v-model="course.title" required />
+				<input
+					type="text"
+					class="form-control"
+					id="title"
+					v-model="course.title"
+					required
+				/>
 			</div>
 
 			<div class="form-group">
 				<label for="description">Descriere</label>
-				<textarea class="form-control" id="description" v-model="course.description" required></textarea>
+				<textarea
+					class="form-control"
+					id="description"
+					v-model="course.description"
+					required
+				></textarea>
 			</div>
 
 			<div class="form-group">
-				<label for="points">Procent puncte necesare pentru a completa cursul</label>
-				<input type="number" step="5" max="100" min="0" class="form-control" id="points" v-model="course.points"
-					required />
+				<label for="points"
+					>Procent puncte necesare pentru a completa cursul</label
+				>
+				<input
+					type="number"
+					step="5"
+					max="100"
+					min="0"
+					class="form-control"
+					id="points"
+					v-model="course.points"
+					required
+				/>
 			</div>
 
 			<div class="form-group">
 				<label for="image">Image</label>
-				<input type="file" class="form-control" id="image" @change="onFileChange" />
+				<input
+					type="file"
+					class="form-control"
+					id="image"
+					@change="onFileChange"
+				/>
 			</div>
 
 			<div class="form-group">
@@ -33,14 +59,28 @@
 			</div>
 
 			<div class="form-group">
-				<label for="additional_info">Referințe și informații adiționale</label>
-				<textarea class="form-control" id="additional_info" v-model="course.additional_info"></textarea>
+				<label for="additional_info"
+					>Referințe și informații adiționale</label
+				>
+				<textarea
+					class="form-control"
+					id="additional_info"
+					v-model="course.additional_info"
+				></textarea>
 			</div>
 
 			<div class="form-group">
 				<label for="duration">Durată</label>
-				<select class="form-control" id="duration" v-model="course.duration">
-					<option v-for="duration in durations" :key="duration" :value="duration">
+				<select
+					class="form-control"
+					id="duration"
+					v-model="course.duration"
+				>
+					<option
+						v-for="duration in durations"
+						:key="duration"
+						:value="duration"
+					>
 						{{ duration }}
 					</option>
 				</select>
@@ -48,7 +88,11 @@
 
 			<div class="form-group">
 				<label for="category">Categorie</label>
-				<select class="form-control" id="category" v-model="course.category_id">
+				<select
+					class="form-control"
+					id="category"
+					v-model="course.category_id"
+				>
 					<option v-for="category in categories" :value="category.id">
 						{{ category.name }}
 					</option>
@@ -56,15 +100,26 @@
 			</div>
 			<div class="form-group">
 				<label for="language">Limbă</label>
-				<select class="form-control" id="language" v-model="course.language">
-					<option v-for="language in languages" :key="language" :value="language">
+				<select
+					class="form-control"
+					id="language"
+					v-model="course.language"
+				>
+					<option
+						v-for="language in languages"
+						:key="language"
+						:value="language"
+					>
 						{{ language }}
 					</option>
 				</select>
 			</div>
 			<div class="row">
 				<div class="col-12 d-flex justify-content-center">
-					<button type="submit" class="col-12 col-md-6 rounded-pill btn-lg mt-3 btn btn-warning">
+					<button
+						type="submit"
+						class="col-12 col-md-6 rounded-pill btn-lg mt-3 btn btn-outline-danger bg-white"
+					>
 						{{ isUpdate ? "Actualizează curs" : "Crează curs" }}
 					</button>
 				</div>
