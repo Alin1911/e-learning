@@ -165,6 +165,10 @@ footer {
     object-fit: cover;
 }
 
+.carousel-item {
+    text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
+}
+
 .carousel-control-prev,
 .carousel-control-next {
     width: 5%;

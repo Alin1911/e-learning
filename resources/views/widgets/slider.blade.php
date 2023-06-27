@@ -6,7 +6,7 @@
     </ol>
     <div class="carousel-inner">
         @foreach ($courses as $index => $course)
-            <div class="carousel-item @if($index == 0) active @endif">
+            <div class="carousel-item @if($index == 0) active @endif" style="text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;">
                 <img class="d-block w-100" src="{{ asset($course->image) }}" alt="{{ $course->name }}" />
                 <div class="carousel-caption d-none d-md-block">
                     <h5>{{ $course->title }}</h5>
