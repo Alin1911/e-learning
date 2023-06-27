@@ -14,7 +14,7 @@
 
 <div id="sidebar" class="sidebar">
 	<div class="position-sticky">
-		<div class="list-group list-group-flush">
+		<div class="list-group list-group-flush mt-5">
 			<a
 				href="/course/create"
 				class="list-group-item list-group-item-action py-3 px-5 ripple @if($active == 1) active @endif"
