@@ -18,8 +18,8 @@
                     @php $pairs = json_decode($problem->pairs, true) @endphp
                     <ul>
                         @if(is_object(json_decode($pairs)))
-                        @foreach($pairs as $pair)
-                            <li>{{ $pair['key'] }}: {{ $pair['value'] }}</li>
+                        @foreach($pairs as $key => $pair)
+                            <li>{{ $key }}: {{ $pair }}</li>
                         @endforeach
                         @else
                         <li>{{ $pairs }}</li>
