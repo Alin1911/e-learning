@@ -1,13 +1,13 @@
 <div class="col-md-4">
 	<div class="card">
-		<div class="card-body" style="min-height: 260px">
+		<div class="card-body text-center" style="min-height: 260px">
 			<h2 class="card-title">Platformă Prietenoasă</h2>
 			<p class="card-text">
 				Am creat QuickMindshare având în vedere experiența
 				utilizatorului. Găsește rapid ceea ce te interesează și
 				navighează cu ușurință.
 			</p>
-			<a href="/features" class="btn btn-danger">
+			<a href="/features" class="btn btn-primary">
 				Descoperă Caracteristicile Noastre
 			</a>
 		</div>

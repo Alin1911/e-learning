@@ -15,8 +15,8 @@
 					micro-learning-ului. Pasiunea ta pentru învățare poate fi
 					satisfăcută în moduri rapide și eficiente aici.
 				</p>
-				<a href="#" class="btn btn-primary btn-lg my-4">
-					Descoperă Cursurile Noastre
+				<a href="/course" class="btn shadow rounded-pill p-4 px-5 btn-primary btn-lg mt-4">
+					<strong>Descoperă Cursurile Noastre</strong>
 				</a>
 			</div>
 		</div>
@@ -26,15 +26,16 @@
 			@include("sections.flexibleLearning")
 			@include("sections.learnerCommunity")
 		</div>
-		<div class="row my-5">
+		<div class="row mt-5">
 			<div class="col-md-12 mx-auto text-center">
 				@include("sections.moduleOfWeek")
 			</div>
 		</div>
-		<div class="row my-5">
+	</div>
+		<div class="row py-5 shadow text-white my-4 shadow-info" style="background-color: #4c88f2;">
 			<div class="col-md-8 mx-auto text-center">
 				<h2>Experiența QuickMindshare</h2>
-				<p class="lead">
+				<p class="lead h3 text-white">
 					La QuickMindshare, îți oferim nu doar cunoștințe, ci și o
 					experiență de învățare adaptată nevoilor tale. Platforma
 					noastră de micro-learning este concepută pentru a te ajuta
@@ -42,10 +43,11 @@
 				</p>
 			</div>
 		</div>
+	<div class="container bg-white p-5 shadow">
 		<div class="row my-5 py-5">
 			<!-- Include more micro-learning sections -->
 			@include("sections.userFriendly")
-			@include("sections.interactiveLearning")
+			@include("sections.variety")
 			@include("sections.supportiveCommunity")
 		</div>
 		<div class="row mt-5">
@@ -61,14 +63,14 @@
 					<div class="col-md-6 d-flex justify-content-between">
 						<a
 							href="/term"
-							class="btn btn-info"
+							class="btn btn-lg rounded-pill btn-info text-white"
 							aria-label="Întrebări Frecvente"
 						>
 							Întrebări Frecvente
 						</a>
 						<a
 							href="/contact"
-							class="btn btn-info"
+							class="btn btn-lg rounded-pill btn-danger text-white"
 							aria-label="Contactează-ne"
 						>
 							Contactează-ne
