@@ -17,7 +17,7 @@
                     <h5>Perechi:</h5>
                     @php $pairs = json_decode($problem->pairs, true) @endphp
                     <ul>
-                        @if(is_object(json_decode($pairs)))
+                        @if(is_array($pairs))
                         @foreach($pairs as $key => $pair)
                             <li>{{ $key }}: {{ $pair }}</li>
                         @endforeach
@@ -31,9 +31,9 @@
                     <h5>Rezultate:</h5>
                     @php $results = json_decode($problem->results, true) @endphp
                     <ul>
-                        @if(is_object(json_decode($results)))
-                        @foreach($results as $result)
-                            <li>{{ $result['key'] }}: {{ $result['value'] }}</li>
+                        @if(is_array($results))
+                        @foreach($results as $key => $result)
+                            <li>{{ $key }}: {{ $result }}</li>
                         @endforeach
                         @else
                         <li>{{ $results }}</li>
