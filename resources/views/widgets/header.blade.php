@@ -71,6 +71,9 @@
                         <a class="dropdown-item" href="/home" style="color: #000;">
                             Activitățile mele
 			</a>
+            <a class="dropdown-item" href="/account/1/edit" style="color: #000;">
+			    Contul meu
+			</a>
 			@if(Auth::user()->isAdmin() || Auth::user()->isTeacher())
 			<a class="dropdown-item" href="/course/create" style="color: #000;">
 			    Cursuri
@@ -93,6 +96,9 @@
 			    Cerere rol
 			</a>
 			@endif
+            <a class="dropdown-item" href="/account/1/edit" style="color: #000;">
+			    Contul meu
+			</a>
 
 			<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
 					 document.getElementById('logout-form').submit();" style="color: #000;">
