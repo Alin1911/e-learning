@@ -70,28 +70,36 @@
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/home" style="color: #000;">
                             Activitățile mele
-                        </a>
-                        @if(Auth::user()->isAdmin())
-                        <a class="dropdown-item" href="/course/create" style="color: #000;">
-                            Cursuri
-                        </a>
-                        <a class="dropdown-item" href="/problem/create" style="color: #000;">
-                            Probleme
-                        </a>
-                        <a class="dropdown-item" href="/role/request" style="color: #000;">
-                            Cereri rol
-                        </a>
-                        @else 
-                        <a class="dropdown-item" href="/role/request/create" style="color: #000;">
-                            Cerere rol
-                        </a>
-                        @endif
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();" style="color: #000;">
-                            {{ __('Logout') }}
-                        </a>
+			</a>
+			@if(Auth::user()->isAdmin() || Auth::user()->isTeacher())
+			<a class="dropdown-item" href="/course/create" style="color: #000;">
+			    Cursuri
+			</a>
+			<a class="dropdown-item" href="/problem/create" style="color: #000;">
+			    Probleme
+			</a>
+			@else 
+			<a class="dropdown-item" href="/role/request/create" style="color: #000;">
+			    Cerere rol
+			</a>
+			@endif
+			@if(Auth::user()->isAdmin())
+			<a class="dropdown-item" href="/role/request" style="color: #000;">
+			    Cereri rol
+			</a>
+			@endif
+			@if(Auth::user()->isTeacher())
+			<a class="dropdown-item" href="/role/request/create" style="color: #000;">
+			    Cerere rol
+			</a>
+			@endif
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+			<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+					 document.getElementById('logout-form').submit();" style="color: #000;">
+			    {{ __('Logout') }}
+			</a>
+
+			<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
                     </div>

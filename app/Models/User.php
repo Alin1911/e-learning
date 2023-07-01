@@ -62,6 +62,13 @@ class User extends Authenticatable
 		}
 		return false;
 	}
+	public function isTeacher()
+	{
+		if ($this->role->name === 'teacher') {
+			return true;
+		}
+		return false;
+	}
 	public function learningCourses()
 	{
 		return $this->belongsToMany(Course::class, 'course_user', 'user_id', 'course_id');
