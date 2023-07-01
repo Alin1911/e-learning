@@ -45,6 +45,7 @@ Route::post('/test/{id}/check', 'TestController@check')->name('test.check');
 
 // Exercise routes
 Route::get('/exercise', 'ExerciseController@index')->name('exercise.index');
+Route::delete('/exercise/{id}', 'ExerciseController@delete')->name('exercise.delete');
 Route::resource('/test/{test_id}/exercise', 'ExerciseController'); // This generates multiple routes with names
 
 // Answer routes

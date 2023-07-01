@@ -15,7 +15,10 @@
 					micro-learning-ului. Pasiunea ta pentru învățare poate fi
 					satisfăcută în moduri rapide și eficiente aici.
 				</p>
-				<a href="/course" class="btn shadow rounded-pill p-4 px-5 btn-primary btn-lg mt-4">
+				<a
+					href="/course"
+					class="btn shadow rounded-pill p-4 px-5 btn-primary btn-lg mt-4"
+				>
 					<strong>Descoperă Cursurile Noastre</strong>
 				</a>
 			</div>
@@ -32,17 +35,20 @@
 			</div>
 		</div>
 	</div>
-		<div class="row py-5 shadow text-white my-4 shadow-info" style="background-color: #4c88f2;">
-			<div class="col-md-8 mx-auto text-center">
-				<h2>Experiența QuickMindshare</h2>
-				<p class="lead h3 text-white">
-					La QuickMindshare, îți oferim nu doar cunoștințe, ci și o
-					experiență de învățare adaptată nevoilor tale. Platforma
-					noastră de micro-learning este concepută pentru a te ajuta
-					să înveți în cel mai eficient și plăcut mod posibil.
-				</p>
-			</div>
+	<div
+		class="row py-5 shadow text-white my-4 shadow-info"
+		style="background-color: #4c88f2"
+	>
+		<div class="col-md-8 mx-auto text-center">
+			<h2>Experiența QuickMindshare</h2>
+			<p class="lead h3 text-white">
+				La QuickMindshare, îți oferim nu doar cunoștințe, ci și o
+				experiență de învățare adaptată nevoilor tale. Platforma noastră
+				de micro-learning este concepută pentru a te ajuta să înveți în
+				cel mai eficient și plăcut mod posibil.
+			</p>
 		</div>
+	</div>
 	<div class="container bg-white p-5 shadow">
 		<div class="row my-5 py-5">
 			<!-- Include more micro-learning sections -->

@@ -46,7 +46,7 @@ export default {
 		internalSelectedAnswers: {
 			deep: true,
 			handler(newValue) {
-				this.$emit("update-answers", {
+				this.$emit("update-selected-answers", {
 					exerciseId: this.exercise.id,
 					selectedAnswers: newValue,
 				});

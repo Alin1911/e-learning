@@ -14,8 +14,8 @@
 					>
 						<h5>{{ $e->id }}. Întrebare: {{ $e->question }}</h5>
 						<button
-							class="btn btn-danger rounded-pill"
-							href="/exercise/{{ $e->id }}/delete"
+							class="btn btn-danger rounded-pill delete-exercise-btn"
+							data-exercise-id="{{ $e->id }}"
 						>
 							Șterge exercițiu
 						</button>
@@ -28,4 +28,39 @@
 			</div>
 		</div>
 	</div>
+@endsection
+
+@section("scripts")
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+		var deleteButtons = document.querySelectorAll(".delete-exercise-btn");
+		deleteButtons.forEach(function (button) {
+			button.addEventListener("click", function () {
+				var exerciseId = button.dataset.exerciseId;
+				deleteExercise(exerciseId);
+			});
+		});
+
+		function deleteExercise(exerciseId) {
+			axios
+				.delete("/exercise/" + exerciseId)
+				.then(function (response) {
+					// Verificați dacă răspunsul JSON de la server conține succes
+					if (response.data.success) {
+						// Afișați o alertă de succes
+						alert("Exercițiul a fost șters cu succes!");
+
+						// Actualizați sau reîncărcați pagina, dacă este necesar
+						// window.location.reload();
+					} else {
+						// Afișați o alertă de eroare în cazul în care ștergerea a eșuat
+						alert("A apărut o eroare la ștergerea exercițiului.");
+					}
+				})
+				.catch(function (error) {
+					// Gestionați eventualele erori în cazul în care cererea Ajax a eșuat
+					console.error(error);
+				});
+		}
+	</script>
 @endsection

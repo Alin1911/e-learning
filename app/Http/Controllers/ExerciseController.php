@@ -26,6 +26,7 @@ class ExerciseController extends Controller
 	// Store a newly created exercise in the database
 	public function store(Request $request)
 	{
+
 		$exercise = new Exercise();
 		if ($request->has('test_id')) {
 			$exercise->test_id = $request->test_id;
@@ -65,22 +66,30 @@ class ExerciseController extends Controller
 				$exerciseOption->save();
 			}
 		}
+		if($request->exercise_type == 'numeric') {
+			$exerciseOption = new ExerciseOption();
+			$exerciseOption->exercise_id = $exercise->id;
+			$exerciseOption->option_text = $request->correctAnswer;
+			$exerciseOption->is_correct = 1;
+			$exerciseOption->save();
+		}
 
 		// Store ordering items for the exercise if any
-		if ($request->has('ordering_items')) {
-			$orderingItems = json_decode($request->ordering_items, true);
+		if ($request->has('orderingItems')) {
+			$orderingItems = $request->orderingItems;
+
 			foreach ($orderingItems as $item) {
 				$orderingItem = new ExerciseOrderingItem();
 				$orderingItem->exercise_id = $exercise->id;
-				$orderingItem->item = $item['item'];
-				$orderingItem->correct_order = $item['correct_order'];
+				$orderingItem->item = $item['content'];
+				$orderingItem->correct_order = $item['correctOrder'];
 				$orderingItem->save();
 			}
 		}
-
 		// Store fill in the blank items for the exercise if any
-		if ($request->has('fill_in_the_blank_items')) {
-			$fillInTheBlankItems = json_decode($request->fill_in_the_blank_items, true);
+		if ($request->has('fillInTheBlankItems')) {
+			$fillInTheBlankItems = $request->fillInTheBlankItems;
+
 			foreach ($fillInTheBlankItems as $item) {
 				$fillInTheBlankItem = new ExerciseFillInTheBlankItem();
 				$fillInTheBlankItem->exercise_id = $exercise->id;
@@ -162,4 +171,12 @@ class ExerciseController extends Controller
 		return response()->json(['isCorrect' => $isCorrect]);
 	}
 
+	public function delete($id)
+	{
+		$exercise = Exercise::find($id);
+		$exercise->delete();
+		return response()->json([
+				'success' => true
+		]);
+	}
 }

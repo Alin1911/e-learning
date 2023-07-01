@@ -43,21 +43,43 @@ class Exercise extends Model
 		return $correctOption->id === $answer;
 	}
 
-	public function checkNumericAnswer($answer)
+	public function checkNumeric($answer)
 	{
-		return $this->numeric_answer == $answer;
+		if(count($answer) > 0) {
+			return $this->options->first()->option_text == $answer[0];
+		}
+		return false;
 	}
 
 	public function checkOrdering($ordering)
 	{
-		$correctOrdering = $this->orderingItems()->orderBy('correct_order')->pluck('id')->toArray();
-		return $correctOrdering === $ordering;
+		$order = $this->orderingItems->pluck('correct_order')->sortBy('correct_order');
+		;
+		foreach($order as $i => $o) {
+			if(isset($ordering[$i])) {
+				if($ordering[$i] != $o) {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public function checkFillInTheBlank($words)
 	{
-		$correctWords = $this->fillInTheBlankItems()->orderBy('position')->pluck('word')->toArray();
-		return $correctWords === $words;
+		$answers = $this->fillInTheBlankItems->pluck('word')->sortBy('position');
+		foreach($answers as $i => $w) {
+			if(!isset($words[$i])) {
+				return false;
+			}
+			if($w != $words[$i]) {
+				return false;
+			}
+
+		}
+		return true;
 	}
 
 }

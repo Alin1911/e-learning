@@ -1,25 +1,14 @@
 <template>
-	<div v-if="exercise.exercise_type === 'multiple_choice_single_answer'">
-		<div class="ml-5" style="padding-left: 20px">
-			<div
-				class="form-check"
-				v-for="(option, optionIndex) in exercise.options"
-				:key="option.id"
-			>
+	<div v-if="exercise.exercise_type === 'numeric'">
+		<div>
+			<div class="form-ccontrol">
 				<input
-					class="form-check-input"
-					type="radio"
+					class="form-control"
+					type="number"
 					:name="`exercise-${exercise.id}`"
-					:id="`option-${exercise.id}-${optionIndex}`"
-					:value="option.id"
+					:id="`${exercise.id}`"
 					v-model="internalSelectedAnswer"
 				/>
-				<label
-					class="form-check-label"
-					:for="`option-${exercise.id}-${optionIndex}`"
-				>
-					{{ option.option_text }}
-				</label>
 			</div>
 		</div>
 	</div>
@@ -44,6 +33,7 @@ export default {
 	},
 	watch: {
 		internalSelectedAnswer(newValue) {
+			console.log("send: " + newValue);
 			this.$emit("update-selected-answers", {
 				exerciseId: this.exercise.id,
 				selectedAnswers: [newValue],

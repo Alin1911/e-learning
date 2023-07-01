@@ -78,6 +78,7 @@ export default {
 			selectedExerciseType: "",
 			question: "",
 			exerciseData: null,
+			correctAnswer: 0,
 		};
 	},
 	computed: {
@@ -99,13 +100,13 @@ export default {
 	methods: {
 		async addExercise() {
 			const exercise = {
-				test_id: this.test_id, // Așigurați-vă că aveți test_id în parametrii rutei
+				test_id: this.test_id,
 				question: this.question,
 				exercise_type: this.selectedExerciseType,
+				correctAnswer: this.correctAnswer,
 				...this.exerciseData,
 			};
 			console.log("Exercise data:", exercise);
-			// Adăugați codul pentru a trimite exercițiul la server (de exemplu, prin POST la un API endpoint)
 			const csrfToken = document
 				.querySelector('meta[name="csrf-token"]')
 				.getAttribute("content");
@@ -119,13 +120,10 @@ export default {
 			});
 
 			if (response.ok) {
-				// Exercițiul a fost creat cu succes
-				// Resetați formularul
 				this.selectedExerciseType = "";
 				this.question = "";
 				this.exerciseData = null;
 			} else {
-				// Tratați eroarea (de exemplu, afișați un mesaj de eroare)
 				console.error(
 					`Error ${response.status}: ${response.statusText}`
 				);

@@ -117,7 +117,7 @@ class TestController extends Controller
 				}
 			}
 			if($e->exercise_type  == 'numeric') {
-				$answer = $e->checkNumeric($exercise['selected_answers'][0]);
+				$answer = $e->checkNumeric($exercise['selected_answers']);
 				if($answer) {
 					$points += $e->points;
 				}

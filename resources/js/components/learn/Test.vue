@@ -21,7 +21,7 @@
 					:is="exerciseComponentName(exercise.exercise_type)"
 					:exercise="exercise"
 					:selected-answers.sync="selectedAnswers[exercise.id]"
-					@update-answers="updateSelectedAnswers"
+					@update-selected-answers="updateSelectedAnswers"
 				/>
 			</div>
 			<button type="submit" class="btn btn-primary">
@@ -36,7 +36,7 @@ import SingleAnswer from "./SingleAnswer.vue";
 import MultipleAnswer from "./MultipleAnswer.vue";
 import OrderingExercise from "./OrderingExercise.vue";
 import FillInTheBlanks from "./FillInTheBlanks.vue";
-import MatchingExercise from "./MatchingExercise.vue";
+import Numeric from "./Numeric.vue";
 import axios from "axios";
 
 export default {
@@ -45,7 +45,7 @@ export default {
 		MultipleAnswer,
 		OrderingExercise,
 		FillInTheBlanks,
-		MatchingExercise,
+		Numeric,
 	},
 	props: {
 		test_id: {
@@ -67,6 +67,8 @@ export default {
 	},
 	methods: {
 		updateSelectedAnswers({ exerciseId, selectedAnswers }) {
+			console.log("Received:", exerciseId, selectedAnswers); // Log received data
+
 			this.selectedAnswers[exerciseId] = selectedAnswers;
 			this.$forceUpdate();
 		},
@@ -102,12 +104,12 @@ export default {
 					return "SingleAnswer";
 				case "multiple_choice_multiple_answers":
 					return "MultipleAnswer";
-				case "ordering_items":
+				case "ordering":
 					return "OrderingExercise";
-				case "fill_in_the_blank_items":
+				case "fill_in_the_blank":
 					return "FillInTheBlanks";
-				case "matching-exercise":
-					return "MatchingExercise";
+				case "numeric":
+					return "Numeric";
 			}
 		},
 		async submitTest() {
