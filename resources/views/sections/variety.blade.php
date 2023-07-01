@@ -7,7 +7,7 @@
 				Descoperă o gamă largă de cursuri, de la științe exacte la arte,
 				la ritmul tău.
 			</p>
-			<a href="/course/free" class="btn btn-primary">
+			<a href="/course" class="btn btn-primary">
 				Explorează Diversitatea
 			</a>
 		</div>

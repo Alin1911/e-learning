@@ -1,41 +1,20 @@
 <template>
 	<div>
 		<div class="mb-3">
-			<label for="course-selector" class="form-label"
-				>Selectează cursul</label
-			>
-			<select
-				class="form-select"
-				id="course-selector"
-				v-model="selectedCourse"
-				@change="resetLesson"
-			>
+			<label for="course-selector" class="form-label">Selectează cursul</label>
+			<select class="form-select" id="course-selector" v-model="selectedCourse" @change="resetLesson">
 				<option disabled value="">Alege un curs</option>
-				<option
-					v-for="course in courses"
-					:key="course.id"
-					:value="course"
-				>
+				<option v-for="course in courses" :key="course.id" :value="course">
 					{{ course.title }}
 				</option>
 			</select>
 		</div>
 		<div v-if="selectedCourse">
 			<div class="mb-3">
-				<label for="lesson-selector" class="form-label"
-					>Selectează lecția (opțional)</label
-				>
-				<select
-					class="form-select"
-					id="lesson-selector"
-					v-model="selectedLesson"
-				>
+				<label for="lesson-selector" class="form-label">Selectează lecția (opțional)</label>
+				<select class="form-select" id="lesson-selector" v-model="selectedLesson">
 					<option value="">Fără lecție</option>
-					<option
-						v-for="lesson in selectedCourse.lessons"
-						:key="lesson.id"
-						:value="lesson"
-					>
+					<option v-for="lesson in selectedCourse.lessons" :key="lesson.id" :value="lesson">
 						{{ lesson.title }}
 					</option>
 				</select>
@@ -43,24 +22,17 @@
 			<div v-if="selectedLesson">
 				<h3>Teste pentru lecția selectată</h3>
 				<ul class="list-group mb-3">
-					<li
-						v-for="test in selectedLesson.tests"
-						:key="test.id"
-						class="list-group-item d-flex bd-highlight mb-3"
-					>
+					<li v-for="test in selectedLesson.tests" :key="test.id"
+						class="list-group-item d-flex bd-highlight mb-3">
 						<b class="p-2 bd-highlight">{{ test.title }}</b>
 						<div class="ms-auto p-2 bd-highlight">
-							<a class="m-1" :href="'/test/' + test.id"
-								><i class="fa-solid fa-eye"></i
-							></a>
-							<a class="m-1" :href="'/test/' + test.id + '/edit'"
-								><i class="fas fa-edit"></i
-							></a>
-							<a
+							<a class="m-1" :href="'/test/' + test.id"><i class="fa-solid fa-eye"></i></a>
+							<a class="m-1" :href="'/test/' + test.id + '/edit'"><i class="fas fa-edit"></i></a>
+							<!-- <a
 								class="m-1"
 								:href="'/test/' + test.id + '/delete'"
 								><i class="fa-solid fa-trash"></i
-							></a>
+							></a> -->
 						</div>
 					</li>
 				</ul>
@@ -69,26 +41,16 @@
 				<h3>Teste pentru cursul selectat</h3>
 				<ul class="list-group mb-3">
 					<div v-for="test in selectedCourse.tests">
-						<li
-							v-if="test && !test.lesson_id"
-							:key="test.id"
-							class="list-group-item d-flex bd-highlight mb-3"
-						>
+						<li v-if="test && !test.lesson_id" :key="test.id" class="list-group-item d-flex bd-highlight mb-3">
 							<b class="p-2 bd-highlight">{{ test.title }}</b>
 							<div class="ms-auto p-2 bd-highlight">
-								<a class="m-1" :href="'/test/' + test.id"
-									><i class="fa-solid fa-eye"></i
-								></a>
-								<a
-									class="m-1"
-									:href="'/test/' + test.id + '/edit'"
-									><i class="fas fa-edit"></i
-								></a>
-								<a
+								<a class="m-1" :href="'/test/' + test.id"><i class="fa-solid fa-eye"></i></a>
+								<a class="m-1" :href="'/test/' + test.id + '/edit'"><i class="fas fa-edit"></i></a>
+								<!-- <a
 									class="m-1"
 									:href="'/test/' + test.id + '/delete'"
 									><i class="fa-solid fa-trash"></i
-								></a>
+								></a> -->
 							</div>
 						</li>
 					</div>
@@ -97,37 +59,16 @@
 			<h3>Adaugă un nou test</h3>
 			<form @submit.prevent="addTest">
 				<div class="mb-3">
-					<label for="test-title" class="form-label"
-						>Titlul testului</label
-					>
-					<input
-						type="text"
-						class="form-control"
-						id="test-title"
-						v-model="newTest.title"
-					/>
+					<label for="test-title" class="form-label">Titlul testului</label>
+					<input type="text" class="form-control" id="test-title" v-model="newTest.title" />
 				</div>
 				<div class="mb-3">
-					<label for="test-lesson" class="form-label"
-						>Timp pentru test</label
-					>
-					<input
-						type="number"
-						class="form-control"
-						id="test-time"
-						v-model="newTest.time"
-					/>
+					<label for="test-lesson" class="form-label">Timp pentru test</label>
+					<input type="number" class="form-control" id="test-time" v-model="newTest.time" />
 				</div>
 				<div class="mb-3">
-					<label for="test-description" class="form-label"
-						>Descrierea testului</label
-					>
-					<textarea
-						class="form-control"
-						id="test-description"
-						rows="3"
-						v-model="newTest.description"
-					></textarea>
+					<label for="test-description" class="form-label">Descrierea testului</label>
+					<textarea class="form-control" id="test-description" rows="3" v-model="newTest.description"></textarea>
 				</div>
 				<button type="submit" class="btn btn-primary">
 					Adaugă testul

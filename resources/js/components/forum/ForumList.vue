@@ -1,10 +1,6 @@
 <template>
 	<div>
-		<div
-			class="bg-white mb-3 shadow px-3 py-3"
-			v-for="forum in forums"
-			:key="forum.id"
-		>
+		<div class="bg-white mb-3 shadow px-3 py-3" v-for="forum in forums" :key="forum.id">
 			<div class="d-flex justify-content-between">
 				<div>
 					<h3>{{ forum.title }}</h3>
@@ -41,7 +37,7 @@ export default {
 		axios.defaults.headers.common["Content-Type"] = "application/json";
 		axios.defaults.headers.common["Accept"] = "application/json";
 
-		const response = await axios.get("/forums").then((response) => {
+		const response = await axios.get("/forumsjson").then((response) => {
 			this.forums = response.data;
 			this.forums.forEach((forum) => {
 				forum.posts = 0;

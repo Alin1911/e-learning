@@ -26,14 +26,20 @@ class ForumController extends Controller
 		$standaloneForums = Forum::whereNull('course_id')->get();
 		$standaloneForums->load('topics', 'topics.posts');
 
+		// Send data to the view
+		return view('forum.index')->with('forums', $standaloneForums);
+	}
+	public function jsonIndex(Request $request)
+	{
+		$standaloneForums = Forum::whereNull('course_id')->get();
+		$standaloneForums->load('topics', 'topics.posts');
+
 		// Return data as JSON if required
 		if($request->wantsJson()) {
 			return json_encode($standaloneForums);
 		}
-
-		// Send data to the view
-		return view('forum.index')->with('forums', $standaloneForums);
 	}
+
 
 	// Display form for creating a new forum
 	public function create()

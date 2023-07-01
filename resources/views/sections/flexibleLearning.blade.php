@@ -6,7 +6,7 @@
 				Învăță la ritmul tău. Cursurile noastre de micro-learning sunt
 				gata atunci când tu ești, pe orice dispozitiv.
 			</p>
-			<a href="/course/flexible-learning" class="btn btn-danger">
+			<a href="/problem" class="btn btn-danger">
 				Încearcă Învățarea Flexibilă
 			</a>
 		</div>

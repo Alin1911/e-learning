@@ -59,6 +59,7 @@ Route::post('/posts/{id}/likes', 'ForumPostController@likes')->name('post.likes'
 Route::post('/topics/{id}/posts', 'ForumPostController@store')->name('topic.posts');
 Route::post('/forums/{id}/topics', 'ForumTopicController@store')->name('forum.topics');
 Route::get('/forums', 'ForumController@index')->name('forum.index');
+Route::get('/forumsjson', 'ForumController@jsonIndex')->name('forum.index');
 Route::get('/forums/{id}', 'ForumController@show')->name('forum.show');
 Route::get('/forums/{id}/topics', 'ForumController@topics')->name('forum.topics');
 Route::resource('/topics', 'ForumTopicController'); // This generates multiple routes with names

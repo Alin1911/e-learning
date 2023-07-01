@@ -1,20 +1,10 @@
 <template>
 	<div>
 		<div class="mb-3">
-			<label for="course-selector" class="form-label"
-				>Selectează cursul</label
-			>
-			<select
-				class="form-select"
-				id="course-selector"
-				v-model="selectedCourse"
-			>
+			<label for="course-selector" class="form-label">Selectează cursul</label>
+			<select class="form-select" id="course-selector" v-model="selectedCourse">
 				<option disabled value="">Alege un curs</option>
-				<option
-					v-for="course in courses"
-					:key="course.id"
-					:value="course"
-				>
+				<option v-for="course in courses" :key="course.id" :value="course">
 					{{ course.title }}
 				</option>
 			</select>
@@ -23,11 +13,8 @@
 			<div v-if="selectedCourse.lessons">
 				<h3>Lecții existente</h3>
 				<ul class="list-group mb-1">
-					<li
-						v-for="lesson in selectedCourse.lessons"
-						:key="lesson.id"
-						class="list-group-item d-flex bd-highlight mb-3"
-					>
+					<li v-for="lesson in selectedCourse.lessons" :key="lesson.id"
+						class="list-group-item d-flex bd-highlight mb-3">
 						<b class="p-2 bd-highlight">{{ lesson.title }}</b>
 						<div class="ms-auto p-2 bd-highlight">
 							<small v-if="lesson.user" class="text-secondary">
@@ -36,19 +23,13 @@
 									lesson.user.name
 								}}</span>
 							</small>
-							<a class="m-1" :href="'/lesson/' + lesson.id"
-								><i class="fa-solid fa-eye"></i
-							></a>
-							<a
-								class="m-1"
-								:href="'/lesson/' + lesson.id + '/edit'"
-								><i class="fas fa-edit"></i
-							></a>
-							<a
+							<a class="m-1" :href="'/lesson/' + lesson.id"><i class="fa-solid fa-eye"></i></a>
+							<a class="m-1" :href="'/lesson/' + lesson.id + '/edit'"><i class="fas fa-edit"></i></a>
+							<!-- <a
 								class="m-1"
 								:href="'/lesson/' + lesson.id + '/delete'"
 								><i class="fa-solid fa-trash"></i
-							></a>
+							></a> -->
 						</div>
 					</li>
 				</ul>
@@ -56,26 +37,13 @@
 			<h3>Adaugă o nouă lecție</h3>
 			<form @submit.prevent="addLesson">
 				<div class="mb-3">
-					<label for="lesson-title" class="form-label"
-						>Titlul lecției</label
-					>
-					<input
-						type="text"
-						class="form-control"
-						id="lesson-title"
-						v-model="newLesson.title"
-					/>
+					<label for="lesson-title" class="form-label">Titlul lecției</label>
+					<input type="text" class="form-control" id="lesson-title" v-model="newLesson.title" />
 				</div>
 				<div class="mb-3">
-					<label for="lesson-description" class="form-label"
-						>Descrierea lecției</label
-					>
-					<textarea
-						class="form-control"
-						id="lesson-description"
-						rows="3"
-						v-model="newLesson.description"
-					></textarea>
+					<label for="lesson-description" class="form-label">Descrierea lecției</label>
+					<textarea class="form-control" id="lesson-description" rows="3"
+						v-model="newLesson.description"></textarea>
 				</div>
 				<button type="submit" class="btn btn-primary">
 					Adaugă lecția

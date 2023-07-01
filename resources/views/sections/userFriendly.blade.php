@@ -7,7 +7,7 @@
 				utilizatorului. Găsește rapid ceea ce te interesează și
 				navighează cu ușurință.
 			</p>
-			<a href="/features" class="btn btn-primary">
+			<a href="/team" class="btn btn-primary">
 				Descoperă Caracteristicile Noastre
 			</a>
 		</div>

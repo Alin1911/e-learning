@@ -6,7 +6,7 @@
 				Învăță ce ai nevoie în doar câteva minute cu lecțiile noastre de
 				micro-learning. Eficiente, concise și ușor de asimilat.
 			</p>
-			<a href="/course/quick-lessons" class="btn btn-danger">
+			<a href="/course" class="btn btn-danger">
 				Încearcă o Lecție Rapidă
 			</a>
 		</div>
