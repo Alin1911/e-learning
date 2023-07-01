@@ -96,10 +96,6 @@
 			    Cerere rol
 			</a>
 			@endif
-            <a class="dropdown-item" href="/account/1/edit" style="color: #000;">
-			    Contul meu
-			</a>
-
 			<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
 					 document.getElementById('logout-form').submit();" style="color: #000;">
 			    {{ __('Logout') }}
