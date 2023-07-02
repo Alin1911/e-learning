@@ -32,6 +32,17 @@
 					</div>
 
 					<div class="form-group">
+						<label for="argumente">Motivatie</label>
+						<textarea
+							class="form-control"
+							id="argumente"
+							name="argumente"
+							rows="3"
+							required
+						></textarea>
+					</div>
+
+					<div class="form-group">
 						<label for="description">Description</label>
 						<textarea
 							class="form-control"
@@ -74,14 +85,18 @@
 							required
 						/>
 					</div>
-					<button type="button" class="mt-3 btn btn-primary" onclick="submitLesson()">
+					<button
+						type="button"
+						class="mt-3 btn btn-primary"
+						onclick="submitLesson()"
+					>
 						Propune lectie
 					</button>
 				</form>
 			</div>
 		</div>
 	</div>
-
+	@se
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script>
 		function submitLesson() {
@@ -90,18 +105,20 @@
 			const formData = new FormData(form);
 
 			// Efectuați postul cu Axios
-			axios.post('/lesson', formData)
-				.then(function(response) {
+			axios
+				.post("/lesson", formData)
+				.then(function (response) {
 					// Dacă răspunsul este OK, afișați un mesaj de succes și redirecționați
 					if (response.status === 200) {
 						alert("Lecția a fost propusă cu succes!");
 						window.history.back(); // Redirecționați către pagina principală
-					}
-					else {
-						alert("A apărut o eroare. Vă rugăm să încercați din nou.");
+					} else {
+						alert(
+							"A apărut o eroare. Vă rugăm să încercați din nou."
+						);
 					}
 				})
-				.catch(function(error) {
+				.catch(function (error) {
 					alert("A apărut o eroare. Vă rugăm să încercați din nou.");
 					console.error(error);
 				});

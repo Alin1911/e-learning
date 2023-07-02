@@ -1,6 +1,10 @@
 <template>
 	<div>
-		<div class="bg-white mb-3 shadow px-3 py-3" v-for="forum in forums" :key="forum.id">
+		<div
+			class="bg-white mb-3 shadow px-3 py-3"
+			v-for="forum in forums"
+			:key="forum.id"
+		>
 			<div class="d-flex justify-content-between">
 				<div>
 					<h3>{{ forum.title }}</h3>

@@ -40,7 +40,6 @@ class ForumController extends Controller
 		}
 	}
 
-
 	// Display form for creating a new forum
 	public function create()
 	{

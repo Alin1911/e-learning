@@ -57,6 +57,9 @@ class LessonController extends Controller
 		if($request->has('content')) {
 			$lesson->content = $request->input('content');
 		}
+		if($request->has('argumente')) {
+			$lesson->argumente = $request->input('argumente');
+		}
 		if($request->has('duration')) {
 			$lesson->duration = $request->input('duration');
 		}
