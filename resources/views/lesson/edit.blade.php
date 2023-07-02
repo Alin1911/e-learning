@@ -112,7 +112,15 @@
 							required
 						/>
 					</div>
-
+					<div class="form-group">
+						<label for="file">File</label>
+						<input
+							type="file"
+							class="form-control"
+							id="file"
+							name="file"
+						/>
+					</div>
 					<button type="submit" class="mt-3 btn btn-primary">
 						Actualizare lectien
 					</button>
