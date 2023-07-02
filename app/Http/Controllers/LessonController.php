@@ -54,8 +54,25 @@ class LessonController extends Controller
 		if ($request->has('description')) {
 			$lesson->description = $request->input('description');
 		}
-		if ($request->has('video_url')) {
-			$lesson->video_url = $request->input('video_url');
+		if($request->has('content')) {
+			$lesson->content = $request->input('content');
+		}
+		if($request->has('duration')) {
+			$lesson->duration = $request->input('duration');
+		}
+		if($request->has('is_published')) {
+			$lesson->is_published = $request->input('is_published') ? 1 : 0;
+		}
+		if($request->has('order')) {
+			$lesson->order = $request->input('order');
+		}
+		if(isset($request->video)) {
+			if(isset($lesson->video_url)) {
+				$video = substr($lesson->video_url, 22);
+				Storage::disk('public')->delete($video);
+			}
+			$video = $request->file('video')->store('lessons/videos', 'public');
+			$lesson->video_url = asset('storage/' . $video);
 		}
 		$user = Auth::user();
 		if($user->id != $lesson->course->user_id) {

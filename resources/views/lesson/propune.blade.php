@@ -7,6 +7,7 @@
 				<h2>Propune lectie pentru cursul: {{ $course->title }}</h2>
 
 				<form
+					id="lessonForm"
 					action="/lesson"
 					method="POST"
 					enctype="multipart/form-data"
@@ -73,21 +74,37 @@
 							required
 						/>
 					</div>
-
-					<div class="form-group">
-						<label for="file">File</label>
-						<input
-							type="file"
-							class="form-control"
-							id="file"
-							name="file"
-						/>
-					</div>
-					<button type="submit" class="mt-3 btn btn-primary">
+					<button type="button" class="mt-3 btn btn-primary" onclick="submitLesson()">
 						Propune lectie
 					</button>
 				</form>
 			</div>
 		</div>
 	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script>
+		function submitLesson() {
+			// Obțineți formularul și valorile câmpurilor
+			const form = document.getElementById("lessonForm");
+			const formData = new FormData(form);
+
+			// Efectuați postul cu Axios
+			axios.post('/lesson', formData)
+				.then(function(response) {
+					// Dacă răspunsul este OK, afișați un mesaj de succes și redirecționați
+					if (response.status === 200) {
+						alert("Lecția a fost propusă cu succes!");
+						window.history.back(); // Redirecționați către pagina principală
+					}
+					else {
+						alert("A apărut o eroare. Vă rugăm să încercați din nou.");
+					}
+				})
+				.catch(function(error) {
+					alert("A apărut o eroare. Vă rugăm să încercați din nou.");
+					console.error(error);
+				});
+		}
+	</script>
 @endsection
