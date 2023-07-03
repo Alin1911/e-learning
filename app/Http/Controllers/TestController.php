@@ -50,6 +50,9 @@ class TestController extends Controller
 	public function create(Request $request)
 	{
 		$user = Auth::user();
+		if(!$user->isAdmin() && !$user->isTeacher()) {
+			abort(403);
+		}
 		$course = $user->courses;
 		$course->load('lessons', 'tests', 'lessons.tests');
 		if($request->wantsJson()) {
@@ -60,6 +63,10 @@ class TestController extends Controller
 
 	public function edit($id)
 	{
+		$user= Auth::user();
+		if(!$user->isAdmin() && !$user->isTeacher()) {
+			abort(403);
+		}
 		$test = Test::find($id);
 		$test->load('course', 'lesson', 'exercises');
 		return view('test.edit')->with(['test' => $test]);

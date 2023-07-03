@@ -28,6 +28,9 @@ class LessonController extends Controller
 	public function create()
 	{
 		$user = Auth::user();
+		if(!$user->isAdmin() && !$user->isTeacher()) {
+			abort(403);
+		}
 		$courses = $user->courses;
 		$courses->load('lessons', 'lessons.tests', 'lessons.user');
 
@@ -112,6 +115,9 @@ class LessonController extends Controller
 	{
 		$lesson = Lesson::findOrFail($id);
 		$user = Auth::user();
+		if($user->id != $lesson->course->user_id) {
+			abort(403);
+		}
 		$course = $user->courses->find($lesson->course_id);
 		return view('lesson.edit')->with(['course' => $course, 'lesson' => $lesson, 'user' => $user]);
 
