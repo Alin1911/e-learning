@@ -14,6 +14,9 @@ services:
       SERVICE_NAME: app
       SERVICE_TAGS: dev
     working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
       - app-network
 
@@ -26,6 +29,9 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - app-network
 
@@ -38,14 +44,36 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: laravel
-      MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: learning
+      MYSQL_ROOT_PASSWORD: learning
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - app-network
-
+  #phpmyadmin Service
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: learning 
+    depends_on:
+      - db
+    networks:
+      - app-network
 #Docker Networks
 networks:
   app-network:
     driver: bridge
+#Volumes
+volumes:
+  dbdata:
+    driver: local
