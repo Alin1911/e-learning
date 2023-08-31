@@ -96,8 +96,9 @@
 			</div>
 		</div>
 	</div>
-	@endsection
-	@section('scripts')
+@endsection
+
+@section("scripts")
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script>
 		function submitLesson() {

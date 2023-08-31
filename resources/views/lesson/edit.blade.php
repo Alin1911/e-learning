@@ -14,11 +14,12 @@
 				>
 					@csrf
 					@method("PUT")
-@if(isset( $lesson->argumente))
-<div class="col-12">
-	<h4> Motiv: {{$lesson->argumente}} </h4>
-</div>
-@endif
+					@if (isset($lesson->argumente))
+						<div class="col-12">
+							<h4>Motiv: {{ $lesson->argumente }}</h4>
+						</div>
+					@endif
+
 					<div class="form-group">
 						<label for="title">Title</label>
 						<input
