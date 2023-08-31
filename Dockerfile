@@ -38,7 +38,9 @@ RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 RUN usermod -aG sudo www
 RUN chmod -R g+w /var/www
-
+RUN mkdir -p /var/www/vendor
+RUN chown -R www:www /var/www/vendor
+RUN chmod -R 777 /var/www/vendor
 
 # Copy existing application directory contents
 COPY . /var/www
