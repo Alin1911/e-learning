@@ -37,6 +37,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 RUN usermod -aG sudo www
+RUN chmod -R g+w /var/www
+
 
 # Copy existing application directory contents
 COPY . /var/www
