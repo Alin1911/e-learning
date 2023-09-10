@@ -12,23 +12,24 @@
             <i class="fa-solid fa-bars text-white"></i>
         </button>
         <div class="row collapse w-100 mt-4" id="search">
-                    <form class="form-control rounded-pill col-12 py-3" action="{{ route('course.index') }}" method="GET">
-                        <input
-                            id="form1"
-                            type="search"
-                            class="form-control rounded-pill border-white"
-                            placeholder="Caută cursuri"
-                            name="search"
-                            @if(isset($search)) value="{{ $search }}" @endif>
-                            <hr class="m-0" />
-                        <button class="btn bg-light w-100 rounded-pill" type="submit" aria-label="Trimite formularul"><i class="fas fa-search"></i></button>
-                    </form>
+            <form class="form-control rounded-pill col-12 py-3" action="{{ route('course.index') }}" method="GET">
+                <input
+                    id="form1"
+                    type="search"
+                    class="form-control rounded-pill border-white"
+                    placeholder="Caută cursuri"
+                    name="search"
+                    @if(isset($search)) value="{{ $search }}" @endif
+                >
+                <hr class="m-0">
+                <button class="btn bg-light w-100 rounded-pill" type="submit" aria-label="Trimite formularul"><i class="fas fa-search"></i></button>
+            </form>
         </div>
         <div class="collapse navbar-collapse p-1" id="navbarSupportedContent">
             <div class="navbar-nav me-auto d-flex align-items-center px-3">
                 <div class="nav-item">
                     <a class="nav-link" href="/course" style="color: #000;">Cursuri</a>
-                    </div>
+                </div>
                 <div class="nav-item">
                     <a class="nav-link" href="/problem" style="color: #000;">Exerciții</a>
                 </div>
@@ -36,7 +37,7 @@
                     <a class="nav-link" href="/forums" style="color: #000;">Discuții</a>
                 </div>
             </div>
-            <div class="row w-100 d-flex justify-content-center d-none d-md-flex">
+            <div class="w-100 d-flex justify-content-center d-none d-md-flex">
                 <div class="d-flex">
                     <form class="input-group rounded-pill" action="{{ route('course.index') }}" method="GET">
                         <input 
@@ -46,74 +47,58 @@
                             placeholder="Caută cursuri"
                             name="search"
                             @if(isset($search)) value="{{ $search }}" @endif
-                            style="min-width: 400px;">
+                            style="min-width: 400px;"
+                        >
                         <button class="btn bg-white rounded-right-1" type="submit" aria-label="Trimite formularul"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
             </div>
             @if(Auth::check())
-            <a class="btn btn-white d-md-none text-uppercase text-white" href="/user">
-                {{ Auth::user()->name }}
-            </a>
-        @else
-            <a class="btn btn-white d-md-none" href="{{ route('login') }}">
-                <i class="fa-solid fa-user text-white"></i>
-            </a>
-        @endif
-            <ul class="navbar-nav ms-auto d-flex align-items-center px-3">
-                @guest
-                    @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}" style="color: #000;">{{ __('Login') }}</a>
-                        </li>
-                    @endif
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}" style="color: #000;">{{ __('Register') }}</a>
-                        </li>
-                    @endif
-                @else
-                <li class="nav-item dropdown">
-                    <div class="dropdown-menu dropdown-menu-end " aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/home" style="color: #000;">
-                            Activitățile mele
-			            </a>
-                        <a class="dropdown-item" href="/account/1/edit" style="color: #000;">
-			                Contul meu
-			            </a>
-			            @if(Auth::user()->isAdmin() || Auth::user()->isTeacher())
-			                <a class="dropdown-item" href="/course/create" style="color: #000;">
-			                    Cursuri
-			                </a>
-                            <a class="dropdown-item" href="/problem/create" style="color: #000;">
-                                Probleme
-                            </a>
+                <div class="dropdown show">
+                    <a class="text-uppercase text-white dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ Auth::user()->name }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="/home" style="color: #000;">Activitățile mele</a>
+                        <a class="dropdown-item" href="/account/1/edit" style="color: #000;">Contul meu</a>
+                        @if(Auth::user()->isAdmin() || Auth::user()->isTeacher())
+                            <a class="dropdown-item" href="/course/create" style="color: #000;">Cursuri</a>
+                            <a class="dropdown-item" href="/problem/create" style="color: #000;">Probleme</a>
                         @else 
-                            <a class="dropdown-item" href="/role/request/create" style="color: #000;">
-                                Cerere rol
-                            </a>
-		            	@endif
+                            <a class="dropdown-item" href="/role/request/create" style="color: #000;">Cerere rol</a>
+                        @endif
                         @if(Auth::user()->isAdmin())
-                        <a class="dropdown-item" href="/role/request" style="color: #000;">
-                            Cereri rol
-                        </a>
+                            <a class="dropdown-item" href="/role/request" style="color: #000;">Cereri rol</a>
                         @endif
                         @if(Auth::user()->isTeacher())
-                        <a class="dropdown-item" href="/role/request/create" style="color: #000;">
-                            Cerere rol
-                        </a>
+                            <a class="dropdown-item" href="/role/request/create" style="color: #000;">Cerere rol</a>
                         @endif
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();" style="color: #000;">
-                            {{ __('Logout') }}
-                        </a>
+                            document.getElementById('logout-form').submit();" style="color: #000;">{{ __('Logout') }}</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
                     </div>
-                </li> 
-                @endguest
-            </ul>
+                </div>
+            @else
+                <a class="btn btn-white d-md-none" href="{{ route('login') }}">
+                    <i class="fa-solid fa-user text-white"></i>
+                </a>
+            @endif
         </div>
+        @if(!Auth::check())
+            <div class="navbar-nav ms-auto d-flex align-items-center px-3">
+                @if (Route::has('login'))
+                    <div class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}" style="color: #000;">{{ __('Login') }}</a>
+                    </div>
+                @endif
+                @if (Route::has('register'))
+                    <div class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}" style="color: #000;">{{ __('Register') }}</a>
+                    </div>
+                @endif
+            </div>
+        @endif
     </div>
 </nav>
