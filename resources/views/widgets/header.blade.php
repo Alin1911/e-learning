@@ -81,12 +81,6 @@
                     </div>
                 </div>
             @else
-                <a class="btn btn-white d-md-none" href="{{ route('login') }}">
-                    <i class="fa-solid fa-user text-white"></i>
-                </a>
-            @endif
-        </div>
-        @if(!Auth::check())
             <div class="navbar-nav ms-auto d-flex align-items-center px-3">
                 @if (Route::has('login'))
                     <div class="nav-item">
@@ -99,6 +93,7 @@
                     </div>
                 @endif
             </div>
-        @endif
+            @endif
+        </div>
     </div>
 </nav>
