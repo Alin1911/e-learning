@@ -33,7 +33,6 @@ services:
       - ./:/var/www
       - ./nginx/conf.d/:/etc/nginx/conf.d/
       - ./certbot/conf:/etc/nginx/ssl
-      - ./ssl:/etc/nginx/ssl
       - ./certbot/data:/var/www/html
     networks:
       - app-network
