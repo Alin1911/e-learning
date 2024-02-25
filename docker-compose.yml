@@ -21,30 +21,30 @@ services:
       - app-network
 
   #Nginx Service
-webserver:
-  image: nginx:alpine
-  container_name: webserver
-  restart: unless-stopped
-  tty: true
-  ports:
-    - "80:80"
-    - "443:443"
-  volumes:
-    - ./:/var/www
-    - ./nginx/conf.d/:/etc/nginx/conf.d/
-    - ./ssl:/etc/nginx/ssl  
-  networks:
-    - app-network
-  depends_on:
-    - certbot
-    
-certbot:
-  image: certbot/certbot
-  volumes:
-    - ./letsencrypt:/etc/letsencrypt
-  entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-  networks:
-    - app-network
+  webserver:
+    image: nginx:alpine
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./ssl:/etc/nginx/ssl  
+    networks:
+      - app-network
+    depends_on:
+      - certbot
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./letsencrypt:/etc/letsencrypt
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    networks:
+      - app-network
 
   #MySQL Service
   db:
