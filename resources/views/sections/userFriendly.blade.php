@@ -3,7 +3,7 @@
 		<div class="card-body text-center" style="min-height: 260px">
 			<h2 class="card-title">Platformă Prietenoasă</h2>
 			<p class="card-text">
-				Am creat QuickMindshare având în vedere experiența
+				Am creat Pantasmify având în vedere experiența
 				utilizatorului. Găsește rapid ceea ce te interesează și
 				navighează cu ușurință.
 			</p>

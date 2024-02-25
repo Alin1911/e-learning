@@ -1,6 +1,6 @@
 @extends("layouts.app")
 
-@section('title', 'QuickMindshare - Începutul călătoriei tale în micro-learning')
+@section('title', 'Pantasmify - Începutul călătoriei tale în micro-learning')
 
 @section("content")
 	@include("widgets.slider")
@@ -8,7 +8,7 @@
 		<div class="row justify-content-center py-5">
 			<div class="col-md-12 text-center">
 				<h1 class="mb-4">
-					Descoperă QuickMindshare - portalul tău de micro-learning
+					Descoperă Pantasmify - portalul tău de micro-learning
 				</h1>
 				<p class="lead">
 					Îmbinăm libertatea cunoașterii cu eficiența
@@ -40,9 +40,9 @@
 		style="background-color: #4c88f2"
 	>
 		<div class="col-md-8 mx-auto text-center">
-			<h2>Experiența QuickMindshare</h2>
+			<h2>Experiența Pantasmify</h2>
 			<p class="lead h3 text-white">
-				La QuickMindshare, îți oferim nu doar cunoștințe, ci și o
+				La Pantasmify, îți oferim nu doar cunoștințe, ci și o
 				experiență de învățare adaptată nevoilor tale. Platforma noastră
 				de micro-learning este concepută pentru a te ajuta să înveți în
 				cel mai eficient și plăcut mod posibil.
@@ -58,10 +58,10 @@
 		</div>
 		<div class="row mt-5">
 			<div class="col-md-12 mx-auto text-center">
-				<h2>Află mai multe despre QuickMindshare</h2>
+				<h2>Află mai multe despre Pantasmify</h2>
 				<p class="lead">
 					Ești curios să afli mai multe despre cum funcționează
-					QuickMindshare și ce te așteaptă după ce te înregistrezi?
+					Pantasmify și ce te așteaptă după ce te înregistrezi?
 					Vizitează secțiunea de Întrebări Frecvente sau
 					contactează-ne direct.
 				</p>

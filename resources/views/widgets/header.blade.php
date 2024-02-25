@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md px-2 shadow-sm">
     <div class="container-md px-1 py-3 d-flex justify-content-center justify-content-md-start">
-        <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand text-uppercase" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
         </a>
         <button class="navbar-toggler border-0 navbar-toggler-focus mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#search"
