@@ -22,7 +22,7 @@ services:
 
   #Nginx Service
   webserver:
-    image: nginx:alpine
+    image: nginx:latest
     container_name: webserver
     restart: unless-stopped
     tty: true
@@ -32,18 +32,22 @@ services:
     volumes:
       - ./:/var/www
       - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./certbot/conf:/etc/nginx/ssl
       - ./ssl:/etc/nginx/ssl
-      - /letsencrypt:/etc/letsencrypt
+      - ./certbot/data:/var/www/html
     networks:
       - app-network
     depends_on:
       - certbot
-    
+
   certbot:
-    image: certbot/certbot
+    container_name: certbot
+    image: certbot/certbot:latest
+    command: certonly --webroot --webroot-path=/var/www/html --email andreialin2324@gmail.com --agree-tos --no-eff-email -d phantasmify.com -d www.phantasmify.com
     volumes:
-      - /letsencrypt:/etc/letsencrypt
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/logs:/var/log/letsencrypt
+      - ./certbot/data:/var/www/html
     networks:
       - app-network
 
