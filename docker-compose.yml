@@ -41,7 +41,7 @@ webserver:
 certbot:
   image: certbot/certbot
   volumes:
-    - /etc/letsencrypt:/etc/letsencrypt
+    - ./letsencrypt:/etc/letsencrypt
   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
   networks:
     - app-network
