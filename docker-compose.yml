@@ -32,7 +32,8 @@ services:
     volumes:
       - ./:/var/www
       - ./nginx/conf.d/:/etc/nginx/conf.d/
-      - ./ssl:/etc/nginx/ssl  
+      - ./ssl:/etc/nginx/ssl
+      - /letsencrypt:/etc/letsencrypt
     networks:
       - app-network
     depends_on:
