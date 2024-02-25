@@ -1,7 +1,7 @@
 version: '3'
 services:
   
-  #PHP Service
+  # PHP Service
   app:
     build:
       context: .
@@ -20,7 +20,7 @@ services:
     networks:
       - app-network
 
-  #Nginx Service
+  # Nginx Service
   webserver:
     image: nginx:alpine
     container_name: webserver
@@ -36,7 +36,7 @@ services:
     networks:
       - app-network
 
-  #MySQL Service
+  # MySQL Service
   db:
     image: mysql:5.7.22
     container_name: db
@@ -55,7 +55,8 @@ services:
       - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - app-network
-  #phpmyadmin Service
+
+  # phpmyadmin Service
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
@@ -70,11 +71,13 @@ services:
       - db
     networks:
       - app-network
-#Docker Networks
+
+# Docker Networks
 networks:
   app-network:
-    driver: bridge
-#Volumes
+    driver: bridge  # Menținerea driverului de rețea la bridge
+
+# Volumes
 volumes:
   dbdata:
     driver: local
