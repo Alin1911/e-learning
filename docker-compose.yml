@@ -32,14 +32,14 @@ services:
     volumes:
       - ./:/var/www
       - ./nginx/conf.d/:/etc/nginx/conf.d/:ro
-      - ./certbot/www/:/var/www/certbot/:ro
+      - ./certbot/www/:/var/www/:ro
     networks:
       - app-network
-      
+
   certbot:
     image: certbot/certbot:latest
     volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
+      - ./:/var/www/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
   #MySQL Service
   db:
