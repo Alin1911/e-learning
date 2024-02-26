@@ -37,7 +37,7 @@ services:
   certbot:
     image: certbot/certbot:latest
     volumes:
-      - ./:/var/www/certbot/:rw
+      - ./:/var/www/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
   #MySQL Service
   db:
