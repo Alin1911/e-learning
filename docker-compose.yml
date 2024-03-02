@@ -21,15 +21,15 @@ services:
       - app-network
 
   #Nginx Service
-webserver:
-  image: nginx:latest
-  ports:
-    - 80:80
-    - 443:443
-  restart: always
-  volumes:
-    - ./nginx/conf/:/etc/nginx/conf.d/:ro
-    - ./certbot/www/:/var/www/certbot/:rw  # Modificat din :ro la :rw
+  webserver:
+    image: nginx:latest
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - ./nginx/conf/:/etc/nginx/conf.d/:ro
+      - ./certbot/www/:/var/www/certbot/:rw  # Modificat din :ro la :rw
   certbot:
     image: certbot/certbot:latest
     volumes:
