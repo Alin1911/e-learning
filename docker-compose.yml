@@ -23,23 +23,18 @@ services:
   #Nginx Service
   webserver:
     image: nginx:latest
-    container_name: webserver
-    restart: unless-stopped
-    tty: true
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80
+      - 443:443
+    restart: always
     volumes:
-      - ./:/var/www
-      - ./nginx/conf.d/:/etc/nginx/conf.d/:ro
-    networks:
-      - app-network
+      - ./nginx/conf/:/etc/nginx/conf.d/:ro
+      - ./certbot/www/:/var/www/certbot/:ro
   certbot:
     image: certbot/certbot:latest
     volumes:
-      - ./:/var/www/:rw
-      - ./:/etc/letsencrypt/:rw
-  #MySQL Service
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
   db:
     image: mysql:5.7.22
     container_name: db
