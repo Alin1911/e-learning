@@ -36,7 +36,7 @@ services:
 
   certbot:
     image: certbot/certbot:latest
-    command: certonly --webroot -w /var/www/certbot -d phantasmify.com
+    command: certonly --webroot -w /var/www/certbot -d phantasmify.com -m andreialin2324@gmail.com --agree-tos --no-eff-email --staging
     volumes:
       - ./certbot/www:/var/www/certbot/:rw
       - ./certbot/conf:/etc/letsencrypt/:rw
