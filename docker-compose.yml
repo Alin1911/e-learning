@@ -36,6 +36,7 @@ services:
 
   certbot:
     image: certbot/certbot:latest
+    command: certonly --webroot -w /var/www/certbot -d phantasmify.com
     volumes:
       - ./certbot/www:/var/www/certbot/:rw
       - ./certbot/conf:/etc/letsencrypt/:rw
