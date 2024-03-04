@@ -20,22 +20,29 @@ services:
     networks:
       - app-network
 
-  #Nginx Service
+  # Nginx Service
   webserver:
     image: nginx:latest
     ports:
-      - 80:80
-      - 443:443
+      - "80:80"  # Redirect HTTP to HTTPS
+      - "443:443"  # HTTPS port
     restart: always
     volumes:
-      - ./nginx/conf/:/etc/nginx/conf.d/:ro
-      - ./certbot/www:/var/www/certbot/:ro
-      - ./certbot/conf/:/etc/nginx/ssl/:ro
+      - ./nginx/conf/:/etc/nginx/conf.d/:ro  # Read-only for configuration
+      - certbot-etc:/etc/letsencrypt  # Persistent storage for certificates (new volume)
+      - certbot-var:/var/www/certbot  # Temporary storage for challenges (new volume)
+    depends_on:
+      - certbot  # Ensure Certbot is ready before starting Nginx
+
+  # Certbot service (updated)
   certbot:
-    image: certbot/certbot:latest
+    image: certbot/certbot
     volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
+      - certbot-etc:/etc/letsencrypt  # Persistent storage for certificates (new volume)
+      - certbot-var:/var/www/certbot  # Temporary storage for challenges (new volume)
+      - ./nginx/conf/renewal:/etc/letsencrypt/renewal  # Include renewal configuration (new volume)
+    command: ["certonly"]  # Only generate certificates, no automatic renewal
+
   db:
     image: mysql:5.7.22
     container_name: db
@@ -75,5 +82,11 @@ networks:
     driver: bridge
 #Volumes
 volumes:
+  certbot-etc: {}
+  certbot-var: {}
+  certbot-renewal: {}  # New volume
   dbdata:
     driver: local
+# Environment Variables
+environment:
+  CERTBOT_DOMAINS: phantasmify.com  
