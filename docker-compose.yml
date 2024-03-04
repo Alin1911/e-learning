@@ -1,7 +1,7 @@
-version: '3'
+version: '3.9'
+
 services:
-  
-  #PHP Service
+  # PHP Service
   app:
     build:
       context: .
@@ -43,6 +43,7 @@ services:
       - ./nginx/conf/renewal:/etc/letsencrypt/renewal  # Include renewal configuration (new volume)
     command: ["certonly"]  # Only generate certificates, no automatic renewal
 
+  # Database Service
   db:
     image: mysql:5.7.22
     container_name: db
@@ -52,7 +53,8 @@ services:
       - "3306:3306"
     environment:
       MYSQL_DATABASE: learning
-      MYSQL_ROOT_PASSWORD: learning
+      # IMPORTANT SECURITY NOTE: Consider using a secure method for storing the root password, such as environment files or secrets management tools.
+      MYSQL_ROOT_PASSWORD: learning  # Replace with a strong password
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
@@ -61,7 +63,8 @@ services:
       - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - app-network
-  #phpmyadmin Service
+
+  # phpMyAdmin Service
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
@@ -71,22 +74,26 @@ services:
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
-      MYSQL_ROOT_PASSWORD: learning 
+      # IMPORTANT SECURITY NOTE: Consider using a secure method for storing the root password, such as environment files or secrets management tools.
+      MYSQL_ROOT_PASSWORD: learning  # Replace with a strong password
     depends_on:
       - db
     networks:
       - app-network
-#Docker Networks
+
+# Docker Networks
 networks:
   app-network:
     driver: bridge
-#Volumes
+
+# Volumes
 volumes:
   certbot-etc: {}
   certbot-var: {}
   certbot-renewal: {}  # New volume
   dbdata:
     driver: local
+
 # Environment Variables
 environment:
-  CERTBOT_DOMAINS: phantasmify.com  
+  CERTBOT_DOMAINS: phantasmify.com
