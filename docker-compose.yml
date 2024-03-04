@@ -1,6 +1,6 @@
-version: '3.9'
-
+version: '3'
 services:
+  
   # PHP Service
   app:
     build:
@@ -24,26 +24,24 @@ services:
   webserver:
     image: nginx:latest
     ports:
-      - "80:80"  # Redirect HTTP to HTTPS
-      - "443:443"  # HTTPS port
+      - 80:80
+      - 443:443
     restart: always
     volumes:
-      - ./nginx/conf/:/etc/nginx/conf.d/:ro  # Read-only for configuration
-      - certbot-etc:/etc/letsencrypt  # Persistent storage for certificates (new volume)
-      - certbot-var:/var/www/certbot  # Temporary storage for challenges (new volume)
-    depends_on:
-      - certbot  # Ensure Certbot is ready before starting Nginx
+      - ./nginx/conf/:/etc/nginx/conf.d/:ro
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf:/etc/nginx/ssl/:ro  # Schimbare aici
+    networks:
+      - app-network
 
-  # Certbot service (updated)
   certbot:
-    image: certbot/certbot
+    image: certbot/certbot:latest
     volumes:
-      - certbot-etc:/etc/letsencrypt  # Persistent storage for certificates (new volume)
-      - certbot-var:/var/www/certbot  # Temporary storage for challenges (new volume)
-      - ./nginx/conf/renewal:/etc/letsencrypt/renewal  # Include renewal configuration (new volume)
-    command: ["certonly"]  # Only generate certificates, no automatic renewal
+      - ./certbot/www:/var/www/certbot/:rw
+      - ./certbot/conf:/etc/letsencrypt/:rw
+    depends_on:
+      - webserver  # Dependență adăugată pentru a asigura că serviciul webserver este pornit înainte de Certbot
 
-  # Database Service
   db:
     image: mysql:5.7.22
     container_name: db
@@ -53,8 +51,7 @@ services:
       - "3306:3306"
     environment:
       MYSQL_DATABASE: learning
-      # IMPORTANT SECURITY NOTE: Consider using a secure method for storing the root password, such as environment files or secrets management tools.
-      MYSQL_ROOT_PASSWORD: learning  # Replace with a strong password
+      MYSQL_ROOT_PASSWORD: learning
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
@@ -64,7 +61,7 @@ services:
     networks:
       - app-network
 
-  # phpMyAdmin Service
+  # PhpMyAdmin Service
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
@@ -74,8 +71,7 @@ services:
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
-      # IMPORTANT SECURITY NOTE: Consider using a secure method for storing the root password, such as environment files or secrets management tools.
-      MYSQL_ROOT_PASSWORD: learning  # Replace with a strong password
+      MYSQL_ROOT_PASSWORD: learning 
     depends_on:
       - db
     networks:
@@ -88,12 +84,5 @@ networks:
 
 # Volumes
 volumes:
-  certbot-etc: {}
-  certbot-var: {}
-  certbot-renewal: {}  # New volume
   dbdata:
     driver: local
-
-# Environment Variables
-environment:
-  CERTBOT_DOMAINS: phantasmify.com
