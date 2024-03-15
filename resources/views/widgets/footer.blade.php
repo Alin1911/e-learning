@@ -1,15 +1,23 @@
-<footer class="footer-bg pt-4">
+<footer class="footer-bg pt-4 pb-0">
 	<div class="container pt-4">
 		<div class="row d-flex justify-content-center">
 			<div class="row" style="font-size: 18px">
-				<div class="col-md-3 col-12">
-					<h3 class="text-white mb-4">Cursuri populare</h3>
+				<div
+					class="col-md-3 col-12 py-3 py-md-0 mb-2 text-center text-md-start"
+				>
+					<h3 class="text-white mb-4 border-bottom pb-2">
+						Cursuri populare
+					</h3>
 					<div><a href="/course/1">Curs de Python</a></div>
 					<div><a href="/course/2">Curs de JavaScript</a></div>
 					<div><a href="/course/3">Curs de HTML și CSS</a></div>
 				</div>
-				<div class="col-md-4 col-12">
-					<h3 class="text-white mb-4">Filtrare cursuri</h3>
+				<div
+					class="col-md-4 col-12 py-3 py-md-0 mb-2 text-center text-md-start"
+				>
+					<h3 class="text-white mb-4 border-bottom pb-2">
+						Filtrare cursuri
+					</h3>
 					<form action="/course" method="get">
 						<div class="mb-3 text-white">
 							<label for="nivel-dificultate" class="form-label">
@@ -52,8 +60,12 @@
 						</button>
 					</form>
 				</div>
-				<div class="col-md-3 col-12 text-white">
-					<h3 class="text-white mb-4">Joc de programare</h3>
+				<div
+					class="col-md-3 col-12 text-white py-3 py-md-0 mb-2 text-center text-md-start"
+				>
+					<h3 class="text-white mb-4 border-bottom pb-2">
+						Joc de programare
+					</h3>
 					<p>
 						Încearcă jocul nostru de programare pentru a-ți testa
 						abilitățile.
@@ -67,8 +79,12 @@
 						Joacă acum
 					</button>
 				</div>
-				<div class="col-md-2 col-12 text-white pl-4">
-					<h3 class="text-white mb-4">Despre noi</h3>
+				<div
+					class="col-md-2 col-12 text-white pl-4 py-3 py-md-0 mb-2 text-center text-md-start"
+				>
+					<h3 class="text-white mb-4 border-bottom pb-2">
+						Despre noi
+					</h3>
 					<div><a href="/team">Echipa noastră</a></div>
 					<div><a href="/contact">Contact</a></div>
 					<div><a href="/term">Termeni și condiții</a></div>
@@ -77,13 +93,10 @@
 		</div>
 		<div class="row mt-5">
 			<div
-				class="col-md-12 d-flex justify-content-center py-4 text-white"
+				class="col-md-12 d-flex justify-content-center py-1 text-white"
 			>
 				<div class="copy-text">
-					<p>
-						&copy; 2023 E-Learning Platform. Toate drepturile
-						rezervate.
-					</p>
+					<p>&copy; 2023 Phantasmify. Toate drepturile rezervate.</p>
 				</div>
 			</div>
 		</div>

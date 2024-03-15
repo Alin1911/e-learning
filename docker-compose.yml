@@ -23,15 +23,16 @@ services:
   # Nginx Service
   webserver:
     image: nginx:latest
-    environment:
-      - domain="phantasmify.com"
-    command: bash -c "apt update && apt install certbot && certbot certonly --force-renewal --webroot -w /var/www/public -d phantasmify.com --agree-tos --email andreialin2324@gmail.com"
+    # environment:
+    #   - domain="phantasmify.com"
+    # command: bash -c "apt update && apt install certbot && certbot certonly --force-renewal --webroot -w /var/www/public -d phantasmify.com --agree-tos --email andreialin2324@gmail.com"
     ports:
       - 80:80
       - 443:443
     restart: always
     volumes:
-      - ./nginx/conf/:/etc/nginx/conf.d/:ro
+      - ./:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - app-network
 
