@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md px-2 shadow-sm">
-    <div class="container-md px-1 py-3 d-flex justify-content-center justify-content-md-start">
+    <div class="container-md px-1 d-flex justify-content-center justify-content-md-start">
         <a class="navbar-brand text-uppercase" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
         </a>
@@ -12,7 +12,7 @@
             <i class="fa-solid fa-bars text-white"></i>
         </button>
         <div class="row collapse w-100 mt-4" id="search">
-            <form class="form-control rounded-pill col-12 py-3" action="{{ route('course.index') }}" method="GET">
+            <form class="form-control rounded-pill col-12" action="{{ route('course.index') }}" method="GET">
                 <input
                     id="form1"
                     type="search"

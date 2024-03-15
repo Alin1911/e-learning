@@ -42,10 +42,10 @@
 		<div class="col-md-8 mx-auto text-center">
 			<h2>Experiența Pantasmify</h2>
 			<p class="lead h3 text-white">
-				La Pantasmify, îți oferim nu doar cunoștințe, ci și o
-				experiență de învățare adaptată nevoilor tale. Platforma noastră
-				de micro-learning este concepută pentru a te ajuta să înveți în
-				cel mai eficient și plăcut mod posibil.
+				La Pantasmify, îți oferim nu doar cunoștințe, ci și o experiență
+				de învățare adaptată nevoilor tale. Platforma noastră de
+				micro-learning este concepută pentru a te ajuta să înveți în cel
+				mai eficient și plăcut mod posibil.
 			</p>
 		</div>
 	</div>
