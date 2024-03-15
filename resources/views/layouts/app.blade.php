@@ -49,7 +49,7 @@
 			"
 		>
 			@include("widgets.header")
-			<div class="pb-5" style="min-height: 600px; padding-top: 90px">
+			<div class="pb-5" style="min-height: 600px; padding-top: 55px;">
 				@yield("content")
 			</div>
 			@include("widgets.footer")
