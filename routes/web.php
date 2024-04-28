@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 // Learning routes
 Route::get('/', 'LearningController@index')->name('learning.index');
@@ -18,6 +19,9 @@ Route::get('/course/leave/{id}', 'CourseController@leave')->name('course.leave')
 
 // Problem routes
 Route::resource('/problem', 'ProblemController'); // This generates multiple routes with names
+
+// Flower routes
+Route::get('/flowers', 'FlowersController@index')->name('flowers.index');
 
 // Authentication routes
 Auth::routes(); // This generates multiple routes with names
