@@ -33,13 +33,6 @@ RUN docker-php-ext-install gd
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Install PHP dependencies
-RUN composer install
-
-# Laravel setup
-RUN php artisan key:generate
-RUN php artisan migrate
-
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php-fpm"]
