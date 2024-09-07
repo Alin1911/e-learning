@@ -43,8 +43,8 @@ services:
     ports:
       - "3306:3306"
     environment:
-      SERVICE_TAGS: dev
-      SERVICE_NAME: mysql
+      MYSQL_ROOT_PASSWORD:   
+      MYSQL_DATABASE: 
     volumes:
       - dbdata:/var/lib/mysql/
       - ./mysql/my.cnf:/etc/mysql/my.cnf
