@@ -42,8 +42,10 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD:   
-      MYSQL_DATABASE: 
+      MYSQL_DATABASE: 'learning'
+      MYSQL_USER: 'pantasmify'
+      MYSQL_PASSWORD:
+      MYSQL_ROOT_PASSWORD:
     volumes:
       - dbdata:/var/lib/mysql/
       - ./mysql/my.cnf:/etc/mysql/my.cnf
