@@ -1,5 +1,6 @@
+version: '3'
 services:
-  
+
   # PHP Service
   app:
     build:
@@ -22,20 +23,18 @@ services:
   # Nginx Service
   webserver:
     image: nginx:latest
-    # environment:
-    #   - domain="phantasmify.com"
-    # command: bash -c "apt update && apt install certbot && certbot certonly --force-renewal --webroot -w /var/www/public -d phantasmify.com --agree-tos --email andreialin2324@gmail.com"
     ports:
       - 80:80
       - 443:443
     restart: always
     volumes:
       - ./:/var/www
-      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./nginx/conf.d/app.conf:/etc/nginx/conf.d/app.conf
+      - ./nginx/conf.d/pma.conf:/etc/nginx/conf.d/pma.conf
     networks:
       - app-network
 
-  #MySQL Service
+  # MySQL Service
   db:
     image: mysql:5.7.22
     container_name: db
@@ -44,16 +43,14 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: learning
-      MYSQL_ROOT_PASSWORD: learning
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
       - dbdata:/var/lib/mysql/
       - ./mysql/my.cnf:/etc/mysql/my.cnf
-      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - app-network
+
 
   # PhpMyAdmin Service
   phpmyadmin:
@@ -65,9 +62,11 @@ services:
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
-      MYSQL_ROOT_PASSWORD: learning 
+      MYSQL_ROOT_PASSWORD: learning
     depends_on:
       - db
+    volumes:
+      - /etc/phpmyadmin:/var/www/html
     networks:
       - app-network
 
