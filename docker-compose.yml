@@ -35,20 +35,20 @@ services:
 
   # MySQL Service
   db:
-    image: mysql:5.7.22
+    image: mysql:latest
     container_name: db
-    restart: unless-stopped
+    restart: always
+  # restart: unless-stopped
     tty: true
+    environment:
+      MYSQL_DATABASE: "learning"
+      MYSQL_USER: "pantasmify"
+      MYSQL_PASSWORD: "G6pikFgP8yzAC47Zc53M"
+      MYSQL_ROOT_PASSWORD: "G6pikFgP8yzAC47Zc53M"
+    volumes:
+      - dbdata:/var/lib/mysql
     ports:
       - "3306:3306"
-    environment:
-      MYSQL_DATABASE: 'learning'
-      MYSQL_USER: 'pantasmify'
-      MYSQL_PASSWORD:
-      MYSQL_ROOT_PASSWORD:
-    volumes:
-      - dbdata:/var/lib/mysql/
-      - ./mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - app-network
 
@@ -57,13 +57,14 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
-    restart: unless-stopped
+    restart: always
+    #restart: unless-stopped
     ports:
       - "8080:80"
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
-      MYSQL_ROOT_PASSWORD: learning
+      MYSQL_ROOT_PASSWORD: "G6pikFgP8yzAC47Zc53M"
     depends_on:
       - db
     volumes:
